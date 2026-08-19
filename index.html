@@ -887,6 +887,13 @@ pintarSelector();
 var pedido = (location.search.match(/[?&]a=(\d+)/) || [])[1];
 if(pedido && D.anuncios[+pedido - 1]) el('pv-cual').value = (+pedido - 1) + '|0';
 
+// ?l=ig-story abre directo esa ubicación: sirve para mandar "mirá cómo se recorta acá".
+var lugarPedido = (location.search.match(/[?&]l=([a-z-]+)/) || [])[1];
+if(lugarPedido && LUGARES.some(function(x){ return x.id === lugarPedido; })){
+  donde = lugarPedido;
+  el('pv-donde').value = lugarPedido;
+}
+
 pintarPreview();
 pintarFormulario();
 el('est').textContent = 'guardado';
