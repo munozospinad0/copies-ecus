@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ECUS · Copies y formulario</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%233E2A9B'/><text x='50' y='71' font-size='58' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>E</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --vio:#3E2A9B;--vio2:#5B3FE0;--vio3:#7b5cff;--dark:#160f38;--ink:#6b6592;
+    --org:#FE881C;--lila:#A688F8;--pink:#F3EEFF;
+    --bg:#f6f4fc;--line:rgba(62,42,155,.1);--sh:0 10px 34px rgba(38,22,110,.08);
+    --ok:#16a34a;--warn:#d97706;--mal:#dc2626;--soft:#9a94bd;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Sora','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--dark);-webkit-font-smoothing:antialiased}
+  svg{display:block}
+
+  header{background:linear-gradient(128deg,#2c1d77 0%,var(--vio) 34%,var(--vio2) 68%,var(--vio3) 100%);color:#fff;padding:26px clamp(16px,4vw,48px) 30px;position:relative;overflow:hidden}
+  header::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.13) 1px,transparent 1.4px);background-size:28px 28px;opacity:.35}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;z-index:1;flex-wrap:wrap}
+  .marca{display:flex;align-items:center;gap:14px}
+  .logo{width:48px;height:48px;border-radius:14px;background:#fff;display:grid;place-items:center;color:var(--vio);font-weight:800;font-size:1.3rem;letter-spacing:-.04em;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+  h1{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:800;letter-spacing:-.03em}
+  header small{display:block;font-size:.7rem;opacity:.85;font-weight:600;margin-top:3px;letter-spacing:.04em}
+  .acc{display:flex;gap:8px;flex-wrap:wrap}
+  .btn{border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;padding:9px 16px;border-radius:24px;font-family:inherit;font-size:.74rem;font-weight:700;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:7px}
+  .btn:hover{background:rgba(255,255,255,.24)}
+  .btn.pri{background:#fff;color:var(--vio);border-color:#fff}
+  .btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .guardado{font-size:.68rem;opacity:.9;font-weight:600;display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.1);padding:8px 14px;border-radius:22px;border:1px solid rgba(255,255,255,.18)}
+  .pt{width:7px;height:7px;border-radius:50%;background:#4ade80}
+
+  .tabs{display:flex;gap:8px;position:relative;z-index:1;margin-top:20px;flex-wrap:wrap}
+  .tab{border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;padding:9px 20px;border-radius:24px;font-family:inherit;font-size:.8rem;font-weight:700;cursor:pointer;transition:.2s}
+  .tab.on{background:#fff;color:var(--vio);border-color:#fff}
+
+  .wrap{max-width:1500px;margin:0 auto 70px;padding:28px clamp(14px,3.5vw,44px) 0}
+  .intro{font-size:.82rem;color:var(--ink);line-height:1.6;max-width:85ch;margin-bottom:22px;font-weight:500}
+  .intro b{color:var(--dark);font-weight:700}
+
+  /* --- anuncio --- */
+  .anuncio{background:#fff;border-radius:22px;box-shadow:var(--sh);margin-bottom:22px;overflow:hidden}
+  .ahead{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .ahead input.nom{border:0;font-family:inherit;font-size:1rem;font-weight:800;color:var(--dark);letter-spacing:-.02em;flex:1;min-width:180px;padding:6px 8px;border-radius:8px}
+  .ahead input.nom:focus{outline:none;background:var(--pink)}
+  .ahead .crea{font-size:.68rem;color:var(--ink);font-weight:700;background:var(--pink);padding:6px 12px;border-radius:14px;border:0;font-family:inherit;min-width:150px}
+  .ahead .crea:focus{outline:none;box-shadow:0 0 0 2px var(--lila)}
+  .quitar{border:0;background:#fee2e2;color:#b91c1c;width:30px;height:30px;border-radius:9px;cursor:pointer;font-size:1rem;font-weight:800;line-height:1}
+  .quitar:hover{background:#dc2626;color:#fff}
+
+  .vars{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:0}
+  .v{padding:18px 20px;border-right:1px solid var(--line)}
+  .v:last-child{border-right:0}
+  .vt{font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--vio);background:var(--pink);display:inline-block;padding:4px 11px;border-radius:12px;margin-bottom:14px}
+  .campo{margin-bottom:15px}
+  .campo label{display:flex;justify-content:space-between;align-items:baseline;font-size:.63rem;font-weight:800;color:var(--ink);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+  .campo .cnt{font-weight:700;font-size:.62rem;letter-spacing:0;text-transform:none}
+  .cnt.ok{color:var(--ok)} .cnt.warn{color:var(--warn)} .cnt.mal{color:var(--mal)}
+  .campo textarea{width:100%;border:2px solid var(--line);border-radius:12px;padding:10px 12px;font-family:inherit;font-size:.84rem;line-height:1.5;color:var(--dark);resize:vertical;background:#fff}
+  .campo textarea:focus{outline:none;border-color:var(--vio2)}
+  .campo textarea.corta{min-height:44px}
+  .campo textarea.larga{min-height:120px}
+  .pista{font-size:.63rem;color:var(--soft);font-weight:600;margin-top:5px;line-height:1.45}
+  .pista b{color:var(--org)}
+
+  /* --- preview --- */
+  .previewbox{background:#fff;border-radius:22px;box-shadow:var(--sh);padding:20px;position:sticky;top:18px}
+  .pvtabs{display:flex;gap:6px;margin-bottom:16px}
+  .pvtab{flex:1;border:1.5px solid var(--line);background:#fff;color:var(--ink);padding:7px;border-radius:11px;font-family:inherit;font-size:.68rem;font-weight:800;cursor:pointer;transition:.2s}
+  .pvtab.on{background:var(--vio);color:#fff;border-color:var(--vio)}
+  .fb{border:1px solid #dfe1e6;border-radius:12px;overflow:hidden;background:#fff;font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+  .fbh{display:flex;align-items:center;gap:9px;padding:11px 12px}
+  .fbav{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--vio),var(--vio3));display:grid;place-items:center;color:#fff;font-weight:800;font-size:.82rem;flex:none}
+  .fbn{font-size:.8rem;font-weight:700;color:#050505;line-height:1.25}
+  .fbp{font-size:.68rem;color:#65676b}
+  .fbtx{padding:0 12px 10px;font-size:.82rem;line-height:1.4;color:#050505;white-space:pre-wrap;word-break:break-word}
+  .fbtx .mas{color:#65676b;cursor:default}
+  .fbimg{width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,#efeafd,#e2d9fb);display:grid;place-items:center;color:var(--soft);font-size:.72rem;font-weight:700;text-align:center;padding:20px;border-top:1px solid #f0f0f0;border-bottom:1px solid #f0f0f0}
+  .fbcta{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:#f7f8fa}
+  .fbcta .izq{min-width:0}
+  .fbd{font-size:.66rem;color:#65676b;text-transform:uppercase;letter-spacing:.02em}
+  .fbt{font-size:.83rem;font-weight:700;color:#050505;line-height:1.3;margin-top:2px;word-break:break-word}
+  .fbb{background:#e4e6eb;color:#050505;border:0;padding:8px 13px;border-radius:7px;font-size:.74rem;font-weight:700;white-space:nowrap;flex:none;font-family:inherit}
+  .fbacc{display:flex;justify-content:space-around;padding:7px 0;border-top:1px solid #f0f0f0;color:#65676b;font-size:.74rem;font-weight:600}
+  .ig .fbh{padding:9px 11px}
+  .ig .fbav{width:31px;height:31px;border-radius:50%;background:linear-gradient(45deg,#f09433,#dc2743,#bc1888)}
+  .ig .fbimg{aspect-ratio:4/5}
+  .ig .fbcta{background:#fff;border-top:1px solid #efefef}
+  .ig .fbb{background:#0095f6;color:#fff;width:100%;text-align:center}
+  .pvsel{width:100%;border:2px solid var(--line);border-radius:11px;padding:9px 11px;font-family:inherit;font-size:.76rem;font-weight:700;color:var(--dark);margin-bottom:14px;background:#fff}
+  .pvsel:focus{outline:none;border-color:var(--vio2)}
+  .pvnota{font-size:.65rem;color:var(--soft);font-weight:600;margin-top:12px;line-height:1.5}
+
+  .cols{display:grid;grid-template-columns:1fr 380px;gap:22px;align-items:start}
+  @media(max-width:1080px){ .cols{grid-template-columns:1fr} .previewbox{position:static} }
+
+  /* --- formulario --- */
+  .form{background:#fff;border-radius:22px;box-shadow:var(--sh);padding:24px;margin-bottom:22px}
+  .form h3{font-size:.95rem;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
+  .form .sub2{font-size:.74rem;color:var(--ink);font-weight:600;margin-bottom:18px;line-height:1.5}
+  .preg{display:flex;gap:10px;align-items:flex-start;padding:12px;background:var(--pink);border-radius:13px;margin-bottom:9px}
+  .preg .num{width:24px;height:24px;border-radius:8px;background:var(--vio);color:#fff;display:grid;place-items:center;font-size:.68rem;font-weight:800;flex:none;margin-top:3px}
+  .preg .cuerpo{flex:1;min-width:0}
+  .preg input{width:100%;border:0;background:transparent;font-family:inherit;font-size:.84rem;font-weight:600;color:var(--dark);padding:4px 0}
+  .preg input:focus{outline:none}
+  .preg .tipo{font-size:.62rem;color:var(--ink);font-weight:700;margin-top:3px}
+  .preg select{border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-family:inherit;font-size:.64rem;font-weight:700;color:var(--ink);background:#fff}
+  .agregar{border:1.5px dashed var(--lila);background:transparent;color:var(--vio);padding:11px;border-radius:13px;font-family:inherit;font-size:.76rem;font-weight:800;cursor:pointer;width:100%;transition:.2s}
+  .agregar:hover{background:var(--pink)}
+
+  .aviso{background:linear-gradient(100deg,#fff6ec,#fff);border:1px solid #ffd9ae;border-radius:16px;padding:14px 18px;font-size:.78rem;font-weight:600;color:#8a4b00;line-height:1.55;margin-bottom:22px}
+  .aviso b{font-weight:800}
+  footer{text-align:center;font-size:.66rem;color:var(--soft);padding:22px;font-weight:600}
+  .oculto{display:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="top">
+    <div class="marca">
+      <div class="logo">E</div>
+      <div>
+        <h1>Copies y formulario</h1>
+        <small>ECUS AGENCY</small>
+      </div>
+    </div>
+    <div class="acc">
+      <div class="guardado"><span class="pt"></span><span id="est">guardado</span></div>
+      <button class="btn" id="b-exp"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Descargar</button>
+      <button class="btn" id="b-imp"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>Cargar</button>
+      <button class="btn pri" id="b-copiar"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar todo</button>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab on" data-p="anuncios">Anuncios</button>
+    <button class="tab" data-p="formulario">Formulario</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <input type="file" id="archivo" accept="application/json" class="oculto">
+
+  <!-- ANUNCIOS -->
+  <div id="p-anuncios">
+    <p class="intro">Tres variaciones por anuncio, para que Meta tenga con qué comparar. Los contadores marcan
+      el largo que Meta muestra sin cortar: <b>125 caracteres</b> el texto primario, <b>40</b> el título y
+      <b>30</b> la descripción. Pasarse no rompe nada, pero lo que sobra se esconde detrás de "Ver más".
+      Todo se guarda solo en este navegador.</p>
+
+    <div class="aviso" id="aviso-datos"></div>
+
+    <div class="cols">
+      <div>
+        <div id="lista"></div>
+        <button class="agregar" id="b-nuevo">+ Agregar otro anuncio</button>
+      </div>
+      <div class="previewbox">
+        <div class="pvtabs">
+          <button class="pvtab on" data-r="fb">Facebook</button>
+          <button class="pvtab" data-r="ig">Instagram</button>
+        </div>
+        <select class="pvsel" id="pv-cual"></select>
+        <div id="pv"></div>
+        <div class="pvnota">La vista previa es una aproximación: Meta ajusta el recorte según el dispositivo y la ubicación.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMULARIO -->
+  <div id="p-formulario" class="oculto">
+    <p class="intro">El formulario nativo de Meta. Cada pregunta que agregás baja la cantidad de leads pero sube
+      la calidad — <b>es la palanca más directa que tenés</b> para dejar de recibir gente que no compra.
+      Con dos o tres preguntas de filtro alcanza; con más, la gente abandona.</p>
+
+    <div class="cols">
+      <div>
+        <div class="form">
+          <h3>Pantalla de bienvenida</h3>
+          <div class="sub2">Lo primero que ve quien tocó el anuncio. Si acá no se entiende qué gana, no completa.</div>
+          <div class="campo">
+            <label>Título <span class="cnt" id="c-ftit"></span></label>
+            <textarea class="corta" id="f-titulo" data-max="60"></textarea>
+          </div>
+          <div class="campo">
+            <label>Descripción</label>
+            <textarea class="larga" id="f-desc" data-max="300"></textarea>
+            <div class="pista">Conviene decir qué pasa después: quién lo contacta y en cuánto tiempo.</div>
+          </div>
+        </div>
+
+        <div class="form">
+          <h3>Preguntas</h3>
+          <div class="sub2">Meta ya trae nombre, correo y teléfono. Estas son las que agregás vos para filtrar.</div>
+          <div id="preguntas"></div>
+          <button class="agregar" id="b-preg">+ Agregar pregunta</button>
+        </div>
+
+        <div class="form">
+          <h3>Pantalla final</h3>
+          <div class="sub2">Lo que ve cuando termina. Es el momento de mayor intención: aprovechalo para que escriba.</div>
+          <div class="campo">
+            <label>Título</label>
+            <textarea class="corta" id="f-ftit" data-max="60"></textarea>
+          </div>
+          <div class="campo">
+            <label>Texto</label>
+            <textarea class="corta" id="f-ftxt" data-max="200"></textarea>
+          </div>
+          <div class="campo">
+            <label>Texto del botón</label>
+            <textarea class="corta" id="f-fbtn" data-max="30"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="previewbox">
+        <div style="font-size:.78rem;font-weight:800;margin-bottom:14px">Así se ve el formulario</div>
+        <div class="fb" id="pv-form"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>ECUS Agency · se guarda en este navegador · descargá el archivo para respaldar o compartir</footer>
+
+<script>
+(function(){
+'use strict';
+
+var LS = 'ecus_copies_v1';
+
+// Límites que Meta muestra sin recortar. No son máximos duros: son el punto donde
+// aparece el "Ver más" o el texto se corta según la ubicación.
+var TOPES = { texto: 125, titulo: 40, desc: 30 };
+
+// Arranque con lo que HOY mejor rinde en la cuenta, según el análisis de copies:
+// hablarle al lector sale 29% más barato; las preguntas rinden peor en promedio
+// aunque las mejores piezas sueltas sean preguntas.
+var INICIAL = {
+  anuncios: [
+    { nombre:'Sistema de ventas | Dueños de negocio', creativo:'ecus nicole.mp4', cta:'Enviar mensaje',
+      vars:[
+        { titulo:'¿Estás perdiendo clientes?',
+          texto:'¿Llevas el control de tus clientes en WhatsApp, Excel o simplemente de memoria?\n\nTe montamos un sistema que ordena tus leads, te avisa a quién seguir y te muestra cuánto vendiste. Escribinos y te lo mostramos.',
+          desc:'Implementamos un CRM a medida' },
+        { titulo:'Tus leads se enfrían solos',
+          texto:'Cada lead que no contestás en la primera hora vale la mitad.\n\nCon nuestro sistema tu equipo sabe a quién llamar, cuándo y por qué. Te lo mostramos en 15 minutos.',
+          desc:'Ordená tu proceso comercial' },
+        { titulo:'Vendé sin perder el hilo',
+          texto:'Si hoy no sabés cuántos leads te entran, quién los atiende ni cuántos compran, no tenés un problema de marketing: tenés un problema de proceso.\n\nTe ayudamos a resolverlo.',
+          desc:'Más control, más ventas' }
+      ] }
+  ],
+  formulario: {
+    titulo:'Contanos de tu negocio',
+    desc:'Te escribimos por WhatsApp el mismo día para mostrarte cómo funciona el sistema con tus propios números. Sin compromiso.',
+    preguntas:[
+      { texto:'¿Cuántas personas venden en tu equipo?', tipo:'opciones' },
+      { texto:'¿Cómo llevás hoy el seguimiento de tus clientes?', tipo:'opciones' }
+    ],
+    finTitulo:'¡Listo! Te escribimos hoy',
+    finTexto:'En las próximas horas te contactamos por WhatsApp al número que dejaste.',
+    finBoton:'Escribinos ahora'
+  }
+};
+
+var D = cargar();
+var pagina = 'anuncios';
+var red = 'fb';
+var pvIdx = 0;
+
+function cargar(){
+  try {
+    var g = localStorage.getItem(LS);
+    if(g) return JSON.parse(g);
+  } catch(e){}
+  return JSON.parse(JSON.stringify(INICIAL));
+}
+
+var guardarTimer = null;
+function guardar(){
+  clearTimeout(guardarTimer);
+  el('est').textContent = 'guardando…';
+  guardarTimer = setTimeout(function(){
+    try {
+      localStorage.setItem(LS, JSON.stringify(D));
+      el('est').textContent = 'guardado ' + new Date().toLocaleTimeString('es-PA',{hour:'2-digit',minute:'2-digit'});
+    } catch(e){
+      el('est').textContent = 'no se pudo guardar';
+    }
+  }, 400);
+}
+
+function el(id){ return document.getElementById(id); }
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/** Cuenta caracteres y avisa según el tope de Meta, sin impedir escribir. */
+function contador(n, tope){
+  if(!tope) return { txt: n + ' caracteres', clase: '' };
+  if(n === 0) return { txt: '0 / ' + tope, clase: '' };
+  if(n <= tope) return { txt: n + ' / ' + tope, clase: 'ok' };
+  if(n <= tope * 1.5) return { txt: n + ' / ' + tope + ' · se recorta', clase: 'warn' };
+  return { txt: n + ' / ' + tope + ' · muy largo', clase: 'mal' };
+}
+
+// ------------------------------------------------------------------ anuncios
+function pintarAnuncios(){
+  el('lista').innerHTML = D.anuncios.map(function(a, i){
+    return '<div class="anuncio" data-i="' + i + '">' +
+      '<div class="ahead">' +
+        '<input class="nom" value="' + esc(a.nombre) + '" data-c="nombre" placeholder="Nombre del anuncio">' +
+        '<input class="crea" value="' + esc(a.creativo || '') + '" data-c="creativo" placeholder="archivo del creativo">' +
+        (D.anuncios.length > 1 ? '<button class="quitar" title="Quitar">×</button>' : '') +
+      '</div>' +
+      '<div class="vars">' + a.vars.map(function(v, j){
+        return '<div class="v">' +
+          '<div class="vt">Variación ' + 'ABC'[j] + '</div>' +
+          campo('Texto primario', v.texto, 'texto', TOPES.texto, i, j, 'larga',
+                'Los primeros 125 caracteres son los que se leen sin tocar "Ver más".') +
+          campo('Título', v.titulo, 'titulo', TOPES.titulo, i, j, 'corta',
+                'Va en negrita debajo de la imagen. Es lo segundo que se lee.') +
+          campo('Descripción', v.desc, 'desc', TOPES.desc, i, j, 'corta',
+                'Solo aparece en algunas ubicaciones. Si se cae, el anuncio tiene que funcionar igual.') +
+        '</div>';
+      }).join('') + '</div></div>';
+  }).join('');
+
+  // eventos
+  el('lista').querySelectorAll('textarea[data-c]').forEach(function(t){
+    t.addEventListener('input', function(){
+      var i = +t.dataset.i, j = +t.dataset.j;
+      D.anuncios[i].vars[j][t.dataset.c] = t.value;
+      var lab = t.parentNode.querySelector('.cnt');
+      var c = contador(t.value.length, +t.dataset.max);
+      lab.textContent = c.txt; lab.className = 'cnt ' + c.clase;
+      guardar();
+      if(i === pvIdx) pintarPreview();
+    });
+  });
+  el('lista').querySelectorAll('input[data-c]').forEach(function(inp){
+    inp.addEventListener('input', function(){
+      var i = +inp.closest('.anuncio').dataset.i;
+      D.anuncios[i][inp.dataset.c] = inp.value;
+      guardar(); pintarSelector(); pintarPreview();
+    });
+  });
+  el('lista').querySelectorAll('.quitar').forEach(function(b){
+    b.onclick = function(){
+      var i = +b.closest('.anuncio').dataset.i;
+      if(!confirm('¿Quitar "' + D.anuncios[i].nombre + '"?')) return;
+      D.anuncios.splice(i, 1);
+      if(pvIdx >= D.anuncios.length) pvIdx = 0;
+      guardar(); pintarAnuncios(); pintarSelector(); pintarPreview();
+    };
+  });
+
+  pintarAviso();
+}
+
+function campo(etq, valor, clave, tope, i, j, alto, pista){
+  var c = contador((valor||'').length, tope);
+  return '<div class="campo">' +
+    '<label>' + etq + ' <span class="cnt ' + c.clase + '">' + c.txt + '</span></label>' +
+    '<textarea class="' + alto + '" data-c="' + clave + '" data-i="' + i + '" data-j="' + j + '" data-max="' + tope + '">' +
+      esc(valor) + '</textarea>' +
+    '<div class="pista">' + pista + '</div></div>';
+}
+
+/** Resumen honesto de qué falta, arriba de todo. */
+function pintarAviso(){
+  var vacias = 0, largos = 0, total = 0;
+  D.anuncios.forEach(function(a){
+    a.vars.forEach(function(v){
+      total++;
+      if(!v.texto || !v.titulo) vacias++;
+      if((v.texto||'').length > TOPES.texto * 1.5) largos++;
+    });
+  });
+  var partes = [];
+  partes.push('<b>' + D.anuncios.length + ' anuncio(s)</b> con ' + total + ' variaciones.');
+  if(vacias) partes.push('<b>' + vacias + '</b> sin completar.');
+  if(largos) partes.push('<b>' + largos + '</b> con el texto muy largo.');
+  if(!vacias && !largos) partes.push('Todo completo y dentro de los largos que Meta muestra.');
+  el('aviso-datos').innerHTML = partes.join(' ');
+}
+
+function pintarSelector(){
+  var s = el('pv-cual');
+  var opciones = [];
+  D.anuncios.forEach(function(a, i){
+    a.vars.forEach(function(v, j){
+      opciones.push('<option value="' + i + '|' + j + '">' + esc(a.nombre) + ' · ' + 'ABC'[j] + '</option>');
+    });
+  });
+  var antes = s.value;
+  s.innerHTML = opciones.join('');
+  if(antes) s.value = antes;
+  if(!s.value && opciones.length) s.selectedIndex = 0;
+}
+
+function pintarPreview(){
+  var sel = el('pv-cual').value || '0|0';
+  var p = sel.split('|');
+  var a = D.anuncios[+p[0]];
+  if(!a){ el('pv').innerHTML = ''; return; }
+  pvIdx = +p[0];
+  var v = a.vars[+p[1]] || {};
+
+  var txt = esc(v.texto || '');
+  // Meta corta con "Ver más": se replica para que se vea qué queda arriba del pliegue.
+  if((v.texto||'').length > TOPES.texto){
+    txt = esc(v.texto.slice(0, TOPES.texto)) + '… <span class="mas">Ver más</span>';
+  }
+
+  var cta = a.cta || 'Más información';
+  var creativo = a.creativo ? esc(a.creativo) : 'sin creativo asignado';
+
+  el('pv').innerHTML =
+    '<div class="fb ' + (red === 'ig' ? 'ig' : '') + '">' +
+      '<div class="fbh"><div class="fbav">' + (red === 'ig' ? '' : 'E') + '</div>' +
+        '<div><div class="fbn">ECUS Agency</div>' +
+        '<div class="fbp">' + (red === 'ig' ? 'Publicidad' : 'Publicidad · &#127760;') + '</div></div></div>' +
+      '<div class="fbtx">' + (txt || '<span class="mas">(sin texto primario)</span>') + '</div>' +
+      '<div class="fbimg">' + creativo + '</div>' +
+      '<div class="fbcta">' +
+        '<div class="izq">' +
+          (red === 'ig' ? '' : '<div class="fbd">' + esc(v.desc || '') + '</div>') +
+          '<div class="fbt">' + esc(v.titulo || '(sin título)') + '</div>' +
+        '</div>' +
+        (red === 'ig' ? '' : '<button class="fbb">' + esc(cta) + '</button>') +
+      '</div>' +
+      (red === 'ig' ? '<div style="padding:0 12px 12px"><button class="fbb">' + esc(cta) + '</button></div>' : '') +
+      '<div class="fbacc"><span>Me gusta</span><span>Comentar</span><span>Compartir</span></div>' +
+    '</div>';
+}
+
+// ------------------------------------------------------------------ formulario
+function pintarFormulario(){
+  el('f-titulo').value = D.formulario.titulo || '';
+  el('f-desc').value = D.formulario.desc || '';
+  el('f-ftit').value = D.formulario.finTitulo || '';
+  el('f-ftxt').value = D.formulario.finTexto || '';
+  el('f-fbtn').value = D.formulario.finBoton || '';
+
+  el('preguntas').innerHTML = (D.formulario.preguntas || []).map(function(p, i){
+    return '<div class="preg" data-i="' + i + '">' +
+      '<div class="num">' + (i+1) + '</div>' +
+      '<div class="cuerpo">' +
+        '<input value="' + esc(p.texto) + '" placeholder="Escribí la pregunta">' +
+        '<div class="tipo">Respuesta: ' +
+          '<select><option value="opciones"' + (p.tipo==='opciones'?' selected':'') + '>opción múltiple</option>' +
+          '<option value="corta"' + (p.tipo==='corta'?' selected':'') + '>texto corto</option></select>' +
+        '</div>' +
+      '</div>' +
+      '<button class="quitar">×</button></div>';
+  }).join('');
+
+  el('preguntas').querySelectorAll('.preg').forEach(function(fila){
+    var i = +fila.dataset.i;
+    fila.querySelector('input').addEventListener('input', function(e){
+      D.formulario.preguntas[i].texto = e.target.value; guardar(); pintarPvForm();
+    });
+    fila.querySelector('select').addEventListener('change', function(e){
+      D.formulario.preguntas[i].tipo = e.target.value; guardar(); pintarPvForm();
+    });
+    fila.querySelector('.quitar').onclick = function(){
+      D.formulario.preguntas.splice(i, 1); guardar(); pintarFormulario(); pintarPvForm();
+    };
+  });
+
+  ['f-titulo|titulo','f-desc|desc','f-ftit|finTitulo','f-ftxt|finTexto','f-fbtn|finBoton'].forEach(function(par){
+    var p = par.split('|');
+    el(p[0]).oninput = function(){ D.formulario[p[1]] = el(p[0]).value; guardar(); pintarPvForm(); };
+  });
+
+  pintarPvForm();
+}
+
+function pintarPvForm(){
+  var f = D.formulario;
+  var base = ['Nombre completo','Correo electrónico','Número de teléfono'];
+  el('pv-form').innerHTML =
+    '<div class="fbh"><div class="fbav">E</div><div><div class="fbn">ECUS Agency</div>' +
+      '<div class="fbp">Formulario</div></div></div>' +
+    '<div style="padding:4px 14px 16px">' +
+      '<div style="font-size:.95rem;font-weight:800;color:#050505;line-height:1.3">' + esc(f.titulo || '(sin título)') + '</div>' +
+      '<div style="font-size:.78rem;color:#65676b;margin-top:7px;line-height:1.5;white-space:pre-wrap">' + esc(f.desc || '') + '</div>' +
+      '<div style="margin-top:16px;font-size:.68rem;font-weight:800;color:#65676b;text-transform:uppercase;letter-spacing:.05em">Meta completa solo</div>' +
+      base.map(function(b){
+        return '<div style="border:1px solid #dfe1e6;border-radius:9px;padding:9px 11px;margin-top:7px;font-size:.76rem;color:#65676b;background:#f7f8fa">' + b + '</div>';
+      }).join('') +
+      ((f.preguntas||[]).length ? '<div style="margin-top:16px;font-size:.68rem;font-weight:800;color:var(--vio);text-transform:uppercase;letter-spacing:.05em">Tus preguntas</div>' : '') +
+      (f.preguntas||[]).map(function(p){
+        return '<div style="border:1.5px solid #A688F8;border-radius:9px;padding:10px 11px;margin-top:7px;font-size:.78rem;color:#050505;font-weight:600">' +
+          esc(p.texto || '(pregunta vacía)') +
+          '<div style="font-size:.66rem;color:#65676b;font-weight:500;margin-top:4px">' +
+          (p.tipo === 'corta' ? 'escribe la respuesta' : 'elige una opción') + '</div></div>';
+      }).join('') +
+      '<div style="margin-top:18px;padding-top:14px;border-top:1px solid #efefef">' +
+        '<div style="font-size:.84rem;font-weight:800;color:#050505">' + esc(f.finTitulo || '') + '</div>' +
+        '<div style="font-size:.75rem;color:#65676b;margin-top:5px;line-height:1.45">' + esc(f.finTexto || '') + '</div>' +
+        '<button class="fbb" style="width:100%;margin-top:11px;background:#0866ff;color:#fff">' + esc(f.finBoton || 'Listo') + '</button>' +
+      '</div>' +
+    '</div>';
+}
+
+// ------------------------------------------------------------------ acciones
+el('b-nuevo').onclick = function(){
+  D.anuncios.push({ nombre:'Anuncio nuevo', creativo:'', cta:'Enviar mensaje',
+    vars:[{titulo:'',texto:'',desc:''},{titulo:'',texto:'',desc:''},{titulo:'',texto:'',desc:''}] });
+  guardar(); pintarAnuncios(); pintarSelector(); pintarPreview();
+  window.scrollTo({ top: document.body.scrollHeight, behavior:'smooth' });
+};
+
+el('b-preg').onclick = function(){
+  D.formulario.preguntas = D.formulario.preguntas || [];
+  D.formulario.preguntas.push({ texto:'', tipo:'opciones' });
+  guardar(); pintarFormulario();
+};
+
+el('b-exp').onclick = function(){
+  var blob = new Blob([JSON.stringify(D, null, 2)], { type:'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'copies-ecus-' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+el('b-imp').onclick = function(){ el('archivo').click(); };
+el('archivo').onchange = function(e){
+  var f = e.target.files[0];
+  if(!f) return;
+  var r = new FileReader();
+  r.onload = function(){
+    try {
+      var nuevo = JSON.parse(r.result);
+      if(!nuevo.anuncios) throw new Error('el archivo no tiene anuncios');
+      D = nuevo; guardar(); pintarAnuncios(); pintarSelector(); pintarPreview(); pintarFormulario();
+      alert('Cargado.');
+    } catch(err){ alert('No se pudo leer: ' + err.message); }
+  };
+  r.readAsText(f);
+  e.target.value = '';
+};
+
+/** Todo en texto plano, listo para pegar en Meta o mandar por correo. */
+el('b-copiar').onclick = function(){
+  var L = [];
+  D.anuncios.forEach(function(a){
+    L.push('=== ' + a.nombre + ' ===');
+    if(a.creativo) L.push('Creativo: ' + a.creativo);
+    a.vars.forEach(function(v, j){
+      L.push('');
+      L.push('-- Variación ' + 'ABC'[j] + ' --');
+      L.push('Texto primario: ' + (v.texto || ''));
+      L.push('Título: ' + (v.titulo || ''));
+      L.push('Descripción: ' + (v.desc || ''));
+    });
+    L.push('');
+  });
+  var f = D.formulario;
+  L.push('=== FORMULARIO ===');
+  L.push('Título: ' + (f.titulo||''));
+  L.push('Descripción: ' + (f.desc||''));
+  L.push('');
+  L.push('Preguntas:');
+  (f.preguntas||[]).forEach(function(p, i){
+    L.push('  ' + (i+1) + '. ' + (p.texto||'') + '  [' + (p.tipo==='corta'?'texto corto':'opción múltiple') + ']');
+  });
+  L.push('');
+  L.push('Pantalla final: ' + (f.finTitulo||'') + ' / ' + (f.finTexto||'') + ' / botón: ' + (f.finBoton||''));
+
+  var txt = L.join('\n');
+  navigator.clipboard.writeText(txt).then(function(){
+    var b = el('b-copiar');
+    var antes = b.innerHTML;
+    b.innerHTML = 'Copiado';
+    setTimeout(function(){ b.innerHTML = antes; }, 1600);
+  }).catch(function(){
+    // Sin permiso de portapapeles: se muestra para copiar a mano.
+    prompt('Copiá esto:', txt);
+  });
+};
+
+document.querySelectorAll('.tab').forEach(function(t){
+  t.onclick = function(){
+    pagina = t.dataset.p;
+    document.querySelectorAll('.tab').forEach(function(x){ x.classList.remove('on'); });
+    t.classList.add('on');
+    el('p-anuncios').classList.toggle('oculto', pagina !== 'anuncios');
+    el('p-formulario').classList.toggle('oculto', pagina !== 'formulario');
+  };
+});
+
+document.querySelectorAll('.pvtab').forEach(function(t){
+  t.onclick = function(){
+    red = t.dataset.r;
+    document.querySelectorAll('.pvtab').forEach(function(x){ x.classList.remove('on'); });
+    t.classList.add('on');
+    pintarPreview();
+  };
+});
+
+el('pv-cual').onchange = pintarPreview;
+
+// ------------------------------------------------------------------ arranque
+pintarAnuncios();
+pintarSelector();
+pintarPreview();
+pintarFormulario();
+el('est').textContent = 'guardado';
+
+})();
+</script>
+</body>
+</html>
