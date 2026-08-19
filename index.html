@@ -118,6 +118,21 @@
   .al.buena{background:#dcfce7;color:#15803d}
   .al.media{background:#fef3c7;color:#92400e}
   .al.mala{background:#fee2e2;color:#b91c1c}
+  .al.arreglo{background:#e0e7ff;color:#3730a3;border-left:3px solid var(--vio2)}
+  .al b{font-weight:800}
+
+  /* recargar creativos, al lado del selector de ubicación */
+  .filaSel{display:flex;gap:8px;align-items:stretch;margin-bottom:14px}
+  .filaSel .pvsel{flex:1}
+  .recrea{border:2px solid var(--line);background:#fff;border-radius:11px;width:42px;flex:none;cursor:pointer;display:grid;place-items:center;transition:.2s}
+  .recrea:hover{border-color:var(--vio2);background:var(--pink)}
+  .recrea svg{width:15px;height:15px;stroke:var(--vio);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .recrea.girando svg{animation:girar .9s linear infinite}
+  @keyframes girar{to{transform:rotate(360deg)}}
+  .cat{font-size:.68rem;font-weight:700;padding:7px 11px;border-radius:9px;margin-bottom:11px;line-height:1.4}
+  .cat.cargando{background:var(--pink);color:var(--vio)}
+  .cat.ok{background:#dcfce7;color:#15803d}
+  .cat.mal{background:#fee2e2;color:#b91c1c}
   .lnota{font-size:.66rem;color:var(--ink);font-weight:600;line-height:1.45;margin-top:8px}
   .fbcta{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:#f7f8fa}
   .fbcta .izq{min-width:0}
@@ -204,7 +219,13 @@
       </div>
       <div class="previewbox">
         <select class="pvsel" id="pv-cual"></select>
-        <select class="pvsel" id="pv-donde"></select>
+        <div class="filaSel">
+          <select class="pvsel" id="pv-donde" style="margin:0"></select>
+          <button class="recrea" id="b-recrea" title="Volver a traer los creativos">
+            <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 3v6h-6"/></svg>
+          </button>
+        </div>
+        <div id="cat-estado"></div>
         <div id="pv-formato"></div>
         <div id="pv"></div>
         <div class="pvnota">La vista previa es una aproximación: Meta ajusta el recorte según el dispositivo.</div>
@@ -419,6 +440,34 @@ function recorte(creativoProp, lugarProp){
   return { corta:true, lado:'arriba y abajo', pierde: Math.round((1 - creativoProp/lugarProp) * 100) };
 }
 
+/** Nombre humano de una proporción: "vertical 4:5" dice más que "0.8". */
+function nombreProp(p){
+  if(!p) return '';
+  var tabla = [
+    [1,      'cuadrada 1:1'],
+    [4/5,    'vertical 4:5'],
+    [9/16,   'vertical completa 9:16'],
+    [1.91,   'horizontal 1.91:1'],
+    [16/9,   'horizontal 16:9'],
+    [2/3,    'vertical 2:3']
+  ];
+  var mejor = tabla[0], dif = Math.abs(p - tabla[0][0]);
+  tabla.forEach(function(t){
+    var d = Math.abs(p - t[0]);
+    if(d < dif){ dif = d; mejor = t; }
+  });
+  return dif < 0.05 ? mejor[1] : p.toFixed(2) + ':1';
+}
+
+/** Qué exportar para que calce en esta ubicación, en píxeles concretos. */
+function medidaIdeal(prop){
+  if(Math.abs(prop - 1) < 0.02) return '1080×1080';
+  if(Math.abs(prop - 4/5) < 0.02) return '1080×1350';
+  if(Math.abs(prop - 9/16) < 0.02) return '1080×1920';
+  if(Math.abs(prop - 1.91) < 0.05) return '1200×628';
+  return '1080×' + Math.round(1080 / prop);
+}
+
 function cargar(){
   try {
     var g = localStorage.getItem(LS);
@@ -603,12 +652,28 @@ function pintarPreview(){
 
   // --- Ficha del formato, arriba de la vista previa ---
   var alertas = [];
-  if(corte && corte.corta){
-    alertas.push('<div class="al ' + (corte.pierde >= 25 ? 'mala' : 'media') + '">' +
-      'Se recorta <b>' + corte.pierde + '%</b> por ' + corte.lado +
-      (ficha ? ' · la pieza es ' + ficha.ancho + '×' + ficha.alto : '') + '</div>');
-  } else if(corte){
-    alertas.push('<div class="al buena">Calza exacto' + (ficha ? ' · ' + ficha.ancho + '×' + ficha.alto : '') + '</div>');
+  if(corte && ficha){
+    var tuya = nombreProp(prop), pide = nombreProp(L.prop);
+    if(corte.corta){
+      // Explicar el mecanismo, no solo el número: Meta escala hasta llenar y lo que
+      // sobresale se pierde. Saberlo es lo que evita volver a exportar mal.
+      alertas.push('<div class="al ' + (corte.pierde >= 25 ? 'mala' : 'media') + '">' +
+        '<b>Se recorta ' + corte.pierde + '% por ' + corte.lado + '.</b><br>' +
+        'Tu pieza es <b>' + tuya + '</b> (' + ficha.ancho + '×' + ficha.alto + ') y acá se muestra <b>' + pide + '</b>. ' +
+        'Meta la agranda hasta llenar el recuadro, y lo que sobresale se pierde.</div>');
+      alertas.push('<div class="al arreglo">' +
+        'Para que quede bien: exportá esta pieza en <b>' + medidaIdeal(L.prop) + '</b>' +
+        (corte.pierde >= 25
+          ? ', o dejá los textos y logos dentro del centro para que el recorte no se los coma.'
+          : '. Con este recorte igual se entiende, pero revisá que no corte texto.') +
+        '</div>');
+    } else {
+      alertas.push('<div class="al buena">' +
+        '<b>Queda bien, no se recorta nada.</b><br>' +
+        'Tu pieza es ' + tuya + ' (' + ficha.ancho + '×' + ficha.alto + '), justo lo que pide esta ubicación.</div>');
+    }
+  } else if(!ficha && medios.length){
+    alertas.push('<div class="al media">No pude leer las medidas de este creativo, así que no puedo avisarte del recorte. Probá con el botón de recargar.</div>');
   }
   if(L.texto === 0 && (v.texto||'').trim()){
     alertas.push('<div class="al media">Acá <b>no se muestra el texto primario</b>: lo que no esté en la pieza, se pierde</div>');
@@ -859,11 +924,50 @@ el('pv-donde').innerHTML = LUGARES.map(function(l){
 el('pv-donde').onchange = function(){ donde = el('pv-donde').value; pintarPreview(); };
 
 // El catálogo trae las medidas reales de cada creativo: sin él no se puede avisar
-// cuánto se recorta. Si no carga, la vista previa sigue andando sin los avisos.
-fetch('media/creativos.json')
-  .then(function(r){ return r.json(); })
-  .then(function(c){ CREATIVOS = c || []; pintarPreview(); })
-  .catch(function(){});
+// cuánto se recorta.
+//
+// "A veces no carga" tenía tres causas y se atacan las tres: GitHub Pages sirve el JSON
+// cacheado (por eso el ?v= con la hora), la red falla suelto (por eso dos reintentos), y
+// cuando fallaba no se enteraba nadie (por eso el estado a la vista).
+function traerCatalogo(manual){
+  var caja = el('cat-estado');
+  caja.innerHTML = '<div class="cat cargando">Trayendo creativos…</div>';
+
+  var intento = 0;
+  function pedir(){
+    intento++;
+    return fetch('media/creativos.json?v=' + Date.now(), { cache: 'no-store' })
+      .then(function(r){
+        if(!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function(c){
+        CREATIVOS = c || [];
+        caja.innerHTML = manual
+          ? '<div class="cat ok">' + CREATIVOS.length + ' creativos al día</div>'
+          : '';
+        if(manual) setTimeout(function(){ caja.innerHTML = ''; }, 2600);
+        pintarPreview();
+      })
+      .catch(function(e){
+        if(intento < 3) return new Promise(function(r){ setTimeout(r, 700 * intento); }).then(pedir);
+        caja.innerHTML = '<div class="cat mal">No se pudieron traer los creativos (' + e.message +
+          '). Las vistas previas funcionan, pero sin los avisos de recorte.</div>';
+      });
+  }
+  return pedir();
+}
+traerCatalogo(false);
+
+el('b-recrea').onclick = function(){
+  var b = el('b-recrea');
+  b.classList.add('girando');
+  // Se le agrega la hora a cada imagen para saltear la caché del navegador.
+  el('pv').querySelectorAll('img').forEach(function(im){
+    im.src = im.src.split('?')[0] + '?v=' + Date.now();
+  });
+  traerCatalogo(true).then(function(){ b.classList.remove('girando'); });
+};
 
 // Si el material que traigo es más nuevo que lo guardado, avisar en vez de esperar
 // a que alguien descubra el botón.
