@@ -646,8 +646,10 @@ function pintarPreview(){
   // Las ubicaciones verticales (9:16) hacen un anuncio tan alto que el botón —lo último
   // y lo que más se revisa— queda fuera de pantalla. Se limita por ANCHO para que la
   // altura entre sin deformar la proporción: alto deseado × proporción = ancho.
-  if(L.prop < 0.8){
-    var altoTope = L.pantalla ? 62 : 52;             // en vh
+  if(L.prop < 1){
+    // Medido: con la ficha de formato, los selectores y el pie, al creativo le quedan
+    // unos 46vh para que el anuncio ENTERO entre sin scrollear la caja.
+    var altoTope = L.pantalla ? 46 : 44;             // en vh
     estilo += 'max-width:' + (L.prop * altoTope).toFixed(1) + 'vh;';
   }
   var cuerpo;
