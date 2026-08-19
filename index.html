@@ -79,6 +79,18 @@
   .fbtx{padding:0 12px 10px;font-size:.82rem;line-height:1.4;color:#050505;white-space:pre-wrap;word-break:break-word}
   .fbtx .mas{color:#65676b;cursor:default}
   .fbimg{width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,#efeafd,#e2d9fb);display:grid;place-items:center;color:var(--soft);font-size:.72rem;font-weight:700;text-align:center;padding:20px;border-top:1px solid #f0f0f0;border-bottom:1px solid #f0f0f0}
+  /* creativo real */
+  .carru{position:relative;background:#000;border-top:1px solid #f0f0f0;border-bottom:1px solid #f0f0f0;line-height:0}
+  .crfoto{width:100%;display:block;max-height:520px;object-fit:contain;background:#111}
+  .flecha{position:absolute;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;border:0;background:rgba(255,255,255,.94);color:#050505;font-size:1.15rem;font-weight:700;cursor:pointer;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.28);line-height:1;padding:0 0 3px}
+  .flecha:hover{background:#fff}
+  .flecha.izq{left:9px} .flecha.der{right:9px}
+  .puntos{position:absolute;bottom:11px;left:0;right:0;display:flex;justify-content:center;gap:5px}
+  .puntos i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.55)}
+  .puntos i.on{background:#fff;width:7px;height:7px}
+  .tarjnum{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.62);color:#fff;font-size:.62rem;font-weight:700;padding:3px 9px;border-radius:12px;line-height:1.6}
+  .playy{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+  .playy svg{width:54px;height:54px;fill:rgba(255,255,255,.94);stroke:none;filter:drop-shadow(0 2px 10px rgba(0,0,0,.5))}
   .fbcta{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:#f7f8fa}
   .fbcta .izq{min-width:0}
   .fbd{font-size:.66rem;color:#65676b;text-transform:uppercase;letter-spacing:.02em}
@@ -248,6 +260,7 @@ var TOPES = { texto: 125, titulo: 40, desc: 30 };
 var INICIAL = {
   anuncios: [
     { nombre:'Video Nicole · cómo funciona', creativo:'ecus nicole.mp4', cta:'Enviar mensaje',
+      media:['media/video-nicole.jpg'], esVideo:true,
       vars:[
         { titulo:'Mirá tus campañas en vivo',
           texto:'Tu agencia te manda un reporte a fin de mes. Nosotros te damos el acceso.\n\nCuánto invertiste, cuántos leads entraron y cuáles ya contestaron. Cuando quieras mirarlo.',
@@ -261,6 +274,7 @@ var INICIAL = {
       ] },
 
     { nombre:'Carrusel 18 · después del clic', creativo:'ECUS-CARRUSEL-18_01 a 04 (4 tarjetas)', cta:'Más información',
+      media:['media/carrusel-1.jpg','media/carrusel-2.jpg','media/carrusel-3.jpg','media/carrusel-4.jpg'],
       vars:[
         { titulo:'¿Qué pasa después del clic?',
           texto:'1.248 clics. 694 leads. ¿Y después?\n\nSi tu reporte termina ahí, te estás perdiendo la mitad importante: quién contestó, quién servía y quién compró.',
@@ -274,6 +288,7 @@ var INICIAL = {
       ] },
 
     { nombre:'Publicación 19-08 · control de leads', creativo:'19-08 Publicacion.jpg', cta:'Enviar mensaje',
+      media:['media/pub-19.jpg'],
       vars:[
         { titulo:'Tené el control de tus leads',
           texto:'Cada prospecto queda con su nombre, su teléfono y lo que dijo. Sabés quién ya contestó y a quién le falta seguimiento.',
@@ -287,6 +302,7 @@ var INICIAL = {
       ] },
 
     { nombre:'Publicación 20-08 · quién compra', creativo:'20-08 publicacion.jpg', cta:'Más información',
+      media:['media/pub-20.jpg'],
       vars:[
         { titulo:'¿Cuáles terminan comprando?',
           texto:'Ya sabés cuántos leads te entraron. Lo que decide tu mes es cuáles compraron — y eso también lo podés ver.',
@@ -300,6 +316,7 @@ var INICIAL = {
       ] },
 
     { nombre:'Publicación 21-08 · a dónde va la plata', creativo:'21-08 publicacion.jpg', cta:'Enviar mensaje',
+      media:['media/pub-21.jpg'],
       vars:[
         { titulo:'Dejá de invertir a ciegas',
           texto:'$109.59 invertidos, 274 leads. Ese es el dato que deberías poder mirar cualquier día, no una vez al mes.',
@@ -329,6 +346,7 @@ var D = cargar();
 var pagina = 'anuncios';
 var red = 'fb';
 var pvIdx = 0;
+var tarjeta = 0;      // qué tarjeta del carrusel se está mirando
 
 function cargar(){
   try {
@@ -474,7 +492,28 @@ function pintarPreview(){
   }
 
   var cta = a.cta || 'Más información';
-  var creativo = a.creativo ? esc(a.creativo) : 'sin creativo asignado';
+
+  // El creativo de verdad. Antes decía el nombre del archivo, que no sirve para juzgar
+  // si el texto pisa la imagen o si el título repite lo que ya dice la pieza.
+  var medios = a.media || [];
+  var cuerpo;
+  if(medios.length > 1){
+    if(tarjeta >= medios.length) tarjeta = 0;
+    cuerpo = '<div class="carru">' +
+      '<img class="crfoto" src="' + medios[tarjeta] + '" alt="">' +
+      '<button class="flecha izq" data-d="-1">‹</button>' +
+      '<button class="flecha der" data-d="1">›</button>' +
+      '<div class="puntos">' + medios.map(function(_, k){
+        return '<i class="' + (k === tarjeta ? 'on' : '') + '"></i>';
+      }).join('') + '</div>' +
+      '<div class="tarjnum">' + (tarjeta+1) + ' de ' + medios.length + '</div>' +
+    '</div>';
+  } else if(medios.length === 1){
+    cuerpo = '<div class="carru"><img class="crfoto" src="' + medios[0] + '" alt="">' +
+      (a.esVideo ? '<div class="playy"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>' : '') + '</div>';
+  } else {
+    cuerpo = '<div class="fbimg">' + (a.creativo ? esc(a.creativo) : 'sin creativo asignado') + '</div>';
+  }
 
   el('pv').innerHTML =
     '<div class="fb ' + (red === 'ig' ? 'ig' : '') + '">' +
@@ -482,7 +521,7 @@ function pintarPreview(){
         '<div><div class="fbn">ECUS Agency</div>' +
         '<div class="fbp">' + (red === 'ig' ? 'Publicidad' : 'Publicidad · &#127760;') + '</div></div></div>' +
       '<div class="fbtx">' + (txt || '<span class="mas">(sin texto primario)</span>') + '</div>' +
-      '<div class="fbimg">' + creativo + '</div>' +
+      cuerpo +
       '<div class="fbcta">' +
         '<div class="izq">' +
           (red === 'ig' ? '' : '<div class="fbd">' + esc(v.desc || '') + '</div>') +
@@ -493,6 +532,14 @@ function pintarPreview(){
       (red === 'ig' ? '<div style="padding:0 12px 12px"><button class="fbb">' + esc(cta) + '</button></div>' : '') +
       '<div class="fbacc"><span>Me gusta</span><span>Comentar</span><span>Compartir</span></div>' +
     '</div>';
+
+  el('pv').querySelectorAll('.flecha').forEach(function(b){
+    b.onclick = function(){
+      var n = medios.length;
+      tarjeta = (tarjeta + (+b.dataset.d) + n) % n;   // da la vuelta en los dos sentidos
+      pintarPreview();
+    };
+  });
 }
 
 // ------------------------------------------------------------------ formulario
@@ -677,6 +724,12 @@ el('pv-cual').onchange = pintarPreview;
 // ------------------------------------------------------------------ arranque
 pintarAnuncios();
 pintarSelector();
+
+// ?a=2 abre directo ese anuncio en la vista previa: sirve para mandarle a alguien
+// el link de una pieza puntual en vez de "fijate en el tercero".
+var pedido = (location.search.match(/[?&]a=(\d+)/) || [])[1];
+if(pedido && D.anuncios[+pedido - 1]) el('pv-cual').value = (+pedido - 1) + '|0';
+
 pintarPreview();
 pintarFormulario();
 el('est').textContent = 'guardado';
