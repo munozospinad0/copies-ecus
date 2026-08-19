@@ -646,11 +646,13 @@ function pintarPreview(){
   // Las ubicaciones verticales (9:16) hacen un anuncio tan alto que el botón —lo último
   // y lo que más se revisa— queda fuera de pantalla. Se limita por ANCHO para que la
   // altura entre sin deformar la proporción: alto deseado × proporción = ancho.
+  // Medido: al creativo le quedan ~46vh una vez descontados selectores, ficha y pie.
+  var tope = '';
   if(L.prop < 1){
-    // Medido: con la ficha de formato, los selectores y el pie, al creativo le quedan
-    // unos 46vh para que el anuncio ENTERO entre sin scrollear la caja.
-    var altoTope = L.pantalla ? 46 : 44;             // en vh
-    estilo += 'max-width:' + (L.prop * altoTope).toFixed(1) + 'vh;';
+    tope = 'max-width:' + (L.prop * (L.pantalla ? 46 : 44)).toFixed(1) + 'vh;';
+    // En Historias/Reels el marco ES el creativo: si el tope va adentro, el marco
+    // queda más ancho y asoman barras negras a los costados.
+    if(!L.pantalla) estilo += tope;
   }
   var cuerpo;
   if(medios.length){
@@ -713,7 +715,7 @@ function pintarPreview(){
   // Historias y Reels no llevan la caja de texto de siempre: son pantalla completa.
   if(L.pantalla){
     el('pv').innerHTML =
-      '<div class="fb historia">' +
+      '<div class="fb historia" style="' + tope + 'margin:0 auto">' +
         cuerpo +
         '<div class="hcab"><div class="fbav" style="width:26px;height:26px;font-size:.6rem">E</div>' +
           '<div style="color:#fff;font-size:.72rem;font-weight:700">ECUS Agency</div>' +
