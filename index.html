@@ -91,6 +91,34 @@
   .tarjnum{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.62);color:#fff;font-size:.62rem;font-weight:700;padding:3px 9px;border-radius:12px;line-height:1.6}
   .playy{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
   .playy svg{width:54px;height:54px;fill:rgba(255,255,255,.94);stroke:none;filter:drop-shadow(0 2px 10px rgba(0,0,0,.5))}
+  .carru{overflow:hidden}
+  .crfoto{width:100%;height:100%;object-fit:cover;max-height:none}
+
+  /* zonas que la interfaz de Historias/Reels tapa */
+  .zona{position:absolute;left:0;right:0;background:repeating-linear-gradient(45deg,rgba(255,0,0,.13),rgba(255,0,0,.13) 6px,transparent 6px,transparent 12px);pointer-events:none}
+  .zona.arriba{top:0;height:14%;border-bottom:1px dashed rgba(255,255,255,.5)}
+  .zona.abajo{bottom:0;height:20%;border-top:1px dashed rgba(255,255,255,.5)}
+
+  /* historias / reels */
+  .fb.historia{position:relative;background:#000;border:0;border-radius:12px;overflow:hidden}
+  .hcab{position:absolute;top:12px;left:12px;right:12px;display:flex;align-items:center;gap:8px;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+  .htxt{position:absolute;bottom:64px;left:14px;right:14px;color:#fff;font-size:.76rem;line-height:1.4;text-shadow:0 1px 4px rgba(0,0,0,.8)}
+  .hbtn{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.95);color:#050505;font-size:.74rem;font-weight:700;padding:9px 20px;border-radius:9px;white-space:nowrap}
+
+  /* columna derecha */
+  .fb.derecha{display:flex;gap:9px;padding:9px;align-items:flex-start}
+  .fb.derecha .dcol{width:110px;flex:none}
+  .fb.derecha .carru{border:0;border-radius:5px}
+  .fb.derecha .dtxt{flex:1;min-width:0}
+
+  /* ficha del formato */
+  .formato{background:var(--pink);border-radius:13px;padding:12px 14px;margin-bottom:13px}
+  .formato .ideal{font-size:.72rem;font-weight:700;color:var(--vio);margin-bottom:8px}
+  .al{font-size:.7rem;font-weight:700;padding:7px 10px;border-radius:9px;margin-bottom:6px;line-height:1.4}
+  .al.buena{background:#dcfce7;color:#15803d}
+  .al.media{background:#fef3c7;color:#92400e}
+  .al.mala{background:#fee2e2;color:#b91c1c}
+  .lnota{font-size:.66rem;color:var(--ink);font-weight:600;line-height:1.45;margin-top:8px}
   .fbcta{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:#f7f8fa}
   .fbcta .izq{min-width:0}
   .fbd{font-size:.66rem;color:#65676b;text-transform:uppercase;letter-spacing:.02em}
@@ -123,6 +151,9 @@
   .agregar{border:1.5px dashed var(--lila);background:transparent;color:var(--vio);padding:11px;border-radius:13px;font-family:inherit;font-size:.76rem;font-weight:800;cursor:pointer;width:100%;transition:.2s}
   .agregar:hover{background:var(--pink)}
 
+  .nuevoMat{background:linear-gradient(100deg,#ecfdf5,#fff);border:1px solid #a7f3d0;border-radius:16px;padding:13px 18px;font-size:.8rem;font-weight:700;color:#065f46;margin-bottom:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .nuevoMat button{border:0;background:var(--ok);color:#fff;padding:8px 16px;border-radius:20px;font-family:inherit;font-size:.74rem;font-weight:800;cursor:pointer}
+  .nuevoMat button.x{background:transparent;color:#065f46;text-decoration:underline;padding:8px 4px}
   .aviso{background:linear-gradient(100deg,#fff6ec,#fff);border:1px solid #ffd9ae;border-radius:16px;padding:14px 18px;font-size:.78rem;font-weight:600;color:#8a4b00;line-height:1.55;margin-bottom:22px}
   .aviso b{font-weight:800}
   footer{text-align:center;font-size:.66rem;color:var(--soft);padding:22px;font-weight:600}
@@ -172,13 +203,11 @@
         <button class="agregar" id="b-nuevo">+ Agregar otro anuncio</button>
       </div>
       <div class="previewbox">
-        <div class="pvtabs">
-          <button class="pvtab on" data-r="fb">Facebook</button>
-          <button class="pvtab" data-r="ig">Instagram</button>
-        </div>
         <select class="pvsel" id="pv-cual"></select>
+        <select class="pvsel" id="pv-donde"></select>
+        <div id="pv-formato"></div>
         <div id="pv"></div>
-        <div class="pvnota">La vista previa es una aproximación: Meta ajusta el recorte según el dispositivo y la ubicación.</div>
+        <div class="pvnota">La vista previa es una aproximación: Meta ajusta el recorte según el dispositivo.</div>
       </div>
     </div>
   </div>
@@ -258,9 +287,11 @@ var TOPES = { texto: 125, titulo: 40, desc: 30 };
 // avanza. Sin urgencia inventada (sale 22% más cara) y hablándole al lector (29% más
 // barato), que es lo que mostró el análisis de la cuenta.
 var INICIAL = {
+  // Subir esto cuando cambie el material: dispara el aviso de "hay material nuevo".
+  version: '2026-08-19b',
   anuncios: [
     { nombre:'Video Nicole · cómo funciona', creativo:'ecus nicole.mp4', cta:'Enviar mensaje',
-      media:['media/video-nicole.jpg'], esVideo:true,
+      media:['media/ecus-nicole.jpg'], esVideo:true,
       vars:[
         { titulo:'Mirá tus campañas en vivo',
           texto:'Tu agencia te manda un reporte a fin de mes. Nosotros te damos el acceso.\n\nCuánto invertiste, cuántos leads entraron y cuáles ya contestaron. Cuando quieras mirarlo.',
@@ -274,7 +305,7 @@ var INICIAL = {
       ] },
 
     { nombre:'Carrusel 18 · después del clic', creativo:'ECUS-CARRUSEL-18_01 a 04 (4 tarjetas)', cta:'Más información',
-      media:['media/carrusel-1.jpg','media/carrusel-2.jpg','media/carrusel-3.jpg','media/carrusel-4.jpg'],
+      media:['media/ecus-carrusel-18-01.jpg','media/ecus-carrusel-18-02.jpg','media/ecus-carrusel-18-03.jpg','media/ecus-carrusel-18-04.jpg'],
       vars:[
         { titulo:'¿Qué pasa después del clic?',
           texto:'1.248 clics. 694 leads. ¿Y después?\n\nSi tu reporte termina ahí, te estás perdiendo la mitad importante: quién contestó, quién servía y quién compró.',
@@ -288,7 +319,7 @@ var INICIAL = {
       ] },
 
     { nombre:'Publicación 19-08 · control de leads', creativo:'19-08 Publicacion.jpg', cta:'Enviar mensaje',
-      media:['media/pub-19.jpg'],
+      media:['media/19-08-publicacion.jpg'],
       vars:[
         { titulo:'Tené el control de tus leads',
           texto:'Cada prospecto queda con su nombre, su teléfono y lo que dijo. Sabés quién ya contestó y a quién le falta seguimiento.',
@@ -302,7 +333,7 @@ var INICIAL = {
       ] },
 
     { nombre:'Publicación 20-08 · quién compra', creativo:'20-08 publicacion.jpg', cta:'Más información',
-      media:['media/pub-20.jpg'],
+      media:['media/20-08-publicacion.jpg'],
       vars:[
         { titulo:'¿Cuáles terminan comprando?',
           texto:'Ya sabés cuántos leads te entraron. Lo que decide tu mes es cuáles compraron — y eso también lo podés ver.',
@@ -316,7 +347,7 @@ var INICIAL = {
       ] },
 
     { nombre:'Publicación 21-08 · a dónde va la plata', creativo:'21-08 publicacion.jpg', cta:'Enviar mensaje',
-      media:['media/pub-21.jpg'],
+      media:['media/21-08-publicacion.jpg'],
       vars:[
         { titulo:'Dejá de invertir a ciegas',
           texto:'$109.59 invertidos, 274 leads. Ese es el dato que deberías poder mirar cualquier día, no una vez al mes.',
@@ -347,6 +378,46 @@ var pagina = 'anuncios';
 var red = 'fb';
 var pvIdx = 0;
 var tarjeta = 0;      // qué tarjeta del carrusel se está mirando
+var donde = 'fb-feed';
+var CREATIVOS = [];   // catálogo con las medidas reales, lo llena media/creativos.json
+
+// --- Ubicaciones de Meta ------------------------------------------------------
+// `prop` es la proporción (ancho/alto) con la que Meta MUESTRA cada ubicación. Es lo
+// que decide qué se recorta: el creativo se escala para llenar y lo que sobra se pierde.
+// Los topes de texto son los que se leen antes del "Ver más" en cada lugar.
+var LUGARES = [
+  { id:'fb-feed', nombre:'Facebook · Feed', prop:4/5, ideal:'1080×1350 (4:5)',
+    texto:125, titulo:40, desc:30, marca:'facebook',
+    nota:'La ubicación que más impresiones se lleva. Es la única que muestra la descripción.' },
+  { id:'ig-feed', nombre:'Instagram · Feed', prop:4/5, ideal:'1080×1350 (4:5)',
+    texto:125, titulo:40, desc:0, marca:'instagram',
+    nota:'No muestra la descripción. El título va junto al botón.' },
+  { id:'ig-story', nombre:'Instagram · Historias', prop:9/16, ideal:'1080×1920 (9:16)',
+    texto:0, titulo:0, desc:0, marca:'instagram', pantalla:true,
+    nota:'A pantalla completa y sin texto alrededor: lo que no esté EN la pieza, no se lee. Dejá libre el 14% de arriba y el 20% de abajo.' },
+  { id:'reels', nombre:'Reels', prop:9/16, ideal:'1080×1920 (9:16)',
+    texto:72, titulo:0, desc:0, marca:'instagram', pantalla:true,
+    nota:'El texto va abajo, encima del video, y se corta enseguida. La interfaz tapa los bordes.' },
+  { id:'fb-derecha', nombre:'Facebook · Columna derecha', prop:1.91, ideal:'1200×628 (1.91:1)',
+    texto:0, titulo:25, desc:0, marca:'facebook', chico:true,
+    nota:'Diminuto y solo en escritorio. Únicamente se lee el título, y corto.' },
+  { id:'fb-market', nombre:'Facebook · Marketplace', prop:1, ideal:'1080×1080 (1:1)',
+    texto:125, titulo:40, desc:0, marca:'facebook',
+    nota:'Cuadrado. Una pieza 4:5 pierde arriba y abajo.' }
+];
+
+function lugar(){ return LUGARES.filter(function(l){ return l.id === donde; })[0] || LUGARES[0]; }
+
+/** Cuánto del creativo sobrevive al recorte de esta ubicación. */
+function recorte(creativoProp, lugarProp){
+  if(!creativoProp) return null;
+  if(Math.abs(creativoProp - lugarProp) < 0.02) return { corta:false, pierde:0 };
+  if(creativoProp > lugarProp){
+    // El creativo es más ancho: Meta lo escala por alto y recorta los costados.
+    return { corta:true, lado:'los costados', pierde: Math.round((1 - lugarProp/creativoProp) * 100) };
+  }
+  return { corta:true, lado:'arriba y abajo', pierde: Math.round((1 - creativoProp/lugarProp) * 100) };
+}
 
 function cargar(){
   try {
@@ -485,10 +556,16 @@ function pintarPreview(){
   pvIdx = +p[0];
   var v = a.vars[+p[1]] || {};
 
-  var txt = esc(v.texto || '');
-  // Meta corta con "Ver más": se replica para que se vea qué queda arriba del pliegue.
-  if((v.texto||'').length > TOPES.texto){
-    txt = esc(v.texto.slice(0, TOPES.texto)) + '… <span class="mas">Ver más</span>';
+  var L = lugar();
+  red = L.marca === 'instagram' ? 'ig' : 'fb';
+
+  // Cada ubicación corta el texto en un punto distinto — y algunas no lo muestran.
+  var txt = '';
+  if(L.texto > 0){
+    txt = esc(v.texto || '');
+    if((v.texto||'').length > L.texto){
+      txt = esc(v.texto.slice(0, L.texto)) + '… <span class="mas">Ver más</span>';
+    }
   }
 
   var cta = a.cta || 'Más información';
@@ -496,42 +573,95 @@ function pintarPreview(){
   // El creativo de verdad. Antes decía el nombre del archivo, que no sirve para juzgar
   // si el texto pisa la imagen o si el título repite lo que ya dice la pieza.
   var medios = a.media || [];
+  if(tarjeta >= medios.length) tarjeta = 0;
+  var actual = medios[tarjeta] || medios[0];
+
+  // Medidas reales del creativo, para saber qué se pierde en esta ubicación.
+  var ficha = CREATIVOS.filter(function(c){ return c.archivo === actual; })[0];
+  var prop = ficha ? ficha.ancho / ficha.alto : null;
+  var corte = recorte(prop, L.prop);
+
+  var estilo = 'aspect-ratio:' + L.prop.toFixed(4) + ';';
   var cuerpo;
-  if(medios.length > 1){
-    if(tarjeta >= medios.length) tarjeta = 0;
-    cuerpo = '<div class="carru">' +
-      '<img class="crfoto" src="' + medios[tarjeta] + '" alt="">' +
-      '<button class="flecha izq" data-d="-1">‹</button>' +
-      '<button class="flecha der" data-d="1">›</button>' +
-      '<div class="puntos">' + medios.map(function(_, k){
-        return '<i class="' + (k === tarjeta ? 'on' : '') + '"></i>';
-      }).join('') + '</div>' +
-      '<div class="tarjnum">' + (tarjeta+1) + ' de ' + medios.length + '</div>' +
+  if(medios.length){
+    cuerpo = '<div class="carru" style="' + estilo + '">' +
+      '<img class="crfoto" src="' + actual + '" alt="">' +
+      (medios.length > 1 ?
+        '<button class="flecha izq" data-d="-1">‹</button>' +
+        '<button class="flecha der" data-d="1">›</button>' +
+        '<div class="puntos">' + medios.map(function(_, k){
+          return '<i class="' + (k === tarjeta ? 'on' : '') + '"></i>';
+        }).join('') + '</div>' +
+        '<div class="tarjnum">' + (tarjeta+1) + ' de ' + medios.length + '</div>' : '') +
+      (a.esVideo ? '<div class="playy"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>' : '') +
+      // Zonas que la interfaz de Historias y Reels tapa con botones y textos.
+      (L.pantalla ? '<div class="zona arriba"></div><div class="zona abajo"></div>' : '') +
     '</div>';
-  } else if(medios.length === 1){
-    cuerpo = '<div class="carru"><img class="crfoto" src="' + medios[0] + '" alt="">' +
-      (a.esVideo ? '<div class="playy"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>' : '') + '</div>';
   } else {
-    cuerpo = '<div class="fbimg">' + (a.creativo ? esc(a.creativo) : 'sin creativo asignado') + '</div>';
+    cuerpo = '<div class="fbimg" style="' + estilo + '">' + (a.creativo ? esc(a.creativo) : 'sin creativo') + '</div>';
   }
 
-  el('pv').innerHTML =
-    '<div class="fb ' + (red === 'ig' ? 'ig' : '') + '">' +
-      '<div class="fbh"><div class="fbav">' + (red === 'ig' ? '' : 'E') + '</div>' +
-        '<div><div class="fbn">ECUS Agency</div>' +
-        '<div class="fbp">' + (red === 'ig' ? 'Publicidad' : 'Publicidad · &#127760;') + '</div></div></div>' +
-      '<div class="fbtx">' + (txt || '<span class="mas">(sin texto primario)</span>') + '</div>' +
-      cuerpo +
-      '<div class="fbcta">' +
-        '<div class="izq">' +
-          (red === 'ig' ? '' : '<div class="fbd">' + esc(v.desc || '') + '</div>') +
-          '<div class="fbt">' + esc(v.titulo || '(sin título)') + '</div>' +
+  // --- Ficha del formato, arriba de la vista previa ---
+  var alertas = [];
+  if(corte && corte.corta){
+    alertas.push('<div class="al ' + (corte.pierde >= 25 ? 'mala' : 'media') + '">' +
+      'Se recorta <b>' + corte.pierde + '%</b> por ' + corte.lado +
+      (ficha ? ' · la pieza es ' + ficha.ancho + '×' + ficha.alto : '') + '</div>');
+  } else if(corte){
+    alertas.push('<div class="al buena">Calza exacto' + (ficha ? ' · ' + ficha.ancho + '×' + ficha.alto : '') + '</div>');
+  }
+  if(L.texto === 0 && (v.texto||'').trim()){
+    alertas.push('<div class="al media">Acá <b>no se muestra el texto primario</b>: lo que no esté en la pieza, se pierde</div>');
+  }
+  if(L.desc === 0 && (v.desc||'').trim()){
+    alertas.push('<div class="al media">La descripción no aparece en esta ubicación</div>');
+  }
+  if(L.titulo && (v.titulo||'').length > L.titulo){
+    alertas.push('<div class="al media">El título se corta: ' + v.titulo.length + ' de ' + L.titulo + '</div>');
+  }
+  el('pv-formato').innerHTML =
+    '<div class="formato"><div class="ideal">Formato ideal: <b>' + L.ideal + '</b></div>' +
+    alertas.join('') +
+    '<div class="lnota">' + L.nota + '</div></div>';
+
+  // Historias y Reels no llevan la caja de texto de siempre: son pantalla completa.
+  if(L.pantalla){
+    el('pv').innerHTML =
+      '<div class="fb historia">' +
+        cuerpo +
+        '<div class="hcab"><div class="fbav" style="width:26px;height:26px;font-size:.6rem">E</div>' +
+          '<div style="color:#fff;font-size:.72rem;font-weight:700">ECUS Agency</div>' +
+          '<div style="color:rgba(255,255,255,.75);font-size:.66rem">Publicidad</div></div>' +
+        (L.texto ? '<div class="htxt">' + (txt || '') + '</div>' : '') +
+        '<div class="hbtn">' + esc(cta) + ' &#8593;</div>' +
+      '</div>';
+  } else if(L.chico){
+    // Columna derecha: miniatura al costado, solo el título.
+    el('pv').innerHTML =
+      '<div class="fb derecha">' +
+        '<div class="dcol">' + cuerpo + '</div>' +
+        '<div class="dtxt"><div class="fbt">' + esc(v.titulo || '(sin título)') + '</div>' +
+          '<div class="fbp">ecus.agency</div></div>' +
+      '</div>';
+  } else {
+    el('pv').innerHTML =
+      '<div class="fb ' + (red === 'ig' ? 'ig' : '') + '">' +
+        '<div class="fbh"><div class="fbav">' + (red === 'ig' ? '' : 'E') + '</div>' +
+          '<div><div class="fbn">ECUS Agency</div>' +
+          '<div class="fbp">' + (red === 'ig' ? 'Publicidad' : 'Publicidad · &#127760;') + '</div></div></div>' +
+        (L.texto ? '<div class="fbtx">' + (txt || '<span class="mas">(sin texto primario)</span>') + '</div>' : '') +
+        cuerpo +
+        '<div class="fbcta">' +
+          '<div class="izq">' +
+            (L.desc ? '<div class="fbd">' + esc(v.desc || '') + '</div>' : '') +
+            '<div class="fbt">' + esc(v.titulo || '(sin título)') + '</div>' +
+          '</div>' +
+          (red === 'ig' ? '' : '<button class="fbb">' + esc(cta) + '</button>') +
         '</div>' +
-        (red === 'ig' ? '' : '<button class="fbb">' + esc(cta) + '</button>') +
-      '</div>' +
-      (red === 'ig' ? '<div style="padding:0 12px 12px"><button class="fbb">' + esc(cta) + '</button></div>' : '') +
-      '<div class="fbacc"><span>Me gusta</span><span>Comentar</span><span>Compartir</span></div>' +
-    '</div>';
+        (red === 'ig' ? '<div style="padding:0 12px 12px"><button class="fbb">' + esc(cta) + '</button></div>' : '') +
+        '<div class="fbacc"><span>Me gusta</span><span>Comentar</span><span>Compartir</span></div>' +
+      '</div>';
+  }
 
   el('pv').querySelectorAll('.flecha').forEach(function(b){
     b.onclick = function(){
@@ -722,6 +852,33 @@ document.querySelectorAll('.pvtab').forEach(function(t){
 el('pv-cual').onchange = pintarPreview;
 
 // ------------------------------------------------------------------ arranque
+// Selector de ubicaciones
+el('pv-donde').innerHTML = LUGARES.map(function(l){
+  return '<option value="' + l.id + '">' + l.nombre + '</option>';
+}).join('');
+el('pv-donde').onchange = function(){ donde = el('pv-donde').value; pintarPreview(); };
+
+// El catálogo trae las medidas reales de cada creativo: sin él no se puede avisar
+// cuánto se recorta. Si no carga, la vista previa sigue andando sin los avisos.
+fetch('media/creativos.json')
+  .then(function(r){ return r.json(); })
+  .then(function(c){ CREATIVOS = c || []; pintarPreview(); })
+  .catch(function(){});
+
+// Si el material que traigo es más nuevo que lo guardado, avisar en vez de esperar
+// a que alguien descubra el botón.
+if(D.version !== INICIAL.version){
+  var b = document.createElement('div');
+  b.className = 'nuevoMat';
+  b.innerHTML = 'Hay material nuevo cargado. <button id="b-traer2">Traerlo</button>' +
+                '<button id="b-cerrar2" class="x">no, gracias</button>';
+  document.querySelector('.wrap').prepend(b);
+  document.getElementById('b-traer2').onclick = function(){ el('b-restaurar').click(); };
+  document.getElementById('b-cerrar2').onclick = function(){
+    D.version = INICIAL.version; guardar(); b.remove();
+  };
+}
+
 pintarAnuncios();
 pintarSelector();
 

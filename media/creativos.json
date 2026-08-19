@@ -1,0 +1,14 @@
+[
+  {"archivo":"media/01-04-ecus-agency.jpg","nombre":"01-04-ecus-agency","original":"01-04 - ecus agency.mp4","ancho":1080,"alto":1920,"tipo":"video","duracion":"30"},
+  {"archivo":"media/18-02-ecus.jpg","nombre":"18-02-ecus","original":"18-02 ecus.png","ancho":1080,"alto":1350,"tipo":"imagen","duracion":""},
+  {"archivo":"media/19-08-publicacion.jpg","nombre":"19-08-publicacion","original":"19-08 Publicacion.jpg","ancho":1080,"alto":1350,"tipo":"imagen","duracion":""},
+  {"archivo":"media/20-08-publicacion.jpg","nombre":"20-08-publicacion","original":"20-08 publicacion.jpg","ancho":1080,"alto":1350,"tipo":"imagen","duracion":""},
+  {"archivo":"media/21-08-publicacion.jpg","nombre":"21-08-publicacion","original":"21-08 publicacion.jpg","ancho":1080,"alto":1350,"tipo":"imagen","duracion":""},
+  {"archivo":"media/23-03-ecus-1.jpg","nombre":"23-03-ecus-1","original":"23-03 ecus(1).mp4","ancho":1080,"alto":1920,"tipo":"video","duracion":"41"},
+  {"archivo":"media/ecus-carrusel-18-01.jpg","nombre":"ecus-carrusel-18-01","original":"ECUS-CARRUSEL-18_01.png","ancho":1080,"alto":1350,"tipo":"imagen","duracion":""},
+  {"archivo":"media/ecus-carrusel-18-02.jpg","nombre":"ecus-carrusel-18-02","original":"ECUS-CARRUSEL-18_02.png","ancho":1080,"alto":1350,"tipo":"imagen","duracion":""},
+  {"archivo":"media/ecus-carrusel-18-03.jpg","nombre":"ecus-carrusel-18-03","original":"ECUS-CARRUSEL-18_03.png","ancho":1080,"alto":1350,"tipo":"imagen","duracion":""},
+  {"archivo":"media/ecus-carrusel-18-04.jpg","nombre":"ecus-carrusel-18-04","original":"ECUS-CARRUSEL-18_04.png","ancho":1080,"alto":1350,"tipo":"imagen","duracion":""},
+  {"archivo":"media/ecus-agency-original.jpg","nombre":"ecus-agency-original","original":"Ecus Agency Original.png","ancho":4500,"alto":4500,"tipo":"imagen","duracion":""},
+  {"archivo":"media/ecus-nicole.jpg","nombre":"ecus-nicole","original":"ecus nicole.mp4","ancho":1080,"alto":1920,"tipo":"video","duracion":"29"}
+]
