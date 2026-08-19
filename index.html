@@ -67,7 +67,19 @@
   .pista b{color:var(--org)}
 
   /* --- preview --- */
-  .previewbox{background:#fff;border-radius:22px;box-shadow:var(--sh);padding:20px;position:sticky;top:18px}
+  /* La vista previa se queda fija al costado y scrollea POR DENTRO. Antes crecía más
+     que la pantalla — con una pieza 9:16 había que bajar toda la página para ver el
+     botón del anuncio, que es justo lo que uno quiere revisar. */
+  .previewbox{background:#fff;border-radius:22px;box-shadow:var(--sh);padding:20px;
+    position:sticky;top:14px;max-height:calc(100vh - 28px);overflow-y:auto;overscroll-behavior:contain}
+  .previewbox::-webkit-scrollbar{width:7px}
+  .previewbox::-webkit-scrollbar-thumb{background:#d9d2f3;border-radius:6px}
+  .previewbox::-webkit-scrollbar-track{background:transparent}
+  /* Ojo: NO usar max-height acá. Con width:100% + aspect-ratio, un max-height achata
+     el recuadro y el recorte simulado deja de ser fiel — que es todo el punto de esto.
+     Las piezas verticales se limitan por ANCHO (calculado en pintarPreview), que
+     mantiene la proporción exacta. */
+  .carru{margin:0 auto}
   .pvtabs{display:flex;gap:6px;margin-bottom:16px}
   .pvtab{flex:1;border:1.5px solid var(--line);background:#fff;color:var(--ink);padding:7px;border-radius:11px;font-family:inherit;font-size:.68rem;font-weight:800;cursor:pointer;transition:.2s}
   .pvtab.on{background:var(--vio);color:#fff;border-color:var(--vio)}
@@ -631,6 +643,13 @@ function pintarPreview(){
   var corte = recorte(prop, L.prop);
 
   var estilo = 'aspect-ratio:' + L.prop.toFixed(4) + ';';
+  // Las ubicaciones verticales (9:16) hacen un anuncio tan alto que el botón —lo último
+  // y lo que más se revisa— queda fuera de pantalla. Se limita por ANCHO para que la
+  // altura entre sin deformar la proporción: alto deseado × proporción = ancho.
+  if(L.prop < 0.8){
+    var altoTope = L.pantalla ? 62 : 52;             // en vh
+    estilo += 'max-width:' + (L.prop * altoTope).toFixed(1) + 'vh;';
+  }
   var cuerpo;
   if(medios.length){
     cuerpo = '<div class="carru" style="' + estilo + '">' +
