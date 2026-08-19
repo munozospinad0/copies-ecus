@@ -132,6 +132,7 @@
       <div class="guardado"><span class="pt"></span><span id="est">guardado</span></div>
       <button class="btn" id="b-exp"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Descargar</button>
       <button class="btn" id="b-imp"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>Cargar</button>
+      <button class="btn" id="b-restaurar" title="Traer el material de ECUS ya redactado"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 3v6h-6"/></svg>Traer material</button>
       <button class="btn pri" id="b-copiar"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar todo</button>
     </div>
   </div>
@@ -240,29 +241,85 @@ var TOPES = { texto: 125, titulo: 40, desc: 30 };
 // Arranque con lo que HOY mejor rinde en la cuenta, según el análisis de copies:
 // hablarle al lector sale 29% más barato; las preguntas rinden peor en promedio
 // aunque las mejores piezas sueltas sean preguntas.
+// Un anuncio por pieza del material. Los textos NO repiten la pregunta que ya hace la
+// imagen: el creativo pregunta, el texto responde. Si los dos preguntan, el anuncio no
+// avanza. Sin urgencia inventada (sale 22% más cara) y hablándole al lector (29% más
+// barato), que es lo que mostró el análisis de la cuenta.
 var INICIAL = {
   anuncios: [
-    { nombre:'Sistema de ventas | Dueños de negocio', creativo:'ecus nicole.mp4', cta:'Enviar mensaje',
+    { nombre:'Video Nicole · cómo funciona', creativo:'ecus nicole.mp4', cta:'Enviar mensaje',
       vars:[
-        { titulo:'¿Estás perdiendo clientes?',
-          texto:'¿Llevas el control de tus clientes en WhatsApp, Excel o simplemente de memoria?\n\nTe montamos un sistema que ordena tus leads, te avisa a quién seguir y te muestra cuánto vendiste. Escribinos y te lo mostramos.',
-          desc:'Implementamos un CRM a medida' },
-        { titulo:'Tus leads se enfrían solos',
-          texto:'Cada lead que no contestás en la primera hora vale la mitad.\n\nCon nuestro sistema tu equipo sabe a quién llamar, cuándo y por qué. Te lo mostramos en 15 minutos.',
-          desc:'Ordená tu proceso comercial' },
-        { titulo:'Vendé sin perder el hilo',
-          texto:'Si hoy no sabés cuántos leads te entran, quién los atiende ni cuántos compran, no tenés un problema de marketing: tenés un problema de proceso.\n\nTe ayudamos a resolverlo.',
-          desc:'Más control, más ventas' }
+        { titulo:'Mirá tus campañas en vivo',
+          texto:'Tu agencia te manda un reporte a fin de mes. Nosotros te damos el acceso.\n\nCuánto invertiste, cuántos leads entraron y cuáles ya contestaron. Cuando quieras mirarlo.',
+          desc:'Sin esperar el reporte' },
+        { titulo:'Contenido, anuncios y leads',
+          texto:'Así se ve tu negocio cuando dejás de adivinar: el contenido, la pauta y cada prospecto conectados en una sola pantalla.',
+          desc:'Todo conectado' },
+        { titulo:'Así trabajamos en ECUS',
+          texto:'Nicole te muestra en 30 segundos cómo conectamos tu contenido, tus anuncios y tus leads para que sepas qué está funcionando.',
+          desc:'Conocé el sistema' }
+      ] },
+
+    { nombre:'Carrusel 18 · después del clic', creativo:'ECUS-CARRUSEL-18_01 a 04 (4 tarjetas)', cta:'Más información',
+      vars:[
+        { titulo:'¿Qué pasa después del clic?',
+          texto:'1.248 clics. 694 leads. ¿Y después?\n\nSi tu reporte termina ahí, te estás perdiendo la mitad importante: quién contestó, quién servía y quién compró.',
+          desc:'Deslizá y mirá' },
+        { titulo:'Tus leads dejan de perderse',
+          texto:'Los prospectos llegan. El problema arranca cuando nadie sabe qué pasó con ellos.\n\nTe mostramos cómo se ve tenerlos a todos en un solo lugar.',
+          desc:'Mirá cómo funciona' },
+        { titulo:'Todo en un solo lugar',
+          texto:'Gasto, leads, costo por lead y el estado de cada prospecto. En una pantalla que se actualiza sola.',
+          desc:'Contenido, pauta y CRM' }
+      ] },
+
+    { nombre:'Publicación 19-08 · control de leads', creativo:'19-08 Publicacion.jpg', cta:'Enviar mensaje',
+      vars:[
+        { titulo:'Tené el control de tus leads',
+          texto:'Cada prospecto queda con su nombre, su teléfono y lo que dijo. Sabés quién ya contestó y a quién le falta seguimiento.',
+          desc:'Mide, organiza y sigue' },
+        { titulo:'Dejá de perder prospectos',
+          texto:'Invertís en publicidad, entran prospectos, y se terminan perdiendo entre WhatsApp y la memoria de alguien. Con nosotros no.',
+          desc:'Cada lead con su historia' },
+        { titulo:'De la pauta a la venta',
+          texto:'Meta y Google te traen la gente. Nosotros nos ocupamos de que ninguno se quede sin respuesta.',
+          desc:'Seguimiento real' }
+      ] },
+
+    { nombre:'Publicación 20-08 · quién compra', creativo:'20-08 publicacion.jpg', cta:'Más información',
+      vars:[
+        { titulo:'¿Cuáles terminan comprando?',
+          texto:'Ya sabés cuántos leads te entraron. Lo que decide tu mes es cuáles compraron — y eso también lo podés ver.',
+          desc:'Del lead a la venta' },
+        { titulo:'Mirá el retorno real',
+          texto:'El costo por lead te miente si no sabés qué pasó después. Marcá quién compró y mirá cuánto devolvió cada anuncio de verdad.',
+          desc:'No solo el costo por lead' },
+        { titulo:'Seguí a cada prospecto',
+          texto:'Tus anuncios generan leads. Nosotros te mostramos el avance de cada uno hasta que compra o se cae.',
+          desc:'En un solo lugar' }
+      ] },
+
+    { nombre:'Publicación 21-08 · a dónde va la plata', creativo:'21-08 publicacion.jpg', cta:'Enviar mensaje',
+      vars:[
+        { titulo:'Dejá de invertir a ciegas',
+          texto:'$109.59 invertidos, 274 leads. Ese es el dato que deberías poder mirar cualquier día, no una vez al mes.',
+          desc:'Tu inversión, en vivo' },
+        { titulo:'Tu inversión, en claro',
+          texto:'Cuánto invertiste, cuántos leads llegaron y qué resultados generaron. Se actualiza solo, sin pedirle nada a nadie.',
+          desc:'Actualizado en vivo' },
+        { titulo:'¿Sabés a dónde va tu plata?',
+          texto:'Si tu única foto de la pauta es el reporte de fin de mes, estás decidiendo con información vieja.',
+          desc:'Medí lo que invertís' }
       ] }
   ],
   formulario: {
     titulo:'Contanos de tu negocio',
-    desc:'Te escribimos por WhatsApp el mismo día para mostrarte cómo funciona el sistema con tus propios números. Sin compromiso.',
+    desc:'Te escribimos por WhatsApp el mismo día para mostrarte cómo se vería tu operación con el sistema andando, usando tus propios números. Sin compromiso.',
     preguntas:[
-      { texto:'¿Cuántas personas venden en tu equipo?', tipo:'opciones' },
-      { texto:'¿Cómo llevás hoy el seguimiento de tus clientes?', tipo:'opciones' }
+      { texto:'¿Cuánto invertís hoy en publicidad al mes?', tipo:'opciones' },
+      { texto:'¿Cómo llevás hoy el seguimiento de tus prospectos?', tipo:'opciones' }
     ],
-    finTitulo:'¡Listo! Te escribimos hoy',
+    finTitulo:'Listo, te escribimos hoy',
     finTexto:'En las próximas horas te contactamos por WhatsApp al número que dejaste.',
     finBoton:'Escribinos ahora'
   }
@@ -529,6 +586,15 @@ el('b-exp').onclick = function(){
   a.download = 'copies-ecus-' + new Date().toISOString().slice(0,10) + '.json';
   a.click();
   URL.revokeObjectURL(a.href);
+};
+
+// Trae el material redactado. Como el guardado es del navegador, quien ya abrió la
+// página tiene la versión vieja: sin esto no vería nunca los copies nuevos.
+el('b-restaurar').onclick = function(){
+  if(!confirm('Esto reemplaza lo que tengas cargado por el material de ECUS ya redactado.\n\n' +
+              'Si escribiste algo tuyo, primero usá "Descargar" para no perderlo.\n\n¿Seguimos?')) return;
+  D = JSON.parse(JSON.stringify(INICIAL));
+  guardar(); pintarAnuncios(); pintarSelector(); pintarPreview(); pintarFormulario();
 };
 
 el('b-imp').onclick = function(){ el('archivo').click(); };
