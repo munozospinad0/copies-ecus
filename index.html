@@ -321,7 +321,7 @@ var TOPES = { texto: 125, titulo: 40, desc: 30 };
 // barato), que es lo que mostró el análisis de la cuenta.
 var INICIAL = {
   // Subir esto cuando cambie el material: dispara el aviso de "hay material nuevo".
-  version: '2026-08-19c',
+  version: '2026-08-19d',
   anuncios: [
     { nombre:'Video Nicole · cómo funciona', creativo:'ecus nicole.mp4', cta:'Enviar mensaje',
       media:['media/ecus-nicole.jpg'], esVideo:true,
@@ -451,14 +451,15 @@ var INICIAL = {
   ],
   formulario: {
     titulo:'Cuéntanos de tu negocio',
-    desc:'Te escribimos por WhatsApp el mismo día para mostrarte cómo se vería tu operación con el sistema andando, usando tus propios números. Sin compromiso.',
+    // Sin promesas que no controlamos (nada de "el mismo día" ni "con tus propios números").
+    desc:'Déjanos tus datos y te escribimos por WhatsApp. Sin compromiso.',
     preguntas:[
       { texto:'¿Cuánto inviertes hoy en publicidad al mes?', tipo:'opciones' },
       { texto:'¿Cómo llevas hoy el seguimiento de tus prospectos?', tipo:'opciones' }
     ],
-    finTitulo:'Listo, te escribimos hoy',
-    finTexto:'En las próximas horas te contactamos por WhatsApp al número que dejaste.',
-    finBoton:'Escríbenos ahora'
+    finTitulo:'¡Listo!',
+    finTexto:'Te vamos a escribir por WhatsApp al número que dejaste. Si prefieres, escríbenos tú ahora.',
+    finBoton:'Abrir WhatsApp'
   }
 };
 
