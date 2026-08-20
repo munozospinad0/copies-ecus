@@ -247,15 +247,15 @@
 
   <!-- FORMULARIO -->
   <div id="p-formulario" class="oculto">
-    <p class="intro">El formulario nativo de Meta. Cada pregunta que agregás baja la cantidad de leads pero sube
-      la calidad — <b>es la palanca más directa que tenés</b> para dejar de recibir gente que no compra.
+    <p class="intro">El formulario nativo de Meta. Cada pregunta que agregas baja la cantidad de leads pero sube
+      la calidad — <b>es la palanca más directa que tienes</b> para dejar de recibir gente que no compra.
       Con dos o tres preguntas de filtro alcanza; con más, la gente abandona.</p>
 
     <div class="cols">
       <div>
         <div class="form">
           <h3>Pantalla de bienvenida</h3>
-          <div class="sub2">Lo primero que ve quien tocó el anuncio. Si acá no se entiende qué gana, no completa.</div>
+          <div class="sub2">Lo primero que ve quien tocó el anuncio. Si aquí no se entiende qué gana, no completa.</div>
           <div class="campo">
             <label>Título <span class="cnt" id="c-ftit"></span></label>
             <textarea class="corta" id="f-titulo" data-max="60"></textarea>
@@ -269,14 +269,14 @@
 
         <div class="form">
           <h3>Preguntas</h3>
-          <div class="sub2">Meta ya trae nombre, correo y teléfono. Estas son las que agregás vos para filtrar.</div>
+          <div class="sub2">Meta ya trae nombre, correo y teléfono. Estas son las que agregas tú para filtrar.</div>
           <div id="preguntas"></div>
           <button class="agregar" id="b-preg">+ Agregar pregunta</button>
         </div>
 
         <div class="form">
           <h3>Pantalla final</h3>
-          <div class="sub2">Lo que ve cuando termina. Es el momento de mayor intención: aprovechalo para que escriba.</div>
+          <div class="sub2">Lo que ve cuando termina. Es el momento de mayor intención: aprovéchalo para que escriba.</div>
           <div class="campo">
             <label>Título</label>
             <textarea class="corta" id="f-ftit" data-max="60"></textarea>
@@ -300,7 +300,7 @@
   </div>
 </div>
 
-<footer>ECUS Agency · se guarda en este navegador · descargá el archivo para respaldar o compartir</footer>
+<footer>ECUS Agency · se guarda en este navegador · descarga el archivo para respaldar o compartir</footer>
 
 <script>
 (function(){
@@ -321,20 +321,20 @@ var TOPES = { texto: 125, titulo: 40, desc: 30 };
 // barato), que es lo que mostró el análisis de la cuenta.
 var INICIAL = {
   // Subir esto cuando cambie el material: dispara el aviso de "hay material nuevo".
-  version: '2026-08-19b',
+  version: '2026-08-19c',
   anuncios: [
     { nombre:'Video Nicole · cómo funciona', creativo:'ecus nicole.mp4', cta:'Enviar mensaje',
       media:['media/ecus-nicole.jpg'], esVideo:true,
       vars:[
-        { titulo:'Mirá tus campañas en vivo',
+        { titulo:'Mira tus campañas en vivo',
           texto:'Tu agencia te manda un reporte a fin de mes. Nosotros te damos el acceso.\n\nCuánto invertiste, cuántos leads entraron y cuáles ya contestaron. Cuando quieras mirarlo.',
           desc:'Sin esperar el reporte' },
         { titulo:'Contenido, anuncios y leads',
-          texto:'Así se ve tu negocio cuando dejás de adivinar: el contenido, la pauta y cada prospecto conectados en una sola pantalla.',
+          texto:'Así se ve tu negocio cuando dejas de adivinar: el contenido, la pauta y cada prospecto conectados en una sola pantalla.',
           desc:'Todo conectado' },
         { titulo:'Así trabajamos en ECUS',
           texto:'Nicole te muestra en 30 segundos cómo conectamos tu contenido, tus anuncios y tus leads para que sepas qué está funcionando.',
-          desc:'Conocé el sistema' }
+          desc:'Conoce el sistema' }
       ] },
 
     { nombre:'Carrusel 18 · después del clic', creativo:'ECUS-CARRUSEL-18_01 a 04 (4 tarjetas)', cta:'Más información',
@@ -342,10 +342,10 @@ var INICIAL = {
       vars:[
         { titulo:'¿Qué pasa después del clic?',
           texto:'1.248 clics. 694 leads. ¿Y después?\n\nSi tu reporte termina ahí, te estás perdiendo la mitad importante: quién contestó, quién servía y quién compró.',
-          desc:'Deslizá y mirá' },
+          desc:'Desliza y mira' },
         { titulo:'Tus leads dejan de perderse',
           texto:'Los prospectos llegan. El problema arranca cuando nadie sabe qué pasó con ellos.\n\nTe mostramos cómo se ve tenerlos a todos en un solo lugar.',
-          desc:'Mirá cómo funciona' },
+          desc:'Mira cómo funciona' },
         { titulo:'Todo en un solo lugar',
           texto:'Gasto, leads, costo por lead y el estado de cada prospecto. En una pantalla que se actualiza sola.',
           desc:'Contenido, pauta y CRM' }
@@ -354,11 +354,11 @@ var INICIAL = {
     { nombre:'Publicación 19-08 · control de leads', creativo:'19-08 Publicacion.jpg', cta:'Enviar mensaje',
       media:['media/19-08-publicacion.jpg'],
       vars:[
-        { titulo:'Tené el control de tus leads',
-          texto:'Cada prospecto queda con su nombre, su teléfono y lo que dijo. Sabés quién ya contestó y a quién le falta seguimiento.',
+        { titulo:'Ten el control de tus leads',
+          texto:'Cada prospecto queda con su nombre, su teléfono y lo que dijo. Sabes quién ya contestó y a quién le falta seguimiento.',
           desc:'Mide, organiza y sigue' },
-        { titulo:'Dejá de perder prospectos',
-          texto:'Invertís en publicidad, entran prospectos, y se terminan perdiendo entre WhatsApp y la memoria de alguien. Con nosotros no.',
+        { titulo:'Deja de perder prospectos',
+          texto:'Inviertes en publicidad, entran prospectos, y se terminan perdiendo entre WhatsApp y la memoria de alguien. Con nosotros no.',
           desc:'Cada lead con su historia' },
         { titulo:'De la pauta a la venta',
           texto:'Meta y Google te traen la gente. Nosotros nos ocupamos de que ninguno se quede sin respuesta.',
@@ -369,40 +369,96 @@ var INICIAL = {
       media:['media/20-08-publicacion.jpg'],
       vars:[
         { titulo:'¿Cuáles terminan comprando?',
-          texto:'Ya sabés cuántos leads te entraron. Lo que decide tu mes es cuáles compraron — y eso también lo podés ver.',
+          texto:'Ya sabes cuántos leads entraron. Lo que decide tu mes es cuáles compraron — y eso también lo puedes ver.',
           desc:'Del lead a la venta' },
-        { titulo:'Mirá el retorno real',
-          texto:'El costo por lead te miente si no sabés qué pasó después. Marcá quién compró y mirá cuánto devolvió cada anuncio de verdad.',
+        { titulo:'Mira el retorno real',
+          texto:'El costo por lead te miente si no sabes qué pasó después. Marca quién compró y mira cuánto devolvió cada anuncio de verdad.',
           desc:'No solo el costo por lead' },
-        { titulo:'Seguí a cada prospecto',
+        { titulo:'Haz seguimiento a cada lead',
           texto:'Tus anuncios generan leads. Nosotros te mostramos el avance de cada uno hasta que compra o se cae.',
           desc:'En un solo lugar' }
       ] },
 
-    { nombre:'Publicación 21-08 · a dónde va la plata', creativo:'21-08 publicacion.jpg', cta:'Enviar mensaje',
+    { nombre:'Publicación 21-08 · a dónde va el dinero', creativo:'21-08 publicacion.jpg', cta:'Enviar mensaje',
       media:['media/21-08-publicacion.jpg'],
       vars:[
-        { titulo:'Dejá de invertir a ciegas',
+        { titulo:'Deja de invertir a ciegas',
           texto:'$109.59 invertidos, 274 leads. Ese es el dato que deberías poder mirar cualquier día, no una vez al mes.',
           desc:'Tu inversión, en vivo' },
         { titulo:'Tu inversión, en claro',
           texto:'Cuánto invertiste, cuántos leads llegaron y qué resultados generaron. Se actualiza solo, sin pedirle nada a nadie.',
           desc:'Actualizado en vivo' },
-        { titulo:'¿Sabés a dónde va tu plata?',
+        { titulo:'¿Sabes a dónde va tu dinero?',
           texto:'Si tu única foto de la pauta es el reporte de fin de mes, estás decidiendo con información vieja.',
-          desc:'Medí lo que invertís' }
+          desc:'Mide lo que inviertes' }
+      ] },
+
+    { nombre:'Video 27-07 · sistema de ventas', creativo:'ECUS 27-07V4.mp4', cta:'Enviar mensaje',
+      media:['media/ecus-27-07v4.jpg'], esVideo:true,
+      vars:[
+        { titulo:'Un sistema, no anuncios sueltos',
+          texto:'Contenido, anuncios y seguimiento trabajando juntos. Así se ve por dentro: 295 leads a $0.89 cada uno, en una sola pantalla.',
+          desc:'Resultados en vivo' },
+        { titulo:'Leads que sí son tu cliente',
+          texto:'No se trata de recibir más gente, sino la que te compra. El sistema filtra, ordena y le da seguimiento todos los días.',
+          desc:'Tu cliente ideal' },
+        { titulo:'Así se ve por dentro',
+          texto:'Nicole te muestra la pantalla real de un cliente: cuánto invirtió, cuántos leads entraron y cuáles ya compraron.',
+          desc:'30 segundos' }
+      ] },
+
+    { nombre:'Video 31-07 · contenido y seguimiento', creativo:'ECUS 31-07V2.mp4', cta:'Enviar mensaje',
+      media:['media/ecus-31-07v2.jpg'], esVideo:true,
+      vars:[
+        { titulo:'Del contenido a la venta',
+          texto:'Grabamos en tu negocio, publicamos y el agente responde en 8 segundos. Tú solo recibes al que ya está listo para comprar.',
+          desc:'Producción incluida' },
+        { titulo:'Tu equipo no alcanza a responder',
+          texto:'El que pregunta a las 11 de la noche no espera al lunes. El agente atiende, califica y te pasa solo los que sirven.',
+          desc:'Responde en 8 segundos' },
+        { titulo:'Contenido que sí vende',
+          texto:'Video profesional en tu local, pauta que lleva a WhatsApp y seguimiento hasta la venta. Un cliente ya va en 4.8x.',
+          desc:'Grabamos en tu negocio' }
+      ] },
+
+    { nombre:'Video filtraciones · a quién le hablas', creativo:'ecus filtraciones.mp4', cta:'Más información',
+      media:['media/ecus-filtraciones.jpg'], esVideo:true,
+      vars:[
+        { titulo:'Dejas de pagar por curiosos',
+          texto:'Cada mensaje de alguien que nunca iba a comprar te cuesta igual. Filtramos antes para que pagues por el que sí necesita.',
+          desc:'Menos ruido, más ventas' },
+        { titulo:'Que te compren, no que te vean',
+          texto:'No es lo mismo hacer marketing para que te vean que para que te compren. Le hablamos a quien necesita tu servicio.',
+          desc:'Le hablamos al que compra' },
+        { titulo:'¿Cuántos de esos mensajes sirven?',
+          texto:'Miles de interacciones y pocas ventas: ahí está la fuga. Te mostramos dónde se va el dinero y cómo cerrarla.',
+          desc:'Encuentra la fuga' }
+      ] },
+
+    { nombre:'Reel 2 · no necesitas más clientes', creativo:'ecus reel 2.mp4', cta:'Más información',
+      media:['media/ecus-reel-2.jpg'], esVideo:true,
+      vars:[
+        { titulo:'No necesitas más clientes',
+          texto:'Necesitas un mejor proceso de ventas. El error más común es pedir más leads cuando los que ya llegaron se pierden.',
+          desc:'El embudo, ordenado' },
+        { titulo:'Tus leads ya están ahí',
+          texto:'Nuevo, contactado, calificado, propuesta, ganado. Cada prospecto avanza con su valor a la vista y ninguno se queda atrás.',
+          desc:'Embudo de ventas' },
+        { titulo:'$5,730 esperando respuesta',
+          texto:'Saber cuánto dinero tienes en propuestas abiertas cambia a quién llamas hoy. El embudo te lo muestra sin preguntar.',
+          desc:'Todo el proceso a la vista' }
       ] }
   ],
   formulario: {
-    titulo:'Contanos de tu negocio',
+    titulo:'Cuéntanos de tu negocio',
     desc:'Te escribimos por WhatsApp el mismo día para mostrarte cómo se vería tu operación con el sistema andando, usando tus propios números. Sin compromiso.',
     preguntas:[
-      { texto:'¿Cuánto invertís hoy en publicidad al mes?', tipo:'opciones' },
-      { texto:'¿Cómo llevás hoy el seguimiento de tus prospectos?', tipo:'opciones' }
+      { texto:'¿Cuánto inviertes hoy en publicidad al mes?', tipo:'opciones' },
+      { texto:'¿Cómo llevas hoy el seguimiento de tus prospectos?', tipo:'opciones' }
     ],
     finTitulo:'Listo, te escribimos hoy',
     finTexto:'En las próximas horas te contactamos por WhatsApp al número que dejaste.',
-    finBoton:'Escribinos ahora'
+    finBoton:'Escríbenos ahora'
   }
 };
 
@@ -427,7 +483,7 @@ var LUGARES = [
     nota:'No muestra la descripción. El título va junto al botón.' },
   { id:'ig-story', nombre:'Instagram · Historias', prop:9/16, ideal:'1080×1920 (9:16)',
     texto:0, titulo:0, desc:0, marca:'instagram', pantalla:true,
-    nota:'A pantalla completa y sin texto alrededor: lo que no esté EN la pieza, no se lee. Dejá libre el 14% de arriba y el 20% de abajo.' },
+    nota:'A pantalla completa y sin texto alrededor: lo que no esté EN la pieza, no se lee. Deja libre el 14% de arriba y el 20% de abajo.' },
   { id:'reels', nombre:'Reels', prop:9/16, ideal:'1080×1920 (9:16)',
     texto:72, titulo:0, desc:0, marca:'instagram', pantalla:true,
     nota:'El texto va abajo, encima del video, y se corta enseguida. La interfaz tapa los bordes.' },
@@ -687,8 +743,8 @@ function pintarPreview(){
       alertas.push('<div class="al arreglo">' +
         'Para que quede bien: exportá esta pieza en <b>' + medidaIdeal(L.prop) + '</b>' +
         (corte.pierde >= 25
-          ? ', o dejá los textos y logos dentro del centro para que el recorte no se los coma.'
-          : '. Con este recorte igual se entiende, pero revisá que no corte texto.') +
+          ? ', o deja los textos y logos dentro del centro para que el recorte no se los coma.'
+          : '. Con este recorte igual se entiende, pero revisa que no corte texto.') +
         '</div>');
     } else {
       alertas.push('<div class="al buena">' +
@@ -696,7 +752,7 @@ function pintarPreview(){
         'Tu pieza es ' + tuya + ' (' + ficha.ancho + '×' + ficha.alto + '), justo lo que pide esta ubicación.</div>');
     }
   } else if(!ficha && medios.length){
-    alertas.push('<div class="al media">No pude leer las medidas de este creativo, así que no puedo avisarte del recorte. Probá con el botón de recargar.</div>');
+    alertas.push('<div class="al media">No pude leer las medidas de este creativo, así que no puedo avisarte del recorte. Prueba con el botón de recargar.</div>');
   }
   if(L.texto === 0 && (v.texto||'').trim()){
     alertas.push('<div class="al media">Acá <b>no se muestra el texto primario</b>: lo que no esté en la pieza, se pierde</div>');
@@ -772,7 +828,7 @@ function pintarFormulario(){
     return '<div class="preg" data-i="' + i + '">' +
       '<div class="num">' + (i+1) + '</div>' +
       '<div class="cuerpo">' +
-        '<input value="' + esc(p.texto) + '" placeholder="Escribí la pregunta">' +
+        '<input value="' + esc(p.texto) + '" placeholder="Escribe la pregunta">' +
         '<div class="tipo">Respuesta: ' +
           '<select><option value="opciones"' + (p.tipo==='opciones'?' selected':'') + '>opción múltiple</option>' +
           '<option value="corta"' + (p.tipo==='corta'?' selected':'') + '>texto corto</option></select>' +
@@ -1010,11 +1066,11 @@ pintarAnuncios();
 pintarSelector();
 
 // ?a=2 abre directo ese anuncio en la vista previa: sirve para mandarle a alguien
-// el link de una pieza puntual en vez de "fijate en el tercero".
+// el link de una pieza puntual en vez de "fíjate en el tercero".
 var pedido = (location.search.match(/[?&]a=(\d+)/) || [])[1];
 if(pedido && D.anuncios[+pedido - 1]) el('pv-cual').value = (+pedido - 1) + '|0';
 
-// ?l=ig-story abre directo esa ubicación: sirve para mandar "mirá cómo se recorta acá".
+// ?l=ig-story abre directo esa ubicación: sirve para mandar "mira cómo se recorta aquí".
 var lugarPedido = (location.search.match(/[?&]l=([a-z-]+)/) || [])[1];
 if(lugarPedido && LUGARES.some(function(x){ return x.id === lugarPedido; })){
   donde = lugarPedido;
