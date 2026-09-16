@@ -52,9 +52,18 @@
   .quitar{border:0;background:#fee2e2;color:#b91c1c;width:30px;height:30px;border-radius:9px;cursor:pointer;font-size:1rem;font-weight:800;line-height:1}
   .quitar:hover{background:#dc2626;color:#fff}
 
-  .vars{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:0}
-  .v{padding:18px 20px;border-right:1px solid var(--line)}
+  /* Tres columnas o una, nunca 2 + 1: con auto-fit, según el zoom del navegador la C quedaba
+     sola en otra fila con un hueco al lado. Se decide por el ancho de la TARJETA, no de la
+     pantalla, porque la vista previa se come 380 px al costado. */
+  .anuncio{container-type:inline-size}
+  .vars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--line);margin-top:14px}
+  .v{padding:18px 20px;border-right:1px solid var(--line);min-width:0}
   .v:last-child{border-right:0}
+  @container (max-width: 860px){
+    .vars{grid-template-columns:1fr}
+    .v{border-right:0;border-bottom:1px solid var(--line)}
+    .v:last-child{border-bottom:0}
+  }
   .vt{font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--vio);background:var(--pink);display:inline-block;padding:4px 11px;border-radius:12px;margin-bottom:14px}
   .campo{margin-bottom:15px}
   .campo label{display:flex;justify-content:space-between;align-items:baseline;font-size:.63rem;font-weight:800;color:var(--ink);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
@@ -214,6 +223,50 @@
   .tag.venta{background:#16a34a;color:#fff}
   .porque{margin:10px 20px 0;padding:10px 13px;border-left:3px solid var(--org);background:#fff8f1;border-radius:0 10px 10px 0;font-size:.72rem;color:#7a4300;font-weight:600;line-height:1.5}
   .porque b{font-weight:800}
+  .aviso.ok{background:linear-gradient(100deg,#ecfdf5,#fff);border-color:#a7f3d0;color:#065f46}
+
+  /* material visible dentro de cada anuncio */
+  .material{margin:14px 20px 0;background:#f8f7fd;border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+  .mat-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  .mat-top .etq{font-size:.62rem;font-weight:800;color:var(--ink);text-transform:uppercase;letter-spacing:.06em;margin-right:4px}
+  .fmt{border:1.5px solid var(--line);background:#fff;color:var(--ink);padding:4px 11px;border-radius:14px;font-family:inherit;font-size:.66rem;font-weight:800;cursor:pointer}
+  .fmt.on{background:var(--vio);border-color:var(--vio);color:#fff}
+  .mat-top .archivo{margin-left:auto;display:flex;align-items:center;gap:6px;min-width:0;flex:1 1 260px;justify-content:flex-end}
+  .mat-top .archivo span{font-size:.62rem;font-weight:800;color:var(--soft);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+  .mat-top .archivo input{border:1px solid var(--line);background:#fff;border-radius:9px;padding:5px 9px;font-family:inherit;font-size:.68rem;font-weight:700;color:var(--ink);width:100%;max-width:420px;min-width:0}
+  .mat-top .archivo input:focus{outline:none;border-color:var(--lila)}
+  .tiras{display:flex;gap:9px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+  .mini{position:relative;flex:none;height:150px;border-radius:10px;overflow:hidden;border:0;padding:0;cursor:zoom-in;background:#111;box-shadow:0 2px 8px rgba(22,15,56,.15);transition:transform .15s}
+  .mini:hover{transform:translateY(-2px)}
+  .mini img{height:100%;width:auto;display:block}
+  .mini .k{position:absolute;left:6px;bottom:6px;background:rgba(0,0,0,.65);color:#fff;font-size:.6rem;font-weight:800;padding:2px 7px;border-radius:9px}
+  .mini .play{position:absolute;inset:0;display:grid;place-items:center}
+  .mini .play i{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+  .mini .play svg{width:18px;height:18px;fill:var(--vio);margin-left:3px}
+  .mini.vid{height:190px}
+
+  /* visor a pantalla completa */
+  .mat-info{align-self:center;font-size:.74rem;color:var(--ink);font-weight:600;line-height:1.5;max-width:260px;padding:0 6px}
+  .mat-info b{display:block;color:var(--dark);font-weight:800;margin-bottom:3px}
+  .quitar{background:transparent !important;color:var(--soft) !important;font-size:1.15rem !important}
+  .quitar:hover{background:#fee2e2 !important;color:#b91c1c !important}
+  .leyenda{display:flex;gap:8px;flex-wrap:wrap;margin:-10px 0 20px}
+  .leyenda span{font-size:.7rem;font-weight:600;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px 11px}
+  .leyenda b{color:var(--vio);font-weight:800}
+  .visor{position:fixed;inset:0;z-index:50;background:rgba(9,6,26,.97);backdrop-filter:blur(6px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px}
+  .visor.oculto{display:none}
+  .visor .marco{position:relative;display:flex;align-items:center;justify-content:center;max-width:100%;max-height:calc(100vh - 110px)}
+  .visor img,.visor video{max-width:min(92vw,1080px);max-height:calc(100vh - 110px);border-radius:10px;display:block;background:#000}
+  .visor .pie{color:#fff;font-size:.74rem;font-weight:700;margin-top:12px;text-align:center;display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
+  .visor .pie .fmt{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.25)}
+  .visor .pie .fmt.on{background:#fff;color:var(--vio);border-color:#fff}
+  .visor .cerrar{position:absolute;top:14px;right:16px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:1.3rem;cursor:pointer}
+  .visor .nav{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:#050505;font-size:1.5rem;font-weight:700;cursor:pointer;display:grid;place-items:center;padding-bottom:3px}
+  .visor .nav.izq{left:16px} .visor .nav.der{right:16px}
+  .ampliar{position:absolute;top:9px;left:9px;background:rgba(0,0,0,.62);color:#fff;border:0;font-family:inherit;font-size:.62rem;font-weight:800;padding:4px 10px;border-radius:12px;cursor:zoom-in;line-height:1.6;z-index:2}
+  .carru video.crfoto{background:#000}
+  .playy.boton{pointer-events:auto;cursor:pointer;background:transparent;border:0}
+
   .vhead{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:14px}
   .vhead .vt{margin:0}
   .enf{font-size:.62rem;font-weight:700;color:var(--ink)}
@@ -284,11 +337,14 @@
 
   <!-- ANUNCIOS -->
   <div id="p-anuncios">
-    <p class="intro">Tres variaciones por anuncio, para que Meta tenga con qué comparar: <b>A · la línea</b>
-      (responde a la pieza y concreta), <b>B · lo que más trajo</b> (corta, con emoji y una invitación a
-      escribir, como los textos con más conversaciones de la cuenta) y <b>C · ángulo nuevo</b>. El porqué de
-      cada una está en la pestaña <b>Qué vende</b>. Los contadores marcan el largo que Meta muestra sin cortar:
-      <b>125</b> el texto primario, <b>40</b> el título y <b>30</b> la descripción. Todo se guarda solo en este navegador.</p>
+    <p class="intro">Cada anuncio trae su material (toca una pieza para verla en grande; los videos suenan) y tres
+      variaciones para que Meta compare. Los contadores marcan lo que Meta muestra sin "Ver más": <b>125</b> el texto,
+      <b>40</b> el título y <b>30</b> la descripción. El porqué de cada decisión está en <b>Qué vende</b>.</p>
+    <div class="leyenda">
+      <span><b>A · la línea</b> responde a la pieza y concreta</span>
+      <span><b>B · lo que más trajo</b> corta, con emoji e invitación a escribir</span>
+      <span><b>C · ángulo nuevo</b> un caso, un rubro o prueba social</span>
+    </div>
 
     <div class="barra" id="tandas"></div>
     <div class="aviso" id="aviso-datos"></div>
@@ -350,15 +406,15 @@
 
     <div class="an-sec">
       <h2>2 · Los textos que más conversaciones trajeron (12 meses)</h2>
-      <div class="sub2">Cada texto sumado en todos los anuncios donde corrió. Vienen de campañas a WhatsApp, que cuestan menos
+      <div class="sub2">Cada texto sumado en todos los anuncios donde corrió, citado con la ortografía corregida. Vienen de campañas a WhatsApp, que cuestan menos
         por resultado que las de formulario: sirven para ver <b>qué forma</b> funciona, no para comparar su costo con las de hoy.</div>
       <div class="scroll"><table class="tabla">
-        <tr><th>Texto (tal cual se publicó)</th><th class="n">Resultados</th><th class="n">Costo c/u</th></tr>
-        <tr><td><div class="cita">Con un buen contenido, una muy buena estrategia y unas muy buenas campañas, tu negocio puede vender mucho más a través de las redes sociales🎥💜 Contáctanos y personalizamos tu estrategia📲</div><div class="de">6 anuncios de video</div></td><td class="n">170</td><td class="n">$2.45</td></tr>
-        <tr><td><div class="cita">Todavía no humanizas tu marca en redes?🫣 Trabajemos en una estrategia!📲💜</div><div class="de">5 anuncios de video</div></td><td class="n">131</td><td class="n">$2.85</td></tr>
-        <tr><td><div class="cita">Los números que harán crecer tu negocio, no son los que vemos en los likes o en los seguidores, son los que vemos en las ventas✅💜 Dm us📲</div><div class="de">3 anuncios de video</div></td><td class="n">75</td><td class="n">$2.58</td></tr>
-        <tr><td><div class="cita">+ 700k visualizaciones?? Si es posible 🫨💜 Con distintas estrategias, entre contenido orgánico, campañas publicitarias, influencers, tendencias y más🤩 Contáctanos y hablemos📲💭</div><div class="de">5 anuncios de video</div></td><td class="n">74</td><td class="n">$2.53</td></tr>
-        <tr><td><div class="cita">Tienes seguidores y no vendes? Es por falta de estrategia. Contáctanos y agendamos una reunión.</div><div class="de">1 anuncio de video · el más barato con volumen</div></td><td class="n">31</td><td class="n">$1.36</td></tr>
+        <tr><th>Texto</th><th class="n">Resultados</th><th class="n">Costo c/u</th></tr>
+        <tr><td><div class="cita">Con un buen contenido, una muy buena estrategia y unas muy buenas campañas, tu negocio puede vender mucho más a través de las redes sociales 🎥💜 Contáctanos y personalizamos tu estrategia 📲</div><div class="de">6 anuncios de video</div></td><td class="n">170</td><td class="n">$2.45</td></tr>
+        <tr><td><div class="cita">¿Todavía no humanizas tu marca en redes? 🫣 ¡Trabajemos en una estrategia! 📲💜</div><div class="de">5 anuncios de video</div></td><td class="n">131</td><td class="n">$2.85</td></tr>
+        <tr><td><div class="cita">Los números que harán crecer tu negocio no son los que vemos en los likes o en los seguidores, son los que vemos en las ventas ✅💜 Escríbenos por DM 📲</div><div class="de">3 anuncios de video</div></td><td class="n">75</td><td class="n">$2.58</td></tr>
+        <tr><td><div class="cita">¿+700k visualizaciones? ¡Sí, es posible! 🫨💜 Con distintas estrategias: contenido orgánico, campañas publicitarias, influencers, tendencias y más 🤩 Contáctanos y hablemos 📲💭</div><div class="de">5 anuncios de video</div></td><td class="n">74</td><td class="n">$2.53</td></tr>
+        <tr><td><div class="cita">¿Tienes seguidores y no vendes? Es por falta de estrategia. Contáctanos y agendamos una reunión.</div><div class="de">1 anuncio de video · el más barato con volumen</div></td><td class="n">31</td><td class="n">$1.36</td></tr>
         <tr><td><div class="cita">¿Llevas el control de tus clientes en WhatsApp, Excel o simplemente de memoria? Es momento de dar el siguiente paso…</div><div class="de">1 imagen · la mejor pieza estática</div></td><td class="n">11</td><td class="n">$1.35</td></tr>
       </table></div>
       <div class="ojo"><b>Lo que tienen en común:</b> son cortos, hablan de vender (no de publicar), llevan uno a tres emojis y
@@ -483,6 +539,14 @@
   </div>
 </div>
 
+<div class="visor oculto" id="visor">
+  <button class="cerrar" id="v-cerrar" title="Cerrar (Esc)">×</button>
+  <div class="marco" id="v-marco"></div>
+  <button class="nav izq" id="v-izq" title="Anterior (←)">‹</button>
+  <button class="nav der" id="v-der" title="Siguiente (→)">›</button>
+  <div class="pie" id="v-pie"></div>
+</div>
+
 <footer>ECUS Agency · se guarda en este navegador · descarga el archivo para respaldar o compartir</footer>
 
 <script>
@@ -509,13 +573,13 @@ var ENFOQUES = ['la línea', 'lo que más trajo', 'ángulo nuevo'];
 
 var INICIAL = {
   // Subir esto cuando cambie el material: dispara el aviso de "hay material nuevo".
-  version: '2026-09-16a',
+  version: '2026-09-16b',
   anuncios: [
     // ================================================================ SEPTIEMBRE
     { tanda:'sep', grupo:'Videos', servicio:'Redes + pauta', prioridad:'Primero',
-      nombre:'Video · La estrategia', creativo:'16-09 LA ESTRATEGIA.mp4 (24 s)', cta:'Enviar mensaje',
-      media:['media/sep26/estrategia.jpg'], esVideo:true,
-      porque:'Mismo ángulo que «Tienes seguidores y no vendes? Es por falta de estrategia», el texto más barato de la cuenta con volumen: 31 conversaciones a $1.36.',
+      nombre:'Video · La estrategia', creativo:'16-09 LA ESTRATEGIA.mp4', cta:'Enviar mensaje',
+      media:['media/sep26/estrategia.jpg'], esVideo:true, video:'media/video/estrategia.mp4', duracion:'0:24',
+      porque:'Mismo ángulo que «¿Tienes seguidores y no vendes? Es por falta de estrategia», el texto más barato de la cuenta con volumen: 31 conversaciones a $1.36.',
       vars:[
         { titulo:'Cada publicación con un objetivo',
           texto:'Publicar por cumplir no trae clientes. Armamos tu estrategia de contenido y de pauta, con resultados que puedes medir.',
@@ -524,17 +588,17 @@ var INICIAL = {
           texto:'¿Publicas seguido y no llegan clientes? Es falta de estrategia, no de ideas 💜\n\nEscríbenos y armamos la tuya 📲',
           desc:'Respuesta por WhatsApp' },
         { titulo:'Resultados que puedes medir',
-          texto:'Cada contenido y cada campaña con un propósito, y un tablero donde ves qué funcionó y qué no.',
+          texto:'Cada contenido y cada campaña tienen un propósito, y en un tablero ves qué funcionó y qué no.',
           desc:'Estrategia que se mide' }
       ] },
 
     { tanda:'sep', grupo:'Videos', servicio:'Redes (orgánico)', prioridad:'Primero',
-      nombre:'Video · Caso Poggi', creativo:'15-09 RESULTADOS DE POGGI.mp4 (38 s)', cta:'Enviar mensaje',
-      media:['media/sep26/poggi.jpg'], esVideo:true,
-      porque:'Los casos con resultados a la vista son lo que más trae: «+700k visualizaciones?? Si es posible» sumó 74 conversaciones, y el caso Fefa es hoy el único anuncio de redes con volumen.',
+      nombre:'Video · Caso Poggi', creativo:'15-09 RESULTADOS DE POGGI.mp4', cta:'Enviar mensaje',
+      media:['media/sep26/poggi.jpg'], esVideo:true, video:'media/video/poggi.mp4', duracion:'0:38',
+      porque:'Los casos con resultados a la vista son lo que más trae: «¿+700k visualizaciones? ¡Sí, es posible!» sumó 74 conversaciones, y el caso Fefa es hoy el único anuncio de redes con volumen.',
       vars:[
         { titulo:'De las vistas a las visitas',
-          texto:'Sin pauta, solo contenido orgánico: en pocas semanas, Poggi dejó de ser un local más y la gente empezó a visitarlo.',
+          texto:'Sin pauta, solo contenido orgánico: en las primeras semanas, miles de personas descubrieron Poggi y empezaron a visitarlo.',
           desc:'100% contenido orgánico' },
         { titulo:'¿Hacemos lo mismo con tu marca?',
           texto:'Contenido que se comparte, se comenta y lleva gente al local 💜\n\nAsí trabajamos la marca de Poggi. ¿Hacemos la tuya? 📲',
@@ -545,11 +609,11 @@ var INICIAL = {
       ] },
 
     { tanda:'sep', grupo:'Videos', servicio:'Redes + pauta', prioridad:'Primero',
-      nombre:'Video · 5 errores de marketing', creativo:'ECUS 15-09V2.mp4 (21 s)', cta:'Enviar mensaje',
-      media:['media/sep26/errores.jpg'], esVideo:true,
-      porque:'El video cierra preguntando «¿cuántos de estos estás cometiendo?»: el texto no repite la pregunta, responde. Es el más corto del lote, y en esta cuenta la mitad de la gente se va antes de la mitad del video.',
+      nombre:'Video · 5 errores de marketing', creativo:'ECUS 15-09V2.mp4', cta:'Enviar mensaje',
+      media:['media/sep26/errores.jpg'], esVideo:true, video:'media/video/errores.mp4', duracion:'0:21',
+      porque:'El video cierra preguntando «¿cuántos de estos estás cometiendo?»: el texto no repite la pregunta, responde. Es el más corto del lote, y en esta cuenta casi la mitad de la gente se va entre el primer cuarto y la mitad del video.',
       vars:[
-        { titulo:'Una estrategia que corrige los 5',
+        { titulo:'Corrige los 5 errores con estrategia',
           texto:'Si te reconociste en más de uno, no es falta de esfuerzo: es falta de estrategia. La armamos contigo y medimos qué funciona.',
           desc:'Contenido, pauta y medición' },
         { titulo:'Escríbenos y creamos tu estrategia',
@@ -561,8 +625,8 @@ var INICIAL = {
       ] },
 
     { tanda:'sep', grupo:'Videos', servicio:'Redes', prioridad:'Primero',
-      nombre:'Video · Testimonio WBOX', creativo:'Entrevista Wbox.mp4 (46 s)', cta:'Enviar mensaje',
-      media:['media/sep26/wbox.jpg'], esVideo:true,
+      nombre:'Video · Testimonio WBOX', creativo:'Entrevista Wbox.mp4', cta:'Enviar mensaje',
+      media:['media/sep26/wbox.jpg'], esVideo:true, video:'media/video/wbox.mp4', duracion:'0:46',
       porque:'Prueba social con un dato concreto: primer cliente de Didibot en unas dos semanas. Ojo: los testimonios solos han rendido flojo en la cuenta ($3.76 a $4.09 por conversación); mejor que corra junto a los otros.',
       vars:[
         { titulo:'Primer cliente en dos semanas',
@@ -584,13 +648,13 @@ var INICIAL = {
       porque:'Cada dueño se busca en su rubro: mueblerías, telas, mobiliario corporativo, belleza, restaurantes, alimentos, ropa y autos. No trae versión 9:16, así que en Historias se recorta.',
       vars:[
         { titulo:'Redes para tu tipo de negocio',
-          texto:'Mueblerías, restaurantes, salones de belleza, arrendadoras de autos: ya trabajamos redes en esos rubros. Busca el tuyo.',
+          texto:'Mueblerías, restaurantes, salones de belleza, arrendadoras de autos: ya manejamos sus redes. Desliza y busca el tuyo.',
           desc:'8 rubros que ya atendemos' },
         { titulo:'Escríbenos y armamos la tuya',
           texto:'¿Tu negocio está en la lista? 👀\n\nSi no está, igual escríbenos: armamos la estrategia para tu rubro 📲',
           desc:'Respuesta por WhatsApp' },
         { titulo:'Contenido pensado para tu rubro',
-          texto:'No se comunica igual una mueblería que un restaurante. Por eso cada estrategia se arma desde cero, para tu negocio.',
+          texto:'No se comunica igual una mueblería que un restaurante. Por eso armamos cada estrategia desde cero.',
           desc:'Nada de plantillas' }
       ] },
 
@@ -600,7 +664,7 @@ var INICIAL = {
         '4:5':['media/sep26/razon-45-01.jpg','media/sep26/razon-45-02.jpg','media/sep26/razon-45-03.jpg','media/sep26/razon-45-04.jpg'],
         '1:1':['media/sep26/razon-11-01.jpg','media/sep26/razon-11-02.jpg','media/sep26/razon-11-03.jpg','media/sep26/razon-11-04.jpg'],
         '9:16':['media/sep26/razon-916-01.jpg','media/sep26/razon-916-02.jpg','media/sep26/razon-916-03.jpg','media/sep26/razon-916-04.jpg'] },
-      porque:'Viene en los tres formatos: se carga la versión justa en cada ubicación y nada se recorta. La C retoma «los números que harán crecer tu negocio no son los likes», 75 conversaciones.',
+      porque:'Viene en los tres formatos: se carga la versión justa en cada ubicación y nada se recorta. La C retoma «Los números que harán crecer tu negocio no son los likes», 75 conversaciones.',
       vars:[
         { titulo:'Cada contenido con un objetivo',
           texto:'Antes de grabar decidimos qué tiene que lograr cada pieza: que te conozcan, que te recuerden o que te escriban.',
@@ -616,7 +680,7 @@ var INICIAL = {
     { tanda:'sep', grupo:'Imágenes', servicio:'Redes / branding', prioridad:'Probar',
       nombre:'Imagen · Si tu marca no conecta, no vende', creativo:'15-09 (ECUS 16-9 4:5 · ECUS-14-092 1:1 · ECUS-14-09-HISTORIA 9:16)', cta:'Enviar mensaje',
       formatos:{ '4:5':['media/sep26/conecta-45.jpg'], '1:1':['media/sep26/conecta-11.jpg'], '9:16':['media/sep26/conecta-916.jpg'] },
-      porque:'La B retoma «Todavía no humanizas tu marca en redes?», el segundo texto con más conversaciones de la cuenta: 131 a $2.85.',
+      porque:'La B retoma «¿Todavía no humanizas tu marca en redes?», el segundo texto con más conversaciones de la cuenta: 131 a $2.85.',
       vars:[
         { titulo:'Una marca que conecta, vende',
           texto:'Conectar es que te reconozcan sin leer el nombre y te elijan frente a la competencia. En eso trabajamos con tu marca.',
@@ -632,7 +696,7 @@ var INICIAL = {
     { tanda:'sep', grupo:'Imágenes', servicio:'Pauta (Meta Ads)', prioridad:'Probar',
       nombre:'Imagen · Campañas que convierten', creativo:'08-15 (ECUS-08 4:5 · ECUS-08-09-post 1:1 · ECUS-08-09-historia 9:16)', cta:'Enviar mensaje',
       formatos:{ '4:5':['media/sep26/campanas-45.jpg'], '1:1':['media/sep26/campanas-11.jpg'], '9:16':['media/sep26/campanas-916.jpg'] },
-      porque:'Es la única pieza del lote que vende pauta y no redes. La B retoma «¿Estás invirtiendo en publicidad, pero las ventas no crecen?», el mejor CTR de los textos recientes (5.48%).',
+      porque:'Es la única pieza del lote que vende pauta y no redes. La B retoma «¿Estás invirtiendo en publicidad, pero las ventas no crecen?», uno de los CTR más altos de los textos recientes (5.48%).',
       vars:[
         { titulo:'Campañas que traen leads',
           texto:'Definimos a quién le hablas, cuándo aparecer y qué decirle. Y te mostramos cada lead que entra y cuánto costó.',
@@ -649,7 +713,7 @@ var INICIAL = {
     { tanda:'ago', grupo:'Videos', servicio:'Sistema de ventas', meta:'VID_DEMOTABLERO_AGO26',
       resumen:'2 resultados · $4.17 c/u · CRM: 2 leads, 1 contactado',
       nombre:'Video Nicole · cómo funciona', creativo:'ecus nicole.mp4', cta:'Enviar mensaje',
-      media:['media/ecus-nicole.jpg'], esVideo:true,
+      media:['media/ecus-nicole.jpg'], esVideo:true, video:'media/video/nicole.mp4', duracion:'0:29',
       vars:[
         { rinde:'0 resultados con $1.32', titulo:'Mira tus campañas en vivo',
           texto:'Tu agencia te manda un reporte a fin de mes. Nosotros te damos el acceso.\n\nCuánto invertiste, cuántos leads entraron y cuáles ya contestaron. Cuando quieras mirarlo.',
@@ -665,7 +729,7 @@ var INICIAL = {
     { tanda:'ago', grupo:'Videos', servicio:'Sistema de ventas', meta:'VID_SISTEMAVENTAS_AGO26', estrella:true,
       resumen:'27 resultados · $3.63 c/u · CRM: 23 leads y 1 venta',
       nombre:'Video 27-07 · sistema de ventas', creativo:'ECUS 27-07V4.mp4', cta:'Enviar mensaje',
-      media:['media/ecus-27-07v4.jpg'], esVideo:true,
+      media:['media/ecus-27-07v4.jpg'], esVideo:true, video:'media/video/27-07.mp4', duracion:'0:27',
       vars:[
         { rinde:'11 resultados · $2.44 c/u', titulo:'Un sistema, no anuncios sueltos',
           texto:'Contenido, anuncios y seguimiento trabajando juntos. Así se ve por dentro: 295 leads a $0.89 cada uno, en una sola pantalla.',
@@ -681,7 +745,7 @@ var INICIAL = {
     { tanda:'ago', grupo:'Videos', servicio:'Sistema de ventas', meta:'VID_CONTENIDOMASAGENTE_AGO26',
       resumen:'11 resultados · $2.61 c/u · CRM: 8 leads, 1 calificado',
       nombre:'Video 31-07 · contenido y seguimiento', creativo:'ECUS 31-07V2.mp4', cta:'Enviar mensaje',
-      media:['media/ecus-31-07v2.jpg'], esVideo:true,
+      media:['media/ecus-31-07v2.jpg'], esVideo:true, video:'media/video/31-07.mp4', duracion:'0:28',
       vars:[
         { rinde:'2 resultados · $3.29 c/u', titulo:'Del contenido a la venta',
           texto:'Grabamos en tu negocio, publicamos y el agente responde en 8 segundos. Tú solo recibes al que ya está listo para comprar.',
@@ -697,7 +761,7 @@ var INICIAL = {
     { tanda:'ago', grupo:'Videos', servicio:'Sistema de ventas', meta:'VID_FILTRACIONLEADS_AGO26',
       resumen:'5 resultados · $3.44 c/u · CRM: 4 leads, 1 calificado',
       nombre:'Video filtraciones · a quién le hablas', creativo:'ecus filtraciones.mp4', cta:'Más información',
-      media:['media/ecus-filtraciones.jpg'], esVideo:true,
+      media:['media/ecus-filtraciones.jpg'], esVideo:true, video:'media/video/filtraciones.mp4', duracion:'0:31',
       vars:[
         { rinde:'2 resultados · $1.75 c/u', titulo:'Dejas de pagar por curiosos',
           texto:'Cada mensaje de alguien que nunca iba a comprar te cuesta igual. Filtramos antes para que pagues por el que sí necesita.',
@@ -713,7 +777,7 @@ var INICIAL = {
     { tanda:'ago', grupo:'Videos', servicio:'Sistema de ventas', meta:'VID_PROCESOVENTAS_AGO26', estrella:true,
       resumen:'2 resultados · $4.87 c/u · CRM: 2 leads y 1 venta',
       nombre:'Reel 2 · no necesitas más clientes', creativo:'ecus reel 2.mp4', cta:'Más información',
-      media:['media/ecus-reel-2.jpg'], esVideo:true,
+      media:['media/ecus-reel-2.jpg'], esVideo:true, video:'media/video/reel-2.mp4', duracion:'0:33',
       vars:[
         { rinde:'0 resultados con $4.31', titulo:'No necesitas más clientes',
           texto:'Necesitas un mejor proceso de ventas. El error más común es pedir más leads cuando los que ya llegaron se pierden.',
@@ -809,29 +873,51 @@ var D = cargar();
 // Quien ya abrió la página tiene guardada la versión anterior. En vez de pedirle que
 // reemplace todo (y pierda lo que haya editado), se suma el material nuevo y a lo de agosto
 // se le agregan sus resultados, solo donde el texto sigue igual al publicado.
+// Textos que se pulieron después de publicados. Se cambian solo si siguen exactamente como
+// salieron: si alguien los editó, lo suyo manda.
+var CAMBIOS_TEXTO = {
+  'Cada contenido y cada campaña con un propósito, y un tablero donde ves qué funcionó y qué no.':
+    'Cada contenido y cada campaña tienen un propósito, y en un tablero ves qué funcionó y qué no.',
+  'Sin pauta, solo contenido orgánico: en pocas semanas, Poggi dejó de ser un local más y la gente empezó a visitarlo.':
+    'Sin pauta, solo contenido orgánico: en las primeras semanas, miles de personas descubrieron Poggi y empezaron a visitarlo.',
+  'Una estrategia que corrige los 5': 'Corrige los 5 errores con estrategia',
+  'Mueblerías, restaurantes, salones de belleza, arrendadoras de autos: ya trabajamos redes en esos rubros. Busca el tuyo.':
+    'Mueblerías, restaurantes, salones de belleza, arrendadoras de autos: ya manejamos sus redes. Desliza y busca el tuyo.',
+  'No se comunica igual una mueblería que un restaurante. Por eso cada estrategia se arma desde cero, para tu negocio.':
+    'No se comunica igual una mueblería que un restaurante. Por eso armamos cada estrategia desde cero.'
+};
+
+// Quien ya abrió la página tiene guardada una versión anterior. En vez de pedirle que reemplace
+// todo (y pierda lo que editó): el material, las notas y los resultados se toman siempre de la
+// versión nueva; los textos se conservan, salvo los que siguen idénticos a uno que se pulió.
+// Los anuncios que no existían entran; los propios del usuario quedan al final.
 var fusionado = false;
 (function fusionar(){
   if(D.version === INICIAL.version || !D.anuncios) return;
-  if(D.anuncios.some(function(a){ return a.tanda === 'sep'; })) return;
   var base = JSON.parse(JSON.stringify(INICIAL));
   var guardados = D.anuncios, usados = {};
-  var ago = base.anuncios.filter(function(a){ return a.tanda === 'ago'; }).map(function(ini){
+  var META = ['tanda','grupo','servicio','prioridad','porque','creativo','cta','media','formatos',
+              'esVideo','video','duracion','meta','resumen','estrella'];
+  var nuevos = base.anuncios.map(function(ini){
     var k = -1;
     guardados.forEach(function(g, i){ if(k < 0 && !usados[i] && g.nombre === ini.nombre) k = i; });
     if(k < 0) return ini;
     usados[k] = true;
     var g = guardados[k];
-    ['tanda','grupo','servicio','meta','resumen','estrella'].forEach(function(c){ if(ini[c] != null) g[c] = ini[c]; });
+    META.forEach(function(c){ if(c in ini) g[c] = ini[c]; else delete g[c]; });
     (g.vars || []).forEach(function(v, j){
+      ['texto', 'titulo', 'desc'].forEach(function(c){
+        if(CAMBIOS_TEXTO[v[c]]) v[c] = CAMBIOS_TEXTO[v[c]];
+      });
       var iv = ini.vars[j];
-      if(iv && iv.rinde && (v.texto || '') === iv.texto) v.rinde = iv.rinde;
+      if(iv && iv.rinde && (v.texto || '') === iv.texto) v.rinde = iv.rinde; else delete v.rinde;
     });
     return g;
   });
   var resto = guardados.filter(function(_, i){ return !usados[i]; }).map(function(g){
     g.tanda = g.tanda || 'ago'; g.grupo = g.grupo || 'Otros'; return g;
   });
-  D.anuncios = base.anuncios.filter(function(a){ return a.tanda === 'sep'; }).concat(ago, resto);
+  D.anuncios = nuevos.concat(resto);
   D.formulario = D.formulario || base.formulario;
   D.version = INICIAL.version;
   fusionado = true;
@@ -994,6 +1080,144 @@ function pintarIndice(visibles){
   });
 }
 
+// ------------------------------------------------------------------ material a la vista
+// Antes el material solo se veía de a una pieza en la vista previa, y los videos eran una foto
+// fija. Ahora cada anuncio muestra todas sus piezas (por formato) y un clic las abre en grande;
+// los videos se reproducen con sonido.
+var FMT_NOMBRE = { '4:5':'Feed 4:5', '1:1':'Pauta 1:1', '9:16':'Historias 9:16' };
+var fmtVista = {};   // formato elegido en la tira de cada anuncio
+
+function juegos(a){
+  if(a.formatos) return Object.keys(a.formatos).map(function(k){
+    return { clave:k, nombre: FMT_NOMBRE[k] || k, lista: a.formatos[k] };
+  });
+  var lista = a.media || [];
+  return [{ clave:null, nombre: a.esVideo ? 'Video' : (lista.length > 1 ? 'Carrusel' : 'Imagen'), lista: lista }];
+}
+
+function pintarMaterial(a, i){
+  var js = juegos(a);
+  var sel = js[fmtVista[i]] ? fmtVista[i] : 0;
+  var j = js[sel];
+  var cuenta = function(x){ return x.lista.length > 1 ? ' · ' + x.lista.length : ''; };
+  var chips = js.length > 1
+    ? js.map(function(x, n){
+        return '<button class="fmt' + (n === sel ? ' on' : '') + '" data-f="' + n + '">' + esc(x.nombre) + cuenta(x) + '</button>';
+      }).join('')
+    : '<span class="fmt on" style="cursor:default">' + esc(j.nombre) +
+        (j.lista.length > 1 ? ' · ' + j.lista.length + ' tarjetas' : '') + (a.duracion ? ' · ' + esc(a.duracion) : '') + '</span>';
+  var minis = j.lista.map(function(src, n){
+    return '<button class="mini' + (a.esVideo ? ' vid' : '') + '" data-n="' + n + '" title="Ver en grande">' +
+      '<img src="' + src + '" alt="" loading="lazy">' +
+      (a.esVideo ? '<span class="play"><i><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></i></span>' : '') +
+      (j.lista.length > 1 ? '<span class="k">' + (n+1) + '</span>' : '') +
+    '</button>';
+  }).join('');
+  // Con una sola pieza la tira quedaba con un hueco al lado: se usa para decir qué hacer.
+  var info = j.lista.length === 1
+    ? '<div class="mat-info">' + (a.esVideo
+        ? '<b>Video vertical' + (a.duracion ? ' · ' + esc(a.duracion) : '') + '</b>Tócalo para verlo completo y con sonido.'
+        : '<b>' + esc(j.nombre) + '</b>Tócala para verla en grande' + (js.length > 1 ? '; arriba cambias de formato.' : '.')) +
+      '</div>'
+    : '';
+  return '<div class="material" data-i="' + i + '">' +
+    '<div class="mat-top"><span class="etq">Material</span>' + chips +
+      '<label class="archivo"><span>Archivo</span>' +
+      '<input value="' + esc(a.creativo || '') + '" data-c="creativo" placeholder="archivo del creativo"></label></div>' +
+    (minis ? '<div class="tiras">' + minis + info + '</div>' : '<div class="pista">Sin material cargado.</div>') +
+  '</div>';
+}
+
+function enlazarMaterial(caja){
+  var i = +caja.dataset.i;
+  caja.querySelectorAll('.fmt[data-f]').forEach(function(b){
+    b.onclick = function(){
+      fmtVista[i] = +b.dataset.f;
+      var nuevo = document.createElement('div');
+      nuevo.innerHTML = pintarMaterial(D.anuncios[i], i);
+      var reemplazo = nuevo.firstChild;
+      caja.parentNode.replaceChild(reemplazo, caja);
+      enlazarMaterial(reemplazo);
+      enlazarArchivo(reemplazo);
+    };
+  });
+  caja.querySelectorAll('.mini').forEach(function(m){
+    m.onclick = function(){
+      var n = +m.dataset.n;
+      // También lleva la vista previa a esa pieza, para verla dentro del anuncio.
+      var actual = (el('pv-cual').value || '').split('|');
+      if(+actual[0] !== i) el('pv-cual').value = i + '|0';
+      tarjeta = n; pintarPreview();
+      abrirVisor(i, juegos(D.anuncios[i])[fmtVista[i]] ? fmtVista[i] : 0, n);
+    };
+  });
+}
+
+function enlazarArchivo(caja){
+  var inp = caja.querySelector('input[data-c="creativo"]');
+  if(!inp) return;
+  inp.addEventListener('input', function(){
+    var i = +caja.dataset.i;
+    D.anuncios[i].creativo = inp.value;
+    guardar();
+  });
+}
+
+var VIS = null;   // { i: anuncio, f: formato, n: pieza }
+function abrirVisor(i, f, n){
+  VIS = { i:i, f:f, n:n };
+  pintarVisor();
+  el('visor').classList.remove('oculto');
+  document.body.style.overflow = 'hidden';
+}
+function cerrarVisor(){
+  var v = el('v-marco').querySelector('video');
+  if(v) v.pause();
+  el('v-marco').innerHTML = '';
+  el('visor').classList.add('oculto');
+  document.body.style.overflow = '';
+  VIS = null;
+}
+function pintarVisor(){
+  var a = D.anuncios[VIS.i];
+  var js = juegos(a);
+  var j = js[VIS.f] || js[0];
+  if(VIS.n >= j.lista.length) VIS.n = 0;
+  var src = j.lista[VIS.n];
+  var ficha = CREATIVOS.filter(function(c){ return c.archivo === src; })[0];
+  el('v-marco').innerHTML = a.video
+    ? '<video src="' + a.video + '" poster="' + src + '" controls autoplay playsinline></video>'
+    : '<img src="' + src + '" alt="">';
+  var varias = j.lista.length > 1;
+  el('v-izq').style.display = varias ? '' : 'none';
+  el('v-der').style.display = varias ? '' : 'none';
+  el('v-pie').innerHTML = '<span>' + esc(a.nombre) + '</span>' +
+    (varias ? '<span>' + (VIS.n + 1) + ' de ' + j.lista.length + '</span>' : '') +
+    (ficha ? '<span style="opacity:.7">' + esc(ficha.original) + ' · ' + ficha.ancho + '×' + ficha.alto + '</span>' : '') +
+    (js.length > 1 ? js.map(function(x, n){
+      return '<button class="fmt' + (n === VIS.f ? ' on' : '') + '" data-f="' + n + '">' + esc(x.nombre) + '</button>';
+    }).join('') : '');
+  el('v-pie').querySelectorAll('.fmt').forEach(function(b){
+    b.onclick = function(){ VIS.f = +b.dataset.f; pintarVisor(); };
+  });
+}
+function moverVisor(d){
+  var js = juegos(D.anuncios[VIS.i]);
+  var total = (js[VIS.f] || js[0]).lista.length;
+  VIS.n = (VIS.n + d + total) % total;
+  pintarVisor();
+}
+el('v-cerrar').onclick = cerrarVisor;
+el('v-izq').onclick = function(){ moverVisor(-1); };
+el('v-der').onclick = function(){ moverVisor(1); };
+el('visor').onclick = function(e){ if(e.target === el('visor') || e.target === el('v-marco')) cerrarVisor(); };
+document.addEventListener('keydown', function(e){
+  if(!VIS) return;
+  if(e.key === 'Escape') cerrarVisor();
+  if(e.key === 'ArrowLeft') moverVisor(-1);
+  if(e.key === 'ArrowRight') moverVisor(1);
+});
+
 function pintarAnuncios(){
   var visibles = [];
   D.anuncios.forEach(function(a, i){ if(enTanda(a)) visibles.push({ a:a, i:i }); });
@@ -1019,16 +1243,15 @@ function pintarAnuncios(){
     if(a.prioridad) tags.push('<span class="tag ' + (a.prioridad === 'Primero' ? 'pri' : 'prob') + '">' + esc(a.prioridad) + '</span>');
     if(a.servicio) tags.push('<span class="tag">' + esc(a.servicio) + '</span>');
     tags.push('<span class="tag">Botón: ' + esc(a.cta || 'Más información') + '</span>');
-    if(a.formatos) tags.push('<span class="tag">Formatos: ' + Object.keys(a.formatos).join(' · ') + '</span>');
     if(a.resumen) tags.push('<span class="tag ' + (a.estrella ? 'venta' : 'res') + '">' + esc(a.resumen) + '</span>');
     return cabecera + '<div class="anuncio" id="anuncio-' + i + '" data-i="' + i + '">' +
       '<div class="ahead">' +
         '<span class="num">' + (k+1) + '</span>' +
         '<input class="nom" value="' + esc(a.nombre) + '" data-c="nombre" placeholder="Nombre del anuncio">' +
-        '<input class="crea" value="' + esc(a.creativo || '') + '" data-c="creativo" placeholder="archivo del creativo">' +
         (D.anuncios.length > 1 ? '<button class="quitar" title="Quitar">×</button>' : '') +
       '</div>' +
       '<div class="meta">' + tags.join('') + '</div>' +
+      pintarMaterial(a, i) +
       (a.porque ? '<div class="porque"><b>Por qué así:</b> ' + esc(a.porque) + '</div>' : '') +
       '<div class="vars">' + a.vars.map(function(v, j){
         var r = v.rinde ? '<span class="rinde' + (/^0 /.test(v.rinde) ? '' : ' si') + '">' + esc(v.rinde) + '</span>' : '';
@@ -1064,6 +1287,7 @@ function pintarAnuncios(){
       guardar(); pintarSelector(); pintarPreview();
     });
   });
+  el('lista').querySelectorAll('.material').forEach(enlazarMaterial);
   el('lista').querySelectorAll('.quitar').forEach(function(b){
     b.onclick = function(){
       var i = +b.closest('.anuncio').dataset.i;
@@ -1104,6 +1328,7 @@ function pintarAviso(){
   if(largos) partes.push('<b>' + largos + '</b> con el texto muy largo.');
   if(!vacias && !largos) partes.push('Todo completo y dentro de los largos que Meta muestra.');
   el('aviso-datos').innerHTML = partes.join(' ');
+  el('aviso-datos').classList.toggle('ok', !vacias && !largos);
 }
 
 function pintarSelector(){
@@ -1186,7 +1411,10 @@ function pintarPreview(){
   var cuerpo;
   if(medios.length){
     cuerpo = '<div class="carru" style="' + estilo + '">' +
-      '<img class="crfoto" src="' + actual + '" alt="">' +
+      (a.video
+        ? '<video class="crfoto" src="' + a.video + '" poster="' + actual + '" preload="none" playsinline></video>'
+        : '<img class="crfoto" src="' + actual + '" alt="">') +
+      '<button class="ampliar" title="Ver la pieza completa, sin recorte">Ver completa</button>' +
       (medios.length > 1 ?
         '<button class="flecha izq" data-d="-1">‹</button>' +
         '<button class="flecha der" data-d="1">›</button>' +
@@ -1194,7 +1422,7 @@ function pintarPreview(){
           return '<i class="' + (k === tarjeta ? 'on' : '') + '"></i>';
         }).join('') + '</div>' +
         '<div class="tarjnum">' + (tarjeta+1) + ' de ' + medios.length + '</div>' : '') +
-      (a.esVideo ? '<div class="playy"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>' : '') +
+      (a.esVideo ? '<button class="playy boton" title="Reproducir"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>' : '') +
       // Zonas que la interfaz de Historias y Reels tapa con botones y textos.
       (L.pantalla ? '<div class="zona arriba"></div><div class="zona abajo"></div>' : '') +
     '</div>';
@@ -1206,7 +1434,13 @@ function pintarPreview(){
   var alertas = [];
   if(corte && ficha){
     var tuya = nombreProp(prop), pide = nombreProp(L.prop);
-    if(corte.corta){
+    if(corte.corta && a.esVideo && prop < 0.6 && !L.pantalla){
+      // Un video vertical en Feed SIEMPRE se ve recortado: es lo esperado, no un error.
+      // Marcarlo en rojo con "exporta en 1080×1350" hacía pensar que el material estaba mal.
+      alertas.push('<div class="al media"><b>Aquí se ve el centro del video.</b><br>' +
+        'Es normal en video vertical: Meta muestra ' + pide + ' y se pierde un ' + Math.round(corte.pierde / 2) +
+        '% arriba y otro tanto abajo. Solo revisa que subtítulos y logo queden dentro del centro.</div>');
+    } else if(corte.corta){
       // Explicar el mecanismo, no solo el número: Meta escala hasta llenar y lo que
       // sobresale se pierde. Saberlo es lo que evita volver a exportar mal.
       alertas.push('<div class="al ' + (corte.pierde >= 25 ? 'mala' : 'media') + '">' +
@@ -1290,6 +1524,25 @@ function pintarPreview(){
       var n = medios.length;
       tarjeta = (tarjeta + (+b.dataset.d) + n) % n;   // da la vuelta en los dos sentidos
       pintarPreview();
+    };
+  });
+  var fIdx = 0;
+  juegos(a).forEach(function(x, n){ if(x.clave === eleccion.clave) fIdx = n; });
+  el('pv').querySelectorAll('.ampliar').forEach(function(b){
+    b.onclick = function(){
+      var vid = el('pv').querySelector('video');
+      if(vid) vid.pause();
+      abrirVisor(pvIdx, fIdx, tarjeta);
+    };
+  });
+  el('pv').querySelectorAll('.playy.boton').forEach(function(b){
+    b.onclick = function(){
+      var vid = el('pv').querySelector('video');
+      if(!vid){ abrirVisor(pvIdx, fIdx, tarjeta); return; }
+      vid.controls = true;
+      b.remove();
+      var p = vid.play();
+      if(p && p.catch) p.catch(function(){ abrirVisor(pvIdx, fIdx, tarjeta); });
     };
   });
 }
@@ -1537,7 +1790,7 @@ el('b-recrea').onclick = function(){
 if(fusionado){
   var aviso = document.createElement('div');
   aviso.className = 'nuevoMat';
-  aviso.innerHTML = 'Se sumó el material de septiembre. Lo que tenías de agosto quedó como estaba, ahora con sus resultados. ' +
+  aviso.innerHTML = 'Material actualizado: septiembre completo, videos que se reproducen y piezas en alta. Lo que habías editado quedó igual. ' +
                     '<button class="x" id="b-ok-fus">entendido</button>';
   document.querySelector('.wrap').prepend(aviso);
   document.getElementById('b-ok-fus').onclick = function(){ aviso.remove(); };
