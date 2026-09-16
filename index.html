@@ -1517,14 +1517,20 @@ var CAMPOS = [
 function llenas(lista){ return (lista || []).filter(function(o){ return (o.v || '').trim(); }).length; }
 
 function pintarCampos(a, i){
+  // En carrusel Meta solo rota los textos principales: títulos y descripciones van por tarjeta
+  // (el asset_feed_spec de carrusel rechaza titles/descriptions). Mejor decirlo antes de montarlo.
+  var carrusel = !a.esVideo && juegos(a)[0].lista.length > 1;
   return '<div class="campos">' + CAMPOS.map(function(C){
     var lista = a[C.c] || [];
     var n = llenas(lista);
+    var pista = carrusel && C.c !== 'textos'
+      ? '<b>En carrusel Meta no los rota:</b> van uno por tarjeta. Úsalos en las primeras tarjetas.'
+      : C.pista;
     return '<div class="gcampo" data-c="' + C.c + '">' +
       '<div class="gc-head"><h4>' + C.nombre + '</h4>' +
         '<span class="gc-n ' + (n >= MIN_OPCIONES ? 'ok' : 'falta') + '">' + n + (n === 1 ? ' opción' : ' opciones') +
           (n >= MIN_OPCIONES ? '' : ' · faltan ' + (MIN_OPCIONES - n)) + '</span>' +
-        '<span class="gc-pista">' + C.pista + '</span>' +
+        '<span class="gc-pista">' + pista + '</span>' +
         (lista.length < MAX_OPCIONES ? '<button class="gc-mas" data-c="' + C.c + '" title="Meta acepta hasta ' + MAX_OPCIONES + '">+ Agregar</button>' : '') +
       '</div>' +
       '<div class="opciones">' + lista.map(function(o, j){
