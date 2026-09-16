@@ -304,6 +304,51 @@
   .regla p{font-size:.72rem;color:var(--dark);font-weight:500;line-height:1.55}
   .ojo{background:#fff8f1;border:1px solid #ffd9ae;border-radius:12px;padding:11px 14px;font-size:.72rem;color:#7a4300;font-weight:600;line-height:1.55;margin-top:14px}
   @media(max-width:640px){ .fila-b{grid-template-columns:1fr 60px} .fila-b .eje{grid-column:1/3;order:3} }
+
+  /* --- listas de Meta: textos principales, títulos y descripciones --- */
+  .campos{border-top:1px solid var(--line);margin-top:14px}
+  .gcampo{padding:16px 20px;border-bottom:1px solid var(--line)}
+  .gcampo:last-child{border-bottom:0}
+  .gc-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  .gc-head h4{font-size:.84rem;font-weight:800;letter-spacing:-.01em}
+  .gc-n{font-size:.62rem;font-weight:800;padding:3px 9px;border-radius:10px}
+  .gc-n.ok{background:#dcfce7;color:#15803d}
+  .gc-n.falta{background:#fee2e2;color:#b91c1c}
+  .gc-pista{font-size:.66rem;color:var(--soft);font-weight:600;flex:1 1 220px}
+  .gc-mas{border:1.5px dashed var(--lila);background:transparent;color:var(--vio);padding:5px 12px;border-radius:12px;font-family:inherit;font-size:.68rem;font-weight:800;cursor:pointer}
+  .gc-mas:hover{background:var(--pink)}
+  .opciones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .op{min-width:0}
+  .op-head{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:6px;min-height:24px}
+  .op-n{font-size:.6rem;font-weight:800;color:var(--vio);background:var(--pink);padding:4px 9px;border-radius:10px;text-transform:uppercase;letter-spacing:.06em}
+  .op-head .cnt{margin-left:auto;font-size:.62rem;font-weight:700}
+  .op-quitar{border:0;background:transparent;color:var(--soft);cursor:pointer;font-size:1rem;font-weight:800;padding:0 2px;line-height:1}
+  .op-quitar:hover{color:#b91c1c}
+  .op textarea{width:100%;border:2px solid var(--line);border-radius:12px;padding:10px 12px;font-family:inherit;font-size:.84rem;line-height:1.5;color:var(--dark);resize:vertical;background:#fff;display:block}
+  .op textarea:focus{outline:none;border-color:var(--vio2)}
+  .op textarea.larga{min-height:128px}
+  .op textarea.corta{min-height:48px}
+  @container (max-width: 860px){ .opciones{grid-template-columns:1fr} }
+
+  /* combinación que se mira en la vista previa */
+  .combo{background:#f8f7fd;border:1px solid var(--line);border-radius:13px;padding:10px 12px;margin-bottom:12px;display:grid;gap:7px}
+  .cb-fila{display:flex;align-items:center;gap:6px}
+  .cb-fila span{font-size:.62rem;font-weight:800;color:var(--ink);text-transform:uppercase;letter-spacing:.05em;width:92px}
+  .cb{min-width:30px;height:28px;border-radius:8px;border:1.5px solid var(--line);background:#fff;font-family:inherit;font-size:.74rem;font-weight:800;color:var(--ink);cursor:pointer}
+  .cb:hover{border-color:var(--lila)}
+  .cb.on{background:var(--vio);border-color:var(--vio);color:#fff}
+
+  /* versiones del material */
+  .mat-uso{font-size:.7rem;color:var(--ink);font-weight:600;margin:-2px 0 10px;line-height:1.5}
+  .mat-uso b{color:var(--vio);font-weight:800}
+  .carru .fondo{position:absolute;left:-10%;top:-10%;width:120%;height:120%;object-fit:cover;filter:blur(18px) brightness(.72)}
+  .crfoto.contener{position:relative;z-index:1;object-fit:contain;background:transparent}
+  /* En Historias/Reels el nombre de la página va arriba: los controles propios van abajo. */
+  .historia .ampliar,.historia .tarjnum{top:auto;bottom:calc(20% + 8px)}
+  .flecha,.puntos,.tarjnum,.playy,.zona,.ampliar{z-index:2}
+  .hcab,.htxt,.hbtn{z-index:3}
+  .fbdesc{font-size:.74rem;color:#65676b;margin-top:2px;line-height:1.35;word-break:break-word}
+  .al.al-arch{background:#fff;color:var(--ink);border:1px solid var(--line);font-weight:600}
 </style>
 </head>
 <body>
@@ -337,13 +382,14 @@
 
   <!-- ANUNCIOS -->
   <div id="p-anuncios">
-    <p class="intro">Cada anuncio trae su material (toca una pieza para verla en grande; los videos suenan) y tres
-      variaciones para que Meta compare. Los contadores marcan lo que Meta muestra sin "Ver más": <b>125</b> el texto,
-      <b>40</b> el título y <b>30</b> la descripción. El porqué de cada decisión está en <b>Qué vende</b>.</p>
+    <p class="intro">Cada anuncio trae su material (toca una pieza para verla en grande; los videos suenan) y, como en el
+      Administrador de anuncios, <b>mínimo 3 textos principales, 3 títulos y 3 descripciones</b> que Meta combina. Los
+      contadores marcan lo que Meta muestra sin "Ver más": <b>125</b> el texto, <b>40</b> el título y <b>30</b> la
+      descripción. El porqué de cada decisión está en <b>Qué vende</b>.</p>
     <div class="leyenda">
-      <span><b>A · la línea</b> responde a la pieza y concreta</span>
-      <span><b>B · lo que más trajo</b> corta, con emoji e invitación a escribir</span>
-      <span><b>C · ángulo nuevo</b> un caso, un rubro o prueba social</span>
+      <span><b>1 · la línea</b> responde a la pieza y concreta</span>
+      <span><b>2 · lo que más trajo</b> corto, con emoji e invitación a escribir</span>
+      <span><b>3 · ángulo nuevo</b> un caso, un rubro o prueba social</span>
     </div>
 
     <div class="barra" id="tandas"></div>
@@ -363,6 +409,7 @@
             <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 3v6h-6"/></svg>
           </button>
         </div>
+        <div id="pv-combo"></div>
         <div id="cat-estado"></div>
         <div id="pv-formato"></div>
         <div id="pv"></div>
@@ -418,7 +465,7 @@
         <tr><td><div class="cita">¿Llevas el control de tus clientes en WhatsApp, Excel o simplemente de memoria? Es momento de dar el siguiente paso…</div><div class="de">1 imagen · la mejor pieza estática</div></td><td class="n">11</td><td class="n">$1.35</td></tr>
       </table></div>
       <div class="ojo"><b>Lo que tienen en común:</b> son cortos, hablan de vender (no de publicar), llevan uno a tres emojis y
-        cierran invitando a escribir. Ninguno mete urgencia. Esa forma es la variación B de cada anuncio de septiembre,
+        cierran invitando a escribir. Ninguno mete urgencia. Esa forma es la opción 2 (texto, título y descripción) de cada anuncio de septiembre,
         escrita en tuteo neutro y con signos de apertura.</div>
     </div>
 
@@ -476,9 +523,9 @@
     <div class="an-sec">
       <h2>6 · Cómo se escribió septiembre</h2>
       <div class="reglas">
-        <div class="regla"><h4>A · la línea</h4><p>La pieza afirma o pregunta; el texto responde y concreta. Nunca repite lo que ya dice el video o la imagen.</p></div>
-        <div class="regla"><h4>B · lo que más trajo</h4><p>Corto, uno o dos emojis y cierra invitando a escribir por WhatsApp. Es la forma de los textos con más conversaciones.</p></div>
-        <div class="regla"><h4>C · ángulo nuevo</h4><p>Un caso, un rubro o una prueba social, para que Meta tenga algo realmente distinto con qué comparar.</p></div>
+        <div class="regla"><h4>1 · la línea</h4><p>La pieza afirma o pregunta; el texto responde y concreta. Nunca repite lo que ya dice el video o la imagen.</p></div>
+        <div class="regla"><h4>2 · lo que más trajo</h4><p>Corto, uno o dos emojis y cierra invitando a escribir por WhatsApp. Es la forma de los textos con más conversaciones.</p></div>
+        <div class="regla"><h4>3 · ángulo nuevo</h4><p>Un caso, un rubro o una prueba social, para que Meta tenga algo realmente distinto con qué comparar.</p></div>
         <div class="regla"><h4>Siempre</h4><p>Tuteo neutro, sin urgencia inventada, sin filtrar por presupuesto y con cifras solo si se ven o se oyen en la pieza.</p></div>
       </div>
     </div>
@@ -559,320 +606,499 @@ var LS = 'ecus_copies_v1';
 // aparece el "Ver más" o el texto se corta según la ubicación.
 var TOPES = { texto: 125, titulo: 40, desc: 30 };
 
-// Material organizado por TANDA (mes en que llegó) y, dentro de cada tanda, por GRUPO.
-// Cada variación tiene un ENFOQUE, salido del análisis de la cuenta (pestaña "Qué vende"):
-//   A · la línea       el creativo afirma o pregunta, el texto responde y concreta.
-//   B · lo que más trajo  corto, 1-2 emojis y cierra invitando a escribir: es el patrón de
-//                      los 5 textos con más conversaciones de los últimos 12 meses.
-//   C · ángulo nuevo   caso, rubro o prueba social, para que Meta compare algo distinto.
-// Siempre: tuteo neutro, sin urgencia inventada (sale 68% más cara), cifras solo si se ven
-// o se oyen en la pieza, y sin filtrar por presupuesto (los 2 que compraron dijeron que no
-// invertían en publicidad).
-// En agosto cada variación lleva `rinde`: lo que trajo de verdad (Meta, 18-jun a 16-sep-2026).
+// Material organizado por TANDA (mes) y GRUPO. Cada anuncio lleva, como en el Administrador de
+// anuncios, TRES LISTAS INDEPENDIENTES que Meta combina: textos principales, títulos y
+// descripciones. Mínimo 3 de cada una (pedido de Daniel) y máximo 5 (tope de Meta).
+// En septiembre cada opción lleva su enfoque `e`, salido del análisis de la pestaña "Qué vende":
+//   0 · la línea          la pieza afirma o pregunta; el texto responde y concreta.
+//   1 · lo que más trajo  corto, 1-2 emojis e invitación a escribir.
+//   2 · ángulo nuevo      caso, rubro o prueba social.
+// Siempre: tuteo neutro, sin urgencia inventada, cifras solo si están en la pieza y sin filtrar por
+// presupuesto. En agosto cada texto lleva `rinde`: lo que trajo de verdad en Meta (18-jun a 16-sep).
+// Formatos que entregó diseño: FORMATO PAUTA (1:1, cuadrada) va en Feed y Marketplace; FORMATO
+// HISTORIA (9:16, reel) en Historias y Reels; FEED (4:5) es la versión del feed orgánico.
 var ENFOQUES = ['la línea', 'lo que más trajo', 'ángulo nuevo'];
+var MIN_OPCIONES = 3, MAX_OPCIONES = 5;
 
 var INICIAL = {
-  // Subir esto cuando cambie el material: dispara el aviso de "hay material nuevo".
-  version: '2026-09-16b',
+  // Subir esto cuando cambie el material: dispara la actualización de lo guardado.
+  version: "2026-09-16c",
   anuncios: [
-    // ================================================================ SEPTIEMBRE
-    { tanda:'sep', grupo:'Videos', servicio:'Redes + pauta', prioridad:'Primero',
-      nombre:'Video · La estrategia', creativo:'16-09 LA ESTRATEGIA.mp4', cta:'Enviar mensaje',
-      media:['media/sep26/estrategia.jpg'], esVideo:true, video:'media/video/estrategia.mp4', duracion:'0:24',
-      porque:'Mismo ángulo que «¿Tienes seguidores y no vendes? Es por falta de estrategia», el texto más barato de la cuenta con volumen: 31 conversaciones a $1.36.',
-      vars:[
-        { titulo:'Cada publicación con un objetivo',
-          texto:'Publicar por cumplir no trae clientes. Armamos tu estrategia de contenido y de pauta, con resultados que puedes medir.',
-          desc:'Contenido y pauta con plan' },
-        { titulo:'Escríbenos y armamos tu estrategia',
-          texto:'¿Publicas seguido y no llegan clientes? Es falta de estrategia, no de ideas 💜\n\nEscríbenos y armamos la tuya 📲',
-          desc:'Respuesta por WhatsApp' },
-        { titulo:'Resultados que puedes medir',
-          texto:'Cada contenido y cada campaña tienen un propósito, y en un tablero ves qué funcionó y qué no.',
-          desc:'Estrategia que se mide' }
+    { tanda:"sep",
+      grupo:"Videos",
+      servicio:"Redes + pauta",
+      prioridad:"Primero",
+      nombre:"Video · La estrategia",
+      creativo:"16-09 LA ESTRATEGIA.mp4",
+      cta:"Enviar mensaje",
+      media:["media/sep26/estrategia.jpg"],
+      esVideo:true,
+      video:"media/video/estrategia.mp4",
+      duracion:"0:24",
+      porque:"Mismo ángulo que «¿Tienes seguidores y no vendes? Es por falta de estrategia», el texto más barato de la cuenta con volumen: 31 conversaciones a $1.36.",
+      textos:[
+        { e:0, v:"Publicar por cumplir no trae clientes. Armamos tu estrategia de contenido y de pauta, con resultados que puedes medir." },
+        { e:1, v:"¿Publicas seguido y no llegan clientes? Es falta de estrategia, no de ideas 💜\n\nEscríbenos y armamos la tuya 📲" },
+        { e:2, v:"Cada contenido y cada campaña tienen un propósito, y en un tablero ves qué funcionó y qué no." }
+      ],
+      titulos:[
+        { e:0, v:"Cada publicación con un objetivo" },
+        { e:1, v:"Escríbenos y armamos tu estrategia" },
+        { e:2, v:"Resultados que puedes medir" }
+      ],
+      descs:[
+        { e:0, v:"Contenido y pauta con plan" },
+        { e:1, v:"Respuesta por WhatsApp" },
+        { e:2, v:"Estrategia que se mide" }
       ] },
 
-    { tanda:'sep', grupo:'Videos', servicio:'Redes (orgánico)', prioridad:'Primero',
-      nombre:'Video · Caso Poggi', creativo:'15-09 RESULTADOS DE POGGI.mp4', cta:'Enviar mensaje',
-      media:['media/sep26/poggi.jpg'], esVideo:true, video:'media/video/poggi.mp4', duracion:'0:38',
-      porque:'Los casos con resultados a la vista son lo que más trae: «¿+700k visualizaciones? ¡Sí, es posible!» sumó 74 conversaciones, y el caso Fefa es hoy el único anuncio de redes con volumen.',
-      vars:[
-        { titulo:'De las vistas a las visitas',
-          texto:'Sin pauta, solo contenido orgánico: en las primeras semanas, miles de personas descubrieron Poggi y empezaron a visitarlo.',
-          desc:'100% contenido orgánico' },
-        { titulo:'¿Hacemos lo mismo con tu marca?',
-          texto:'Contenido que se comparte, se comenta y lleva gente al local 💜\n\nAsí trabajamos la marca de Poggi. ¿Hacemos la tuya? 📲',
-          desc:'Escríbenos por WhatsApp' },
-        { titulo:'Crea comunidad alrededor de tu marca',
-          texto:'Poggi no es un local más de postres. Unimos marca y contenido desde el primer día para que la gente lo sienta cercano.',
-          desc:'Branding + contenido' }
+    { tanda:"sep",
+      grupo:"Videos",
+      servicio:"Redes (orgánico)",
+      prioridad:"Primero",
+      nombre:"Video · Caso Poggi",
+      creativo:"15-09 RESULTADOS DE POGGI.mp4",
+      cta:"Enviar mensaje",
+      media:["media/sep26/poggi.jpg"],
+      esVideo:true,
+      video:"media/video/poggi.mp4",
+      duracion:"0:38",
+      porque:"Los casos con resultados a la vista son lo que más trae: «¿+700k visualizaciones? ¡Sí, es posible!» sumó 74 conversaciones, y el caso Fefa es hoy el único anuncio de redes con volumen.",
+      textos:[
+        { e:0, v:"Sin pauta, solo contenido orgánico: en las primeras semanas, miles de personas descubrieron Poggi y empezaron a visitarlo." },
+        { e:1, v:"Contenido que se comparte, se comenta y lleva gente al local 💜\n\nAsí trabajamos la marca de Poggi. ¿Hacemos la tuya? 📲" },
+        { e:2, v:"Poggi no es un local más de postres. Unimos marca y contenido desde el primer día para que la gente lo sienta cercano." }
+      ],
+      titulos:[
+        { e:0, v:"De las vistas a las visitas" },
+        { e:1, v:"¿Hacemos lo mismo con tu marca?" },
+        { e:2, v:"Crea comunidad alrededor de tu marca" }
+      ],
+      descs:[
+        { e:0, v:"100% contenido orgánico" },
+        { e:1, v:"Escríbenos por WhatsApp" },
+        { e:2, v:"Branding + contenido" }
       ] },
 
-    { tanda:'sep', grupo:'Videos', servicio:'Redes + pauta', prioridad:'Primero',
-      nombre:'Video · 5 errores de marketing', creativo:'ECUS 15-09V2.mp4', cta:'Enviar mensaje',
-      media:['media/sep26/errores.jpg'], esVideo:true, video:'media/video/errores.mp4', duracion:'0:21',
-      porque:'El video cierra preguntando «¿cuántos de estos estás cometiendo?»: el texto no repite la pregunta, responde. Es el más corto del lote, y en esta cuenta casi la mitad de la gente se va entre el primer cuarto y la mitad del video.',
-      vars:[
-        { titulo:'Corrige los 5 errores con estrategia',
-          texto:'Si te reconociste en más de uno, no es falta de esfuerzo: es falta de estrategia. La armamos contigo y medimos qué funciona.',
-          desc:'Contenido, pauta y medición' },
-        { titulo:'Escríbenos y creamos tu estrategia',
-          texto:'El error más caro es invertir en publicidad sin estrategia 💸\n\nTe ayudamos a ordenar contenido y pauta. Escríbenos 📲',
-          desc:'Respuesta por WhatsApp' },
-        { titulo:'Primero, tu cliente ideal',
-          texto:'Antes de publicar o pautar, definimos a quién le hablas y qué debe lograr cada pieza: atraer, explicar o vender.',
-          desc:'Después, el contenido' }
+    { tanda:"sep",
+      grupo:"Videos",
+      servicio:"Redes + pauta",
+      prioridad:"Primero",
+      nombre:"Video · 5 errores de marketing",
+      creativo:"ECUS 15-09V2.mp4",
+      cta:"Enviar mensaje",
+      media:["media/sep26/errores.jpg"],
+      esVideo:true,
+      video:"media/video/errores.mp4",
+      duracion:"0:21",
+      porque:"El video cierra preguntando «¿cuántos de estos estás cometiendo?»: el texto no repite la pregunta, responde. Es el más corto del lote, y en esta cuenta casi la mitad de la gente se va entre el primer cuarto y la mitad del video.",
+      textos:[
+        { e:0, v:"Si te reconociste en más de uno, no es falta de esfuerzo: es falta de estrategia. La armamos contigo y medimos qué funciona." },
+        { e:1, v:"El error más caro es invertir en publicidad sin estrategia 💸\n\nTe ayudamos a ordenar contenido y pauta. Escríbenos 📲" },
+        { e:2, v:"Antes de publicar o pautar, definimos a quién le hablas y qué debe lograr cada pieza: atraer, explicar o vender." }
+      ],
+      titulos:[
+        { e:0, v:"Corrige los 5 errores con estrategia" },
+        { e:1, v:"Escríbenos y creamos tu estrategia" },
+        { e:2, v:"Primero, tu cliente ideal" }
+      ],
+      descs:[
+        { e:0, v:"Contenido, pauta y medición" },
+        { e:1, v:"Respuesta por WhatsApp" },
+        { e:2, v:"Después, el contenido" }
       ] },
 
-    { tanda:'sep', grupo:'Videos', servicio:'Redes', prioridad:'Primero',
-      nombre:'Video · Testimonio WBOX', creativo:'Entrevista Wbox.mp4', cta:'Enviar mensaje',
-      media:['media/sep26/wbox.jpg'], esVideo:true, video:'media/video/wbox.mp4', duracion:'0:46',
-      porque:'Prueba social con un dato concreto: primer cliente de Didibot en unas dos semanas. Ojo: los testimonios solos han rendido flojo en la cuenta ($3.76 a $4.09 por conversación); mejor que corra junto a los otros.',
-      vars:[
-        { titulo:'Primer cliente en dos semanas',
-          texto:'Casi dos años juntos. Con Didibot, de la idea al primer cliente pasaron unas dos semanas. Así lo cuenta WBOX.',
-          desc:'Testimonio de WBOX' },
-        { titulo:'Resultados así para tu marca',
-          texto:'Casi dos años juntos y nos sigue recomendando 💜\n\nSi quieres resultados así en tus redes, escríbenos 📲',
-          desc:'Escríbenos por WhatsApp' },
-        { titulo:'Redes que traen clientes',
-          texto:'Casilleros internacionales y un robot de entregas: dos negocios distintos y el mismo equipo detrás de sus redes.',
-          desc:'Caso WBOX y Didibot' }
+    { tanda:"sep",
+      grupo:"Videos",
+      servicio:"Redes",
+      prioridad:"Primero",
+      nombre:"Video · Testimonio WBOX",
+      creativo:"Entrevista Wbox.mp4",
+      cta:"Enviar mensaje",
+      media:["media/sep26/wbox.jpg"],
+      esVideo:true,
+      video:"media/video/wbox.mp4",
+      duracion:"0:46",
+      porque:"Prueba social con un dato concreto: primer cliente de Didibot en unas dos semanas. Ojo: los testimonios solos han rendido flojo en la cuenta ($3.76 a $4.09 por conversación); mejor que corra junto a los otros.",
+      textos:[
+        { e:0, v:"Casi dos años juntos. Con Didibot, de la idea al primer cliente pasaron unas dos semanas. Así lo cuenta WBOX." },
+        { e:1, v:"Casi dos años juntos y nos sigue recomendando 💜\n\nSi quieres resultados así en tus redes, escríbenos 📲" },
+        { e:2, v:"Casilleros internacionales y un robot de entregas: dos negocios distintos y el mismo equipo detrás de sus redes." }
+      ],
+      titulos:[
+        { e:0, v:"Primer cliente en dos semanas" },
+        { e:1, v:"Resultados así para tu marca" },
+        { e:2, v:"Redes que traen clientes" }
+      ],
+      descs:[
+        { e:0, v:"Testimonio de WBOX" },
+        { e:1, v:"Escríbenos por WhatsApp" },
+        { e:2, v:"Caso WBOX y Didibot" }
       ] },
 
-    { tanda:'sep', grupo:'Carruseles', servicio:'Redes', prioridad:'Probar',
-      nombre:'Carrusel · Redes para tu rubro', creativo:'14-09 carrusel (9 tarjetas · FEED 4:5 y FORMATO PAUTA 1:1)', cta:'Enviar mensaje',
-      formatos:{
-        '4:5':['media/sep26/industrias-45-01.jpg','media/sep26/industrias-45-02.jpg','media/sep26/industrias-45-03.jpg','media/sep26/industrias-45-04.jpg','media/sep26/industrias-45-05.jpg','media/sep26/industrias-45-06.jpg','media/sep26/industrias-45-07.jpg','media/sep26/industrias-45-08.jpg','media/sep26/industrias-45-09.jpg'],
-        '1:1':['media/sep26/industrias-11-01.jpg','media/sep26/industrias-11-02.jpg','media/sep26/industrias-11-03.jpg','media/sep26/industrias-11-04.jpg','media/sep26/industrias-11-05.jpg','media/sep26/industrias-11-06.jpg','media/sep26/industrias-11-07.jpg','media/sep26/industrias-11-08.jpg','media/sep26/industrias-11-09.jpg'] },
-      porque:'Cada dueño se busca en su rubro: mueblerías, telas, mobiliario corporativo, belleza, restaurantes, alimentos, ropa y autos. No trae versión 9:16, así que en Historias se recorta.',
-      vars:[
-        { titulo:'Redes para tu tipo de negocio',
-          texto:'Mueblerías, restaurantes, salones de belleza, arrendadoras de autos: ya manejamos sus redes. Desliza y busca el tuyo.',
-          desc:'8 rubros que ya atendemos' },
-        { titulo:'Escríbenos y armamos la tuya',
-          texto:'¿Tu negocio está en la lista? 👀\n\nSi no está, igual escríbenos: armamos la estrategia para tu rubro 📲',
-          desc:'Respuesta por WhatsApp' },
-        { titulo:'Contenido pensado para tu rubro',
-          texto:'No se comunica igual una mueblería que un restaurante. Por eso armamos cada estrategia desde cero.',
-          desc:'Nada de plantillas' }
+    { tanda:"sep",
+      grupo:"Carruseles",
+      servicio:"Redes",
+      prioridad:"Probar",
+      nombre:"Carrusel · Redes para tu rubro",
+      creativo:"14-09 carrusel (9 tarjetas · FEED 4:5 y FORMATO PAUTA 1:1)",
+      cta:"Enviar mensaje",
+      formatos:{"4:5":["media/sep26/industrias-45-01.jpg","media/sep26/industrias-45-02.jpg","media/sep26/industrias-45-03.jpg","media/sep26/industrias-45-04.jpg","media/sep26/industrias-45-05.jpg","media/sep26/industrias-45-06.jpg","media/sep26/industrias-45-07.jpg","media/sep26/industrias-45-08.jpg","media/sep26/industrias-45-09.jpg"],"1:1":["media/sep26/industrias-11-01.jpg","media/sep26/industrias-11-02.jpg","media/sep26/industrias-11-03.jpg","media/sep26/industrias-11-04.jpg","media/sep26/industrias-11-05.jpg","media/sep26/industrias-11-06.jpg","media/sep26/industrias-11-07.jpg","media/sep26/industrias-11-08.jpg","media/sep26/industrias-11-09.jpg"]},
+      porque:"Cada dueño se busca en su rubro: mueblerías, telas, mobiliario corporativo, belleza, restaurantes, alimentos, ropa y autos. No trae versión de reel: en Historias y Reels Meta muestra la cuadrada al centro, con fondo.",
+      textos:[
+        { e:0, v:"Mueblerías, restaurantes, salones de belleza, arrendadoras de autos: ya manejamos sus redes. Desliza y busca el tuyo." },
+        { e:1, v:"¿Tu negocio está en la lista? 👀\n\nSi no está, igual escríbenos: armamos la estrategia para tu rubro 📲" },
+        { e:2, v:"No se comunica igual una mueblería que un restaurante. Por eso armamos cada estrategia desde cero." }
+      ],
+      titulos:[
+        { e:0, v:"Redes para tu tipo de negocio" },
+        { e:1, v:"Escríbenos y armamos la tuya" },
+        { e:2, v:"Contenido pensado para tu rubro" }
+      ],
+      descs:[
+        { e:0, v:"8 rubros que ya atendemos" },
+        { e:1, v:"Respuesta por WhatsApp" },
+        { e:2, v:"Nada de plantillas" }
       ] },
 
-    { tanda:'sep', grupo:'Carruseles', servicio:'Redes', prioridad:'Probar',
-      nombre:'Carrusel · Por qué nos necesitas', creativo:'10-09 carrusel (4 tarjetas · FEED 4:5, PAUTA 1:1 e HISTORIA 9:16)', cta:'Enviar mensaje',
-      formatos:{
-        '4:5':['media/sep26/razon-45-01.jpg','media/sep26/razon-45-02.jpg','media/sep26/razon-45-03.jpg','media/sep26/razon-45-04.jpg'],
-        '1:1':['media/sep26/razon-11-01.jpg','media/sep26/razon-11-02.jpg','media/sep26/razon-11-03.jpg','media/sep26/razon-11-04.jpg'],
-        '9:16':['media/sep26/razon-916-01.jpg','media/sep26/razon-916-02.jpg','media/sep26/razon-916-03.jpg','media/sep26/razon-916-04.jpg'] },
-      porque:'Viene en los tres formatos: se carga la versión justa en cada ubicación y nada se recorta. La C retoma «Los números que harán crecer tu negocio no son los likes», 75 conversaciones.',
-      vars:[
-        { titulo:'Cada contenido con un objetivo',
-          texto:'Antes de grabar decidimos qué tiene que lograr cada pieza: que te conozcan, que te recuerden o que te escriban.',
-          desc:'Estrategia antes que volumen' },
-        { titulo:'Hablemos de tu contenido',
-          texto:'Tus ideas están bien. Lo que falta es saber para qué sirve cada post 💜\n\nEscríbenos y lo ordenamos 📲',
-          desc:'Respuesta por WhatsApp' },
-        { titulo:'Que te recuerden y te escriban',
-          texto:'Los likes no pagan cuentas. Trabajamos tu contenido para que la gente te recuerde y, cuando lo necesite, te escriba.',
-          desc:'Contenido con estrategia' }
+    { tanda:"sep",
+      grupo:"Carruseles",
+      servicio:"Redes",
+      prioridad:"Probar",
+      nombre:"Carrusel · Por qué nos necesitas",
+      creativo:"10-09 carrusel (4 tarjetas · FEED 4:5, PAUTA 1:1 e HISTORIA 9:16)",
+      cta:"Enviar mensaje",
+      formatos:{"4:5":["media/sep26/razon-45-01.jpg","media/sep26/razon-45-02.jpg","media/sep26/razon-45-03.jpg","media/sep26/razon-45-04.jpg"],"1:1":["media/sep26/razon-11-01.jpg","media/sep26/razon-11-02.jpg","media/sep26/razon-11-03.jpg","media/sep26/razon-11-04.jpg"],"9:16":["media/sep26/razon-916-01.jpg","media/sep26/razon-916-02.jpg","media/sep26/razon-916-03.jpg","media/sep26/razon-916-04.jpg"]},
+      porque:"Trae cuadrada y de reel: cada ubicación recibe la suya y nada se recorta. El texto 3 retoma «Los números que harán crecer tu negocio no son los likes», 75 conversaciones.",
+      textos:[
+        { e:0, v:"Antes de grabar decidimos qué tiene que lograr cada pieza: que te conozcan, que te recuerden o que te escriban." },
+        { e:1, v:"Tus ideas están bien. Lo que falta es saber para qué sirve cada post 💜\n\nEscríbenos y lo ordenamos 📲" },
+        { e:2, v:"Los likes no pagan cuentas. Trabajamos tu contenido para que la gente te recuerde y, cuando lo necesite, te escriba." }
+      ],
+      titulos:[
+        { e:0, v:"Cada contenido con un objetivo" },
+        { e:1, v:"Hablemos de tu contenido" },
+        { e:2, v:"Que te recuerden y te escriban" }
+      ],
+      descs:[
+        { e:0, v:"Estrategia antes que volumen" },
+        { e:1, v:"Respuesta por WhatsApp" },
+        { e:2, v:"Contenido con estrategia" }
       ] },
 
-    { tanda:'sep', grupo:'Imágenes', servicio:'Redes / branding', prioridad:'Probar',
-      nombre:'Imagen · Si tu marca no conecta, no vende', creativo:'15-09 (ECUS 16-9 4:5 · ECUS-14-092 1:1 · ECUS-14-09-HISTORIA 9:16)', cta:'Enviar mensaje',
-      formatos:{ '4:5':['media/sep26/conecta-45.jpg'], '1:1':['media/sep26/conecta-11.jpg'], '9:16':['media/sep26/conecta-916.jpg'] },
-      porque:'La B retoma «¿Todavía no humanizas tu marca en redes?», el segundo texto con más conversaciones de la cuenta: 131 a $2.85.',
-      vars:[
-        { titulo:'Una marca que conecta, vende',
-          texto:'Conectar es que te reconozcan sin leer el nombre y te elijan frente a la competencia. En eso trabajamos con tu marca.',
-          desc:'Branding y redes' },
-        { titulo:'Humaniza tu marca',
-          texto:'¿Todavía no humanizas tu marca en redes? 🫣\n\nTrabajemos una estrategia que conecte y venda 📲💜',
-          desc:'Estrategia de redes' },
-        { titulo:'Muestra quién está detrás',
-          texto:'Mostramos a tu gente, tu local y cómo trabajas. Así tu marca deja de ser un logo y se vuelve alguien en quien confiar.',
-          desc:'Contenido con tu gente' }
+    { tanda:"sep",
+      grupo:"Imágenes",
+      servicio:"Redes / branding",
+      prioridad:"Probar",
+      nombre:"Imagen · Si tu marca no conecta, no vende",
+      creativo:"15-09 (ECUS 16-9 4:5 · ECUS-14-092 1:1 · ECUS-14-09-HISTORIA 9:16)",
+      cta:"Enviar mensaje",
+      formatos:{"4:5":["media/sep26/conecta-45.jpg"],"1:1":["media/sep26/conecta-11.jpg"],"9:16":["media/sep26/conecta-916.jpg"]},
+      porque:"El texto 2 retoma «¿Todavía no humanizas tu marca en redes?», el segundo texto con más conversaciones de la cuenta: 131 a $2.85.",
+      textos:[
+        { e:0, v:"Conectar es que te reconozcan sin leer el nombre y te elijan frente a la competencia. En eso trabajamos con tu marca." },
+        { e:1, v:"¿Todavía no humanizas tu marca en redes? 🫣\n\nTrabajemos una estrategia que conecte y venda 📲💜" },
+        { e:2, v:"Mostramos a tu gente, tu local y cómo trabajas. Así tu marca deja de ser un logo y se vuelve alguien en quien confiar." }
+      ],
+      titulos:[
+        { e:0, v:"Una marca que conecta, vende" },
+        { e:1, v:"Humaniza tu marca" },
+        { e:2, v:"Muestra quién está detrás" }
+      ],
+      descs:[
+        { e:0, v:"Branding y redes" },
+        { e:1, v:"Estrategia de redes" },
+        { e:2, v:"Contenido con tu gente" }
       ] },
 
-    { tanda:'sep', grupo:'Imágenes', servicio:'Pauta (Meta Ads)', prioridad:'Probar',
-      nombre:'Imagen · Campañas que convierten', creativo:'08-15 (ECUS-08 4:5 · ECUS-08-09-post 1:1 · ECUS-08-09-historia 9:16)', cta:'Enviar mensaje',
-      formatos:{ '4:5':['media/sep26/campanas-45.jpg'], '1:1':['media/sep26/campanas-11.jpg'], '9:16':['media/sep26/campanas-916.jpg'] },
-      porque:'Es la única pieza del lote que vende pauta y no redes. La B retoma «¿Estás invirtiendo en publicidad, pero las ventas no crecen?», uno de los CTR más altos de los textos recientes (5.48%).',
-      vars:[
-        { titulo:'Campañas que traen leads',
-          texto:'Definimos a quién le hablas, cuándo aparecer y qué decirle. Y te mostramos cada lead que entra y cuánto costó.',
-          desc:'Meta Ads con estrategia' },
-        { titulo:'Revisemos tus campañas',
-          texto:'¿Inviertes en publicidad y las ventas no crecen? 📉\n\nEl problema puede ser a quién le hablas. Escríbenos y lo vemos 📲',
-          desc:'Respuesta por WhatsApp' },
-        { titulo:'Anuncios para quien sí compra',
-          texto:'No se trata de gastar más, sino de que el anuncio le llegue a quien sí necesita lo que vendes. Ahí empezamos.',
-          desc:'Meta Ads para tu negocio' }
+    { tanda:"sep",
+      grupo:"Imágenes",
+      servicio:"Pauta (Meta Ads)",
+      prioridad:"Probar",
+      nombre:"Imagen · Campañas que convierten",
+      creativo:"08-15 (ECUS-08 4:5 · ECUS-08-09-post 1:1 · ECUS-08-09-historia 9:16)",
+      cta:"Enviar mensaje",
+      formatos:{"4:5":["media/sep26/campanas-45.jpg"],"1:1":["media/sep26/campanas-11.jpg"],"9:16":["media/sep26/campanas-916.jpg"]},
+      porque:"Es la única pieza del lote que vende pauta y no redes. El texto 2 retoma «¿Estás invirtiendo en publicidad, pero las ventas no crecen?», uno de los CTR más altos de los textos recientes (5.48%).",
+      textos:[
+        { e:0, v:"Definimos a quién le hablas, cuándo aparecer y qué decirle. Y te mostramos cada lead que entra y cuánto costó." },
+        { e:1, v:"¿Inviertes en publicidad y las ventas no crecen? 📉\n\nEl problema puede ser a quién le hablas. Escríbenos y lo vemos 📲" },
+        { e:2, v:"No se trata de gastar más, sino de que el anuncio le llegue a quien sí necesita lo que vendes. Ahí empezamos." }
+      ],
+      titulos:[
+        { e:0, v:"Campañas que traen leads" },
+        { e:1, v:"Revisemos tus campañas" },
+        { e:2, v:"Anuncios para quien sí compra" }
+      ],
+      descs:[
+        { e:0, v:"Meta Ads con estrategia" },
+        { e:1, v:"Respuesta por WhatsApp" },
+        { e:2, v:"Meta Ads para tu negocio" }
       ] },
 
-    // ================================================================ AGOSTO (en pauta)
-    { tanda:'ago', grupo:'Videos', servicio:'Sistema de ventas', meta:'VID_DEMOTABLERO_AGO26',
-      resumen:'2 resultados · $4.17 c/u · CRM: 2 leads, 1 contactado',
-      nombre:'Video Nicole · cómo funciona', creativo:'ecus nicole.mp4', cta:'Enviar mensaje',
-      media:['media/ecus-nicole.jpg'], esVideo:true, video:'media/video/nicole.mp4', duracion:'0:29',
-      vars:[
-        { rinde:'0 resultados con $1.32', titulo:'Mira tus campañas en vivo',
-          texto:'Tu agencia te manda un reporte a fin de mes. Nosotros te damos el acceso.\n\nCuánto invertiste, cuántos leads entraron y cuáles ya contestaron. Cuando quieras mirarlo.',
-          desc:'Sin esperar el reporte' },
-        { rinde:'2 resultados · $2.17 c/u', titulo:'Contenido, anuncios y leads',
-          texto:'Así se ve tu negocio cuando dejas de adivinar: el contenido, la pauta y cada prospecto conectados en una sola pantalla.',
-          desc:'Todo conectado' },
-        { rinde:'0 resultados con $2.23', titulo:'Así trabajamos en ECUS',
-          texto:'Nicole te muestra en 30 segundos cómo conectamos tu contenido, tus anuncios y tus leads para que sepas qué está funcionando.',
-          desc:'Conoce el sistema' }
+    { tanda:"ago",
+      grupo:"Videos",
+      servicio:"Sistema de ventas",
+      meta:"VID_DEMOTABLERO_AGO26",
+      resumen:"2 resultados · $4.17 c/u · CRM: 2 leads, 1 contactado",
+      nombre:"Video Nicole · cómo funciona",
+      creativo:"ecus nicole.mp4",
+      cta:"Enviar mensaje",
+      media:["media/ecus-nicole.jpg"],
+      esVideo:true,
+      video:"media/video/nicole.mp4",
+      duracion:"0:29",
+      textos:[
+        { e:0, v:"Tu agencia te manda un reporte a fin de mes. Nosotros te damos el acceso.\n\nCuánto invertiste, cuántos leads entraron y cuáles ya contestaron. Cuando quieras mirarlo.", rinde:"0 resultados con $1.32" },
+        { e:1, v:"Así se ve tu negocio cuando dejas de adivinar: el contenido, la pauta y cada prospecto conectados en una sola pantalla.", rinde:"2 resultados · $2.17 c/u" },
+        { e:2, v:"Nicole te muestra en 30 segundos cómo conectamos tu contenido, tus anuncios y tus leads para que sepas qué está funcionando.", rinde:"0 resultados con $2.23" }
+      ],
+      titulos:[
+        { e:0, v:"Mira tus campañas en vivo" },
+        { e:1, v:"Contenido, anuncios y leads" },
+        { e:2, v:"Así trabajamos en ECUS" }
+      ],
+      descs:[
+        { e:0, v:"Sin esperar el reporte" },
+        { e:1, v:"Todo conectado" },
+        { e:2, v:"Conoce el sistema" }
       ] },
 
-    { tanda:'ago', grupo:'Videos', servicio:'Sistema de ventas', meta:'VID_SISTEMAVENTAS_AGO26', estrella:true,
-      resumen:'27 resultados · $3.63 c/u · CRM: 23 leads y 1 venta',
-      nombre:'Video 27-07 · sistema de ventas', creativo:'ECUS 27-07V4.mp4', cta:'Enviar mensaje',
-      media:['media/ecus-27-07v4.jpg'], esVideo:true, video:'media/video/27-07.mp4', duracion:'0:27',
-      vars:[
-        { rinde:'11 resultados · $2.44 c/u', titulo:'Un sistema, no anuncios sueltos',
-          texto:'Contenido, anuncios y seguimiento trabajando juntos. Así se ve por dentro: 295 leads a $0.89 cada uno, en una sola pantalla.',
-          desc:'Resultados en vivo' },
-        { rinde:'12 resultados · $3.68 c/u', titulo:'Leads que sí son tu cliente',
-          texto:'No se trata de recibir más gente, sino la que te compra. El sistema filtra, ordena y le da seguimiento todos los días.',
-          desc:'Tu cliente ideal' },
-        { rinde:'2 resultados · $8.04 c/u', titulo:'Así se ve por dentro',
-          texto:'Nicole te muestra la pantalla real de un cliente: cuánto invirtió, cuántos leads entraron y cuáles ya compraron.',
-          desc:'30 segundos' }
+    { tanda:"ago",
+      grupo:"Videos",
+      servicio:"Sistema de ventas",
+      meta:"VID_SISTEMAVENTAS_AGO26",
+      estrella:true,
+      resumen:"27 resultados · $3.63 c/u · CRM: 23 leads y 1 venta",
+      nombre:"Video 27-07 · sistema de ventas",
+      creativo:"ECUS 27-07V4.mp4",
+      cta:"Enviar mensaje",
+      media:["media/ecus-27-07v4.jpg"],
+      esVideo:true,
+      video:"media/video/27-07.mp4",
+      duracion:"0:27",
+      textos:[
+        { e:0, v:"Contenido, anuncios y seguimiento trabajando juntos. Así se ve por dentro: 295 leads a $0.89 cada uno, en una sola pantalla.", rinde:"11 resultados · $2.44 c/u" },
+        { e:1, v:"No se trata de recibir más gente, sino la que te compra. El sistema filtra, ordena y le da seguimiento todos los días.", rinde:"12 resultados · $3.68 c/u" },
+        { e:2, v:"Nicole te muestra la pantalla real de un cliente: cuánto invirtió, cuántos leads entraron y cuáles ya compraron.", rinde:"2 resultados · $8.04 c/u" }
+      ],
+      titulos:[
+        { e:0, v:"Un sistema, no anuncios sueltos" },
+        { e:1, v:"Leads que sí son tu cliente" },
+        { e:2, v:"Así se ve por dentro" }
+      ],
+      descs:[
+        { e:0, v:"Resultados en vivo" },
+        { e:1, v:"Tu cliente ideal" },
+        { e:2, v:"30 segundos" }
       ] },
 
-    { tanda:'ago', grupo:'Videos', servicio:'Sistema de ventas', meta:'VID_CONTENIDOMASAGENTE_AGO26',
-      resumen:'11 resultados · $2.61 c/u · CRM: 8 leads, 1 calificado',
-      nombre:'Video 31-07 · contenido y seguimiento', creativo:'ECUS 31-07V2.mp4', cta:'Enviar mensaje',
-      media:['media/ecus-31-07v2.jpg'], esVideo:true, video:'media/video/31-07.mp4', duracion:'0:28',
-      vars:[
-        { rinde:'2 resultados · $3.29 c/u', titulo:'Del contenido a la venta',
-          texto:'Grabamos en tu negocio, publicamos y el agente responde en 8 segundos. Tú solo recibes al que ya está listo para comprar.',
-          desc:'Producción incluida' },
-        { rinde:'5 resultados · $1.92 c/u', titulo:'Tu equipo no alcanza a responder',
-          texto:'El que pregunta a las 11 de la noche no espera al lunes. El agente atiende, califica y te pasa solo los que sirven.',
-          desc:'Responde en 8 segundos' },
-        { rinde:'2 resultados · $5.35 c/u', titulo:'Contenido que sí vende',
-          texto:'Video profesional en tu local, pauta que lleva a WhatsApp y seguimiento hasta la venta. Un cliente ya va en 4.8x.',
-          desc:'Grabamos en tu negocio' }
+    { tanda:"ago",
+      grupo:"Videos",
+      servicio:"Sistema de ventas",
+      meta:"VID_CONTENIDOMASAGENTE_AGO26",
+      resumen:"11 resultados · $2.61 c/u · CRM: 8 leads, 1 calificado",
+      nombre:"Video 31-07 · contenido y seguimiento",
+      creativo:"ECUS 31-07V2.mp4",
+      cta:"Enviar mensaje",
+      media:["media/ecus-31-07v2.jpg"],
+      esVideo:true,
+      video:"media/video/31-07.mp4",
+      duracion:"0:28",
+      textos:[
+        { e:0, v:"Grabamos en tu negocio, publicamos y el agente responde en 8 segundos. Tú solo recibes al que ya está listo para comprar.", rinde:"2 resultados · $3.29 c/u" },
+        { e:1, v:"El que pregunta a las 11 de la noche no espera al lunes. El agente atiende, califica y te pasa solo los que sirven.", rinde:"5 resultados · $1.92 c/u" },
+        { e:2, v:"Video profesional en tu local, pauta que lleva a WhatsApp y seguimiento hasta la venta. Un cliente ya va en 4.8x.", rinde:"2 resultados · $5.35 c/u" }
+      ],
+      titulos:[
+        { e:0, v:"Del contenido a la venta" },
+        { e:1, v:"Tu equipo no alcanza a responder" },
+        { e:2, v:"Contenido que sí vende" }
+      ],
+      descs:[
+        { e:0, v:"Producción incluida" },
+        { e:1, v:"Responde en 8 segundos" },
+        { e:2, v:"Grabamos en tu negocio" }
       ] },
 
-    { tanda:'ago', grupo:'Videos', servicio:'Sistema de ventas', meta:'VID_FILTRACIONLEADS_AGO26',
-      resumen:'5 resultados · $3.44 c/u · CRM: 4 leads, 1 calificado',
-      nombre:'Video filtraciones · a quién le hablas', creativo:'ecus filtraciones.mp4', cta:'Más información',
-      media:['media/ecus-filtraciones.jpg'], esVideo:true, video:'media/video/filtraciones.mp4', duracion:'0:31',
-      vars:[
-        { rinde:'2 resultados · $1.75 c/u', titulo:'Dejas de pagar por curiosos',
-          texto:'Cada mensaje de alguien que nunca iba a comprar te cuesta igual. Filtramos antes para que pagues por el que sí necesita.',
-          desc:'Menos ruido, más ventas' },
-        { rinde:'0 resultados con $1.85', titulo:'Que te compren, no que te vean',
-          texto:'No es lo mismo hacer marketing para que te vean que para que te compren. Le hablamos a quien necesita tu servicio.',
-          desc:'Le hablamos al que compra' },
-        { rinde:'3 resultados · $3.47 c/u', titulo:'¿Cuántos de esos mensajes sirven?',
-          texto:'Miles de interacciones y pocas ventas: ahí está la fuga. Te mostramos dónde se va el dinero y cómo cerrarla.',
-          desc:'Encuentra la fuga' }
+    { tanda:"ago",
+      grupo:"Videos",
+      servicio:"Sistema de ventas",
+      meta:"VID_FILTRACIONLEADS_AGO26",
+      resumen:"5 resultados · $3.44 c/u · CRM: 4 leads, 1 calificado",
+      nombre:"Video filtraciones · a quién le hablas",
+      creativo:"ecus filtraciones.mp4",
+      cta:"Más información",
+      media:["media/ecus-filtraciones.jpg"],
+      esVideo:true,
+      video:"media/video/filtraciones.mp4",
+      duracion:"0:31",
+      textos:[
+        { e:0, v:"Cada mensaje de alguien que nunca iba a comprar te cuesta igual. Filtramos antes para que pagues por el que sí necesita.", rinde:"2 resultados · $1.75 c/u" },
+        { e:1, v:"No es lo mismo hacer marketing para que te vean que para que te compren. Le hablamos a quien necesita tu servicio.", rinde:"0 resultados con $1.85" },
+        { e:2, v:"Miles de interacciones y pocas ventas: ahí está la fuga. Te mostramos dónde se va el dinero y cómo cerrarla.", rinde:"3 resultados · $3.47 c/u" }
+      ],
+      titulos:[
+        { e:0, v:"Dejas de pagar por curiosos" },
+        { e:1, v:"Que te compren, no que te vean" },
+        { e:2, v:"¿Cuántos de esos mensajes sirven?" }
+      ],
+      descs:[
+        { e:0, v:"Menos ruido, más ventas" },
+        { e:1, v:"Le hablamos al que compra" },
+        { e:2, v:"Encuentra la fuga" }
       ] },
 
-    { tanda:'ago', grupo:'Videos', servicio:'Sistema de ventas', meta:'VID_PROCESOVENTAS_AGO26', estrella:true,
-      resumen:'2 resultados · $4.87 c/u · CRM: 2 leads y 1 venta',
-      nombre:'Reel 2 · no necesitas más clientes', creativo:'ecus reel 2.mp4', cta:'Más información',
-      media:['media/ecus-reel-2.jpg'], esVideo:true, video:'media/video/reel-2.mp4', duracion:'0:33',
-      vars:[
-        { rinde:'0 resultados con $4.31', titulo:'No necesitas más clientes',
-          texto:'Necesitas un mejor proceso de ventas. El error más común es pedir más leads cuando los que ya llegaron se pierden.',
-          desc:'El embudo, ordenado' },
-        { rinde:'1 resultado · $1.41', titulo:'Tus leads ya están ahí',
-          texto:'Nuevo, contactado, calificado, propuesta, ganado. Cada prospecto avanza con su valor a la vista y ninguno se queda atrás.',
-          desc:'Embudo de ventas' },
-        { rinde:'1 resultado · $3.35', titulo:'$5,730 esperando respuesta',
-          texto:'Saber cuánto dinero tienes en propuestas abiertas cambia a quién llamas hoy. El embudo te lo muestra sin preguntar.',
-          desc:'Todo el proceso a la vista' }
+    { tanda:"ago",
+      grupo:"Videos",
+      servicio:"Sistema de ventas",
+      meta:"VID_PROCESOVENTAS_AGO26",
+      estrella:true,
+      resumen:"2 resultados · $4.87 c/u · CRM: 2 leads y 1 venta",
+      nombre:"Reel 2 · no necesitas más clientes",
+      creativo:"ecus reel 2.mp4",
+      cta:"Más información",
+      media:["media/ecus-reel-2.jpg"],
+      esVideo:true,
+      video:"media/video/reel-2.mp4",
+      duracion:"0:33",
+      textos:[
+        { e:0, v:"Necesitas un mejor proceso de ventas. El error más común es pedir más leads cuando los que ya llegaron se pierden.", rinde:"0 resultados con $4.31" },
+        { e:1, v:"Nuevo, contactado, calificado, propuesta, ganado. Cada prospecto avanza con su valor a la vista y ninguno se queda atrás.", rinde:"1 resultado · $1.41" },
+        { e:2, v:"Saber cuánto dinero tienes en propuestas abiertas cambia a quién llamas hoy. El embudo te lo muestra sin preguntar.", rinde:"1 resultado · $3.35" }
+      ],
+      titulos:[
+        { e:0, v:"No necesitas más clientes" },
+        { e:1, v:"Tus leads ya están ahí" },
+        { e:2, v:"$5,730 esperando respuesta" }
+      ],
+      descs:[
+        { e:0, v:"El embudo, ordenado" },
+        { e:1, v:"Embudo de ventas" },
+        { e:2, v:"Todo el proceso a la vista" }
       ] },
 
-    { tanda:'ago', grupo:'Imágenes y carrusel', servicio:'Sistema de ventas', meta:'CARR_DESPUESDELCLIC_AGO26',
-      resumen:'$4.28 gastados · 0 leads',
-      nombre:'Carrusel 18 · después del clic', creativo:'ECUS-CARRUSEL-18_01 a 04 (4 tarjetas)', cta:'Más información',
-      media:['media/ecus-carrusel-18-01.jpg','media/ecus-carrusel-18-02.jpg','media/ecus-carrusel-18-03.jpg','media/ecus-carrusel-18-04.jpg'],
-      vars:[
-        { rinde:'0 resultados con $1.07', titulo:'¿Qué pasa después del clic?',
-          texto:'1.248 clics. 694 leads. ¿Y después?\n\nSi tu reporte termina ahí, te estás perdiendo la mitad importante: quién contestó, quién servía y quién compró.',
-          desc:'Desliza y mira' },
-        { rinde:'0 resultados con $1.41', titulo:'Tus leads dejan de perderse',
-          texto:'Los prospectos llegan. El problema arranca cuando nadie sabe qué pasó con ellos.\n\nTe mostramos cómo se ve tenerlos a todos en un solo lugar.',
-          desc:'Mira cómo funciona' },
-        { rinde:'0 resultados con $1.43', titulo:'Todo en un solo lugar',
-          texto:'Gasto, leads, costo por lead y el estado de cada prospecto. En una pantalla que se actualiza sola.',
-          desc:'Contenido, pauta y CRM' }
+    { tanda:"ago",
+      grupo:"Imágenes y carrusel",
+      servicio:"Sistema de ventas",
+      meta:"CARR_DESPUESDELCLIC_AGO26",
+      resumen:"$4.28 gastados · 0 leads",
+      nombre:"Carrusel 18 · después del clic",
+      creativo:"ECUS-CARRUSEL-18_01 a 04 (4 tarjetas)",
+      cta:"Más información",
+      media:["media/ecus-carrusel-18-01.jpg","media/ecus-carrusel-18-02.jpg","media/ecus-carrusel-18-03.jpg","media/ecus-carrusel-18-04.jpg"],
+      textos:[
+        { e:0, v:"1.248 clics. 694 leads. ¿Y después?\n\nSi tu reporte termina ahí, te estás perdiendo la mitad importante: quién contestó, quién servía y quién compró.", rinde:"0 resultados con $1.07" },
+        { e:1, v:"Los prospectos llegan. El problema arranca cuando nadie sabe qué pasó con ellos.\n\nTe mostramos cómo se ve tenerlos a todos en un solo lugar.", rinde:"0 resultados con $1.41" },
+        { e:2, v:"Gasto, leads, costo por lead y el estado de cada prospecto. En una pantalla que se actualiza sola.", rinde:"0 resultados con $1.43" }
+      ],
+      titulos:[
+        { e:0, v:"¿Qué pasa después del clic?" },
+        { e:1, v:"Tus leads dejan de perderse" },
+        { e:2, v:"Todo en un solo lugar" }
+      ],
+      descs:[
+        { e:0, v:"Desliza y mira" },
+        { e:1, v:"Mira cómo funciona" },
+        { e:2, v:"Contenido, pauta y CRM" }
       ] },
 
-    { tanda:'ago', grupo:'Imágenes y carrusel', servicio:'Sistema de ventas', meta:'IMG_CONTROLLEADS_AGO26',
-      resumen:'$6.50 gastados · 0 leads',
-      nombre:'Publicación 19-08 · control de leads', creativo:'19-08 Publicacion.jpg', cta:'Enviar mensaje',
-      media:['media/19-08-publicacion.jpg'],
-      vars:[
-        { rinde:'0 resultados con $1.23', titulo:'Ten el control de tus leads',
-          texto:'Cada prospecto queda con su nombre, su teléfono y lo que dijo. Sabes quién ya contestó y a quién le falta seguimiento.',
-          desc:'Mide, organiza y sigue' },
-        { rinde:'0 resultados con $1.72', titulo:'Deja de perder prospectos',
-          texto:'Inviertes en publicidad, entran prospectos, y se terminan perdiendo entre WhatsApp y la memoria de alguien. Con nosotros no.',
-          desc:'Cada lead con su historia' },
-        { rinde:'0 resultados con $0.94', titulo:'De la pauta a la venta',
-          texto:'Meta y Google te traen la gente. Nosotros nos ocupamos de que ninguno se quede sin respuesta.',
-          desc:'Seguimiento real' }
+    { tanda:"ago",
+      grupo:"Imágenes y carrusel",
+      servicio:"Sistema de ventas",
+      meta:"IMG_CONTROLLEADS_AGO26",
+      resumen:"$6.50 gastados · 0 leads",
+      nombre:"Publicación 19-08 · control de leads",
+      creativo:"19-08 Publicacion.jpg",
+      cta:"Enviar mensaje",
+      media:["media/19-08-publicacion.jpg"],
+      textos:[
+        { e:0, v:"Cada prospecto queda con su nombre, su teléfono y lo que dijo. Sabes quién ya contestó y a quién le falta seguimiento.", rinde:"0 resultados con $1.23" },
+        { e:1, v:"Inviertes en publicidad, entran prospectos, y se terminan perdiendo entre WhatsApp y la memoria de alguien. Con nosotros no.", rinde:"0 resultados con $1.72" },
+        { e:2, v:"Meta y Google te traen la gente. Nosotros nos ocupamos de que ninguno se quede sin respuesta.", rinde:"0 resultados con $0.94" }
+      ],
+      titulos:[
+        { e:0, v:"Ten el control de tus leads" },
+        { e:1, v:"Deja de perder prospectos" },
+        { e:2, v:"De la pauta a la venta" }
+      ],
+      descs:[
+        { e:0, v:"Mide, organiza y sigue" },
+        { e:1, v:"Cada lead con su historia" },
+        { e:2, v:"Seguimiento real" }
       ] },
 
-    { tanda:'ago', grupo:'Imágenes y carrusel', servicio:'Sistema de ventas', meta:'IMG_QUIENCOMPRA_AGO26',
-      resumen:'$6.15 gastados · 0 leads',
-      nombre:'Publicación 20-08 · quién compra', creativo:'20-08 publicacion.jpg', cta:'Más información',
-      media:['media/20-08-publicacion.jpg'],
-      vars:[
-        { rinde:'0 resultados con $1.14', titulo:'¿Cuáles terminan comprando?',
-          texto:'Ya sabes cuántos leads entraron. Lo que decide tu mes es cuáles compraron — y eso también lo puedes ver.',
-          desc:'Del lead a la venta' },
-        { rinde:'0 resultados con $1.73', titulo:'Mira el retorno real',
-          texto:'El costo por lead te miente si no sabes qué pasó después. Marca quién compró y mira cuánto devolvió cada anuncio de verdad.',
-          desc:'No solo el costo por lead' },
-        { rinde:'0 resultados con $0.95', titulo:'Haz seguimiento a cada lead',
-          texto:'Tus anuncios generan leads. Nosotros te mostramos el avance de cada uno hasta que compra o se cae.',
-          desc:'En un solo lugar' }
+    { tanda:"ago",
+      grupo:"Imágenes y carrusel",
+      servicio:"Sistema de ventas",
+      meta:"IMG_QUIENCOMPRA_AGO26",
+      resumen:"$6.15 gastados · 0 leads",
+      nombre:"Publicación 20-08 · quién compra",
+      creativo:"20-08 publicacion.jpg",
+      cta:"Más información",
+      media:["media/20-08-publicacion.jpg"],
+      textos:[
+        { e:0, v:"Ya sabes cuántos leads entraron. Lo que decide tu mes es cuáles compraron — y eso también lo puedes ver.", rinde:"0 resultados con $1.14" },
+        { e:1, v:"El costo por lead te miente si no sabes qué pasó después. Marca quién compró y mira cuánto devolvió cada anuncio de verdad.", rinde:"0 resultados con $1.73" },
+        { e:2, v:"Tus anuncios generan leads. Nosotros te mostramos el avance de cada uno hasta que compra o se cae.", rinde:"0 resultados con $0.95" }
+      ],
+      titulos:[
+        { e:0, v:"¿Cuáles terminan comprando?" },
+        { e:1, v:"Mira el retorno real" },
+        { e:2, v:"Haz seguimiento a cada lead" }
+      ],
+      descs:[
+        { e:0, v:"Del lead a la venta" },
+        { e:1, v:"No solo el costo por lead" },
+        { e:2, v:"En un solo lugar" }
       ] },
 
-    { tanda:'ago', grupo:'Imágenes y carrusel', servicio:'Sistema de ventas', meta:'IMG_ADONDEVAELDINERO_AGO26',
-      resumen:'$6.73 gastados · 0 leads',
-      nombre:'Publicación 21-08 · a dónde va el dinero', creativo:'21-08 publicacion.jpg', cta:'Enviar mensaje',
-      media:['media/21-08-publicacion.jpg'],
-      vars:[
-        { rinde:'0 resultados con $0.98', titulo:'Deja de invertir a ciegas',
-          texto:'$109.59 invertidos, 274 leads. Ese es el dato que deberías poder mirar cualquier día, no una vez al mes.',
-          desc:'Tu inversión, en vivo' },
-        { rinde:'0 resultados con $2.25', titulo:'Tu inversión, en claro',
-          texto:'Cuánto invertiste, cuántos leads llegaron y qué resultados generaron. Se actualiza solo, sin pedirle nada a nadie.',
-          desc:'Actualizado en vivo' },
-        { rinde:'0 resultados con $1.47', titulo:'¿Sabes a dónde va tu dinero?',
-          texto:'Si tu única foto de la pauta es el reporte de fin de mes, estás decidiendo con información vieja.',
-          desc:'Mide lo que inviertes' }
+    { tanda:"ago",
+      grupo:"Imágenes y carrusel",
+      servicio:"Sistema de ventas",
+      meta:"IMG_ADONDEVAELDINERO_AGO26",
+      resumen:"$6.73 gastados · 0 leads",
+      nombre:"Publicación 21-08 · a dónde va el dinero",
+      creativo:"21-08 publicacion.jpg",
+      cta:"Enviar mensaje",
+      media:["media/21-08-publicacion.jpg"],
+      textos:[
+        { e:0, v:"$109.59 invertidos, 274 leads. Ese es el dato que deberías poder mirar cualquier día, no una vez al mes.", rinde:"0 resultados con $0.98" },
+        { e:1, v:"Cuánto invertiste, cuántos leads llegaron y qué resultados generaron. Se actualiza solo, sin pedirle nada a nadie.", rinde:"0 resultados con $2.25" },
+        { e:2, v:"Si tu única foto de la pauta es el reporte de fin de mes, estás decidiendo con información vieja.", rinde:"0 resultados con $1.47" }
+      ],
+      titulos:[
+        { e:0, v:"Deja de invertir a ciegas" },
+        { e:1, v:"Tu inversión, en claro" },
+        { e:2, v:"¿Sabes a dónde va tu dinero?" }
+      ],
+      descs:[
+        { e:0, v:"Tu inversión, en vivo" },
+        { e:1, v:"Actualizado en vivo" },
+        { e:2, v:"Mide lo que inviertes" }
       ] }
   ],
   formulario: {
-    titulo:'Cuéntanos de tu negocio',
-    // Sin promesas que no controlamos (nada de "el mismo día" ni "con tus propios números").
-    desc:'Déjanos tus datos y te escribimos por WhatsApp. Sin compromiso.',
-    preguntas:[
-      { texto:'¿Cuánto inviertes hoy en publicidad al mes?', tipo:'opciones' },
-      { texto:'¿Cómo llevas hoy el seguimiento de tus prospectos?', tipo:'opciones' }
+    "titulo": "Cuéntanos de tu negocio",
+    "desc": "Déjanos tus datos y te escribimos por WhatsApp. Sin compromiso.",
+    "preguntas": [
+      {
+        "texto": "¿Cuánto inviertes hoy en publicidad al mes?",
+        "tipo": "opciones"
+      },
+      {
+        "texto": "¿Cómo llevas hoy el seguimiento de tus prospectos?",
+        "tipo": "opciones"
+      }
     ],
-    finTitulo:'¡Listo!',
-    finTexto:'Te vamos a escribir por WhatsApp al número que dejaste. Si prefieres, escríbenos tú ahora.',
-    finBoton:'Abrir WhatsApp'
+    "finTitulo": "¡Listo!",
+    "finTexto": "Te vamos a escribir por WhatsApp al número que dejaste. Si prefieres, escríbenos tú ahora.",
+    "finBoton": "Abrir WhatsApp"
   }
 };
 
 var D = cargar();
 
-// Quien ya abrió la página tiene guardada la versión anterior. En vez de pedirle que
-// reemplace todo (y pierda lo que haya editado), se suma el material nuevo y a lo de agosto
-// se le agregan sus resultados, solo donde el texto sigue igual al publicado.
 // Textos que se pulieron después de publicados. Se cambian solo si siguen exactamente como
 // salieron: si alguien los editó, lo suyo manda.
 var CAMBIOS_TEXTO = {
@@ -887,13 +1113,34 @@ var CAMBIOS_TEXTO = {
     'No se comunica igual una mueblería que un restaurante. Por eso armamos cada estrategia desde cero.'
 };
 
+/**
+ * Hasta la versión b cada anuncio traía "variaciones A/B/C" (texto + título + descripción
+ * juntos). Meta no funciona así: son tres listas independientes que combina solo. Esto pasa lo
+ * guardado al modelo de listas sin perder una letra, y completa hasta el mínimo de 3.
+ */
+function aListas(a){
+  if(a.vars){
+    a.textos = a.vars.map(function(v, j){ var o = { e:j, v: v.texto || '' }; if(v.rinde) o.rinde = v.rinde; return o; });
+    a.titulos = a.vars.map(function(v, j){ return { e:j, v: v.titulo || '' }; });
+    a.descs = a.vars.map(function(v, j){ return { e:j, v: v.desc || '' }; });
+    delete a.vars;
+  }
+  ['textos', 'titulos', 'descs'].forEach(function(c){
+    a[c] = (a[c] || []).map(function(o){ return typeof o === 'string' ? { v:o } : o; });
+    while(a[c].length < MIN_OPCIONES) a[c].push({ v:'' });
+  });
+  return a;
+}
+
 // Quien ya abrió la página tiene guardada una versión anterior. En vez de pedirle que reemplace
 // todo (y pierda lo que editó): el material, las notas y los resultados se toman siempre de la
 // versión nueva; los textos se conservan, salvo los que siguen idénticos a uno que se pulió.
 // Los anuncios que no existían entran; los propios del usuario quedan al final.
 var fusionado = false;
 (function fusionar(){
-  if(D.version === INICIAL.version || !D.anuncios) return;
+  if(!D.anuncios) return;
+  D.anuncios.forEach(aListas);
+  if(D.version === INICIAL.version) return;
   var base = JSON.parse(JSON.stringify(INICIAL));
   var guardados = D.anuncios, usados = {};
   var META = ['tanda','grupo','servicio','prioridad','porque','creativo','cta','media','formatos',
@@ -905,12 +1152,15 @@ var fusionado = false;
     usados[k] = true;
     var g = guardados[k];
     META.forEach(function(c){ if(c in ini) g[c] = ini[c]; else delete g[c]; });
-    (g.vars || []).forEach(function(v, j){
-      ['texto', 'titulo', 'desc'].forEach(function(c){
-        if(CAMBIOS_TEXTO[v[c]]) v[c] = CAMBIOS_TEXTO[v[c]];
+    ['textos', 'titulos', 'descs'].forEach(function(c){
+      var lista = g[c], li = ini[c] || [];
+      lista.forEach(function(o, j){
+        if(CAMBIOS_TEXTO[o.v]) o.v = CAMBIOS_TEXTO[o.v];
+        var oi = li[j];
+        if(oi && oi.e != null) o.e = oi.e;
+        if(oi && oi.rinde && o.v === oi.v) o.rinde = oi.rinde; else delete o.rinde;
       });
-      var iv = ini.vars[j];
-      if(iv && iv.rinde && (v.texto || '') === iv.texto) v.rinde = iv.rinde; else delete v.rinde;
+      for(var j = lista.length; j < li.length; j++) lista.push(li[j]);
     });
     return g;
   });
@@ -941,29 +1191,53 @@ var donde = 'fb-feed';
 var CREATIVOS = [];   // catálogo con las medidas reales, lo llena media/creativos.json
 
 // --- Ubicaciones de Meta ------------------------------------------------------
-// `prop` es la proporción (ancho/alto) con la que Meta MUESTRA cada ubicación. Es lo
-// que decide qué se recorta: el creativo se escala para llenar y lo que sobra se pierde.
-// Los topes de texto son los que se leen antes del "Ver más" en cada lugar.
+// Cómo muestra Meta la pieza en cada una:
+//  - feed:     respeta la proporción de la pieza entre 1.91:1 y 4:5. Una cuadrada se ve cuadrada;
+//              lo que es más alto que 4:5 (un reel) se ve recortado al centro, en 4:5.
+//  - cuadro:   Marketplace y columna derecha muestran siempre cuadrado.
+//  - pantalla: Historias y Reels son 9:16. Una pieza que no es 9:16 no se estira ni se recorta:
+//              va entera al centro, con fondo.
+// `usa` es el orden de preferencia entre las versiones que entregó diseño: la cuadrada (FORMATO
+// PAUTA) para feed y cuadro, la de reel (FORMATO HISTORIA) para pantalla completa. La 4:5 (FEED)
+// es la del feed orgánico y solo entra si no hay otra.
 var LUGARES = [
-  { id:'fb-feed', nombre:'Facebook · Feed', prop:4/5, ideal:'1080×1350 (4:5)',
-    texto:125, titulo:40, desc:30, marca:'facebook',
+  { id:'fb-feed', nombre:'Facebook · Feed', tipo:'feed', usa:['1:1','4:5','9:16'],
+    ideal:'cuadrada 1080×1080 (FORMATO PAUTA)', texto:125, titulo:40, desc:30, marca:'facebook',
     nota:'La ubicación que más impresiones se lleva. Es la única que muestra la descripción.' },
-  { id:'ig-feed', nombre:'Instagram · Feed', prop:4/5, ideal:'1080×1350 (4:5)',
-    texto:125, titulo:40, desc:0, marca:'instagram',
+  { id:'ig-feed', nombre:'Instagram · Feed', tipo:'feed', usa:['1:1','4:5','9:16'],
+    ideal:'cuadrada 1080×1080 (FORMATO PAUTA)', texto:125, titulo:40, desc:0, marca:'instagram',
     nota:'No muestra la descripción. El título va junto al botón.' },
-  { id:'ig-story', nombre:'Instagram · Historias', prop:9/16, ideal:'1080×1920 (9:16)',
-    texto:0, titulo:0, desc:0, marca:'instagram', pantalla:true,
-    nota:'A pantalla completa y sin texto alrededor: lo que no esté EN la pieza, no se lee. Deja libre el 14% de arriba y el 20% de abajo.' },
-  { id:'reels', nombre:'Reels', prop:9/16, ideal:'1080×1920 (9:16)',
-    texto:72, titulo:0, desc:0, marca:'instagram', pantalla:true,
-    nota:'El texto va abajo, encima del video, y se corta enseguida. La interfaz tapa los bordes.' },
-  { id:'fb-derecha', nombre:'Facebook · Columna derecha', prop:1.91, ideal:'1200×628 (1.91:1)',
-    texto:0, titulo:25, desc:0, marca:'facebook', chico:true,
-    nota:'Diminuto y solo en escritorio. Únicamente se lee el título, y corto.' },
-  { id:'fb-market', nombre:'Facebook · Marketplace', prop:1, ideal:'1080×1080 (1:1)',
-    texto:125, titulo:40, desc:0, marca:'facebook',
-    nota:'Cuadrado. Una pieza 4:5 pierde arriba y abajo.' }
+  { id:'ig-story', nombre:'Instagram · Historias', tipo:'pantalla', usa:['9:16','1:1','4:5'],
+    ideal:'reel 1080×1920 (FORMATO HISTORIA)', texto:0, titulo:0, desc:0, marca:'instagram',
+    nota:'A pantalla completa y sin texto alrededor: lo que no esté en la pieza, no se lee. La interfaz tapa el 14% de arriba y el 20% de abajo.' },
+  { id:'reels', nombre:'Reels', tipo:'pantalla', usa:['9:16','1:1','4:5'],
+    ideal:'reel 1080×1920 (FORMATO HISTORIA)', texto:72, titulo:0, desc:0, marca:'instagram',
+    nota:'El texto va abajo, encima de la pieza, y se corta enseguida. La interfaz tapa los bordes.' },
+  { id:'fb-market', nombre:'Facebook · Marketplace', tipo:'cuadro', usa:['1:1','4:5','9:16'],
+    ideal:'cuadrada 1080×1080 (FORMATO PAUTA)', texto:125, titulo:40, desc:0, marca:'facebook',
+    nota:'Siempre cuadrado: por eso va la versión de pauta.' },
+  { id:'fb-derecha', nombre:'Facebook · Columna derecha', tipo:'cuadro', chico:true, usa:['1:1','4:5','9:16'],
+    ideal:'cuadrada 1080×1080 (FORMATO PAUTA)', texto:0, titulo:25, desc:0, marca:'facebook',
+    nota:'Diminuto y solo en escritorio. Únicamente se lee el título, y corto.' }
 ];
+
+/**
+ * Cómo queda la pieza en esta ubicación: proporción del recuadro, si llena ('cubre') o va entera
+ * con fondo ('fondo'), y cuánto se pierde. Antes el recuadro era fijo (Feed siempre 4:5) y una
+ * pieza cuadrada salía recortada, que no es lo que hace Meta.
+ */
+function encaje(L, prop){
+  if(!prop) return { caja: L.tipo === 'pantalla' ? 9/16 : 1, modo:'cubre', pierde:0 };
+  var caja;
+  if(L.tipo === 'feed') caja = Math.max(0.8, Math.min(1.91, prop));
+  else if(L.tipo === 'cuadro') caja = 1;
+  else {
+    if(Math.abs(prop - 9/16) < 0.03) return { caja:9/16, modo:'cubre', pierde:0 };
+    return { caja:9/16, modo:'fondo', pierde:0 };
+  }
+  var pierde = Math.round((1 - Math.min(prop, caja) / Math.max(prop, caja)) * 100);
+  return { caja:caja, modo:'cubre', pierde:pierde, lado: prop > caja ? 'los costados' : 'arriba y abajo' };
+}
 
 function lugar(){ return LUGARES.filter(function(l){ return l.id === donde; })[0] || LUGARES[0]; }
 
@@ -1044,7 +1318,7 @@ function contador(n, tope){
 var NOTA_GRUPO = {
   'sep|Videos': 'Van primero: el 93% de los resultados de la cuenta vino de video.',
   'sep|Carruseles': 'Marcados "Probar": en la campaña de formulario de agosto las piezas estáticas no trajeron leads. Rinden mejor llevando a WhatsApp.',
-  'sep|Imágenes': 'Cada una viene en 4:5, 1:1 y 9:16: la vista previa usa la versión que corresponde a cada ubicación.',
+  'sep|Imágenes': 'Cada una viene cuadrada (pauta), de reel (historia) y en 4:5 (feed orgánico): la vista previa usa la que va en cada ubicación.',
   'ago|Videos': 'Lo que corre desde el 19-ago en la campaña de formulario. Cada variación muestra lo que trajo en Meta; el resumen del anuncio suma el CRM.',
   'ago|Imágenes y carrusel': 'Gastaron $23.66 entre las cuatro y no trajeron ningún lead.'
 };
@@ -1075,24 +1349,35 @@ function pintarIndice(visibles){
       var i = +l.getAttribute('href').replace('#anuncio-', '');
       var destino = el('anuncio-' + i);
       if(destino) destino.scrollIntoView({ behavior:'smooth', block:'start' });
-      el('pv-cual').value = i + '|0'; tarjeta = 0; pintarPreview();
+      seleccionarPv(i);
     };
   });
 }
 
 // ------------------------------------------------------------------ material a la vista
-// Antes el material solo se veía de a una pieza en la vista previa, y los videos eran una foto
-// fija. Ahora cada anuncio muestra todas sus piezas (por formato) y un clic las abre en grande;
-// los videos se reproducen con sonido.
-var FMT_NOMBRE = { '4:5':'Feed 4:5', '1:1':'Pauta 1:1', '9:16':'Historias 9:16' };
-var fmtVista = {};   // formato elegido en la tira de cada anuncio
+// Cada anuncio muestra todas sus piezas por versión y un clic las abre en grande; los videos se
+// reproducen con sonido. Las versiones van en el orden en que se usan en el anuncio: primero la
+// cuadrada (pauta), después la de reel y al final la 4:5 del feed orgánico.
+var FMT_NOMBRE = { '1:1':'Cuadrada · pauta', '9:16':'Reel · historia', '4:5':'Feed orgánico 4:5' };
+var FMT_ORDEN = ['1:1', '9:16', '4:5'];
+var fmtVista = {};   // versión elegida en la tira de cada anuncio
 
 function juegos(a){
-  if(a.formatos) return Object.keys(a.formatos).map(function(k){
-    return { clave:k, nombre: FMT_NOMBRE[k] || k, lista: a.formatos[k] };
-  });
+  if(a.formatos) return Object.keys(a.formatos)
+    .sort(function(x, y){ return FMT_ORDEN.indexOf(x) - FMT_ORDEN.indexOf(y); })
+    .map(function(k){ return { clave:k, nombre: FMT_NOMBRE[k] || k, lista: a.formatos[k] }; });
   var lista = a.media || [];
   return [{ clave:null, nombre: a.esVideo ? 'Video' : (lista.length > 1 ? 'Carrusel' : 'Imagen'), lista: lista }];
+}
+
+/** Qué versión va en cada ubicación, dicho en una línea. */
+function usoMaterial(a){
+  var f = a.formatos;
+  if(f && f['1:1'] && f['9:16']) return 'La <b>cuadrada</b> va en Feed y Marketplace; la de <b>reel</b>, en Historias y Reels.' +
+    (f['4:5'] ? ' La 4:5 es la del feed orgánico.' : '');
+  if(f && f['1:1']) return 'La <b>cuadrada</b> va en Feed y Marketplace. No trae versión de reel: en Historias y Reels se ve la cuadrada al centro, con fondo.';
+  if(a.esVideo) return 'Video de <b>reel</b>: llena la pantalla en Historias y Reels; en Feed se ve el centro.';
+  return 'Solo viene en <b>4:5</b>: en Feed se ve entera; en Marketplace se recorta un poco y en Historias va al centro, con fondo.';
 }
 
 function pintarMaterial(a, i){
@@ -1116,14 +1401,15 @@ function pintarMaterial(a, i){
   // Con una sola pieza la tira quedaba con un hueco al lado: se usa para decir qué hacer.
   var info = j.lista.length === 1
     ? '<div class="mat-info">' + (a.esVideo
-        ? '<b>Video vertical' + (a.duracion ? ' · ' + esc(a.duracion) : '') + '</b>Tócalo para verlo completo y con sonido.'
-        : '<b>' + esc(j.nombre) + '</b>Tócala para verla en grande' + (js.length > 1 ? '; arriba cambias de formato.' : '.')) +
+        ? '<b>Video de reel' + (a.duracion ? ' · ' + esc(a.duracion) : '') + '</b>Tócalo para verlo completo y con sonido.'
+        : '<b>' + esc(j.nombre) + '</b>Tócala para verla en grande' + (js.length > 1 ? '; arriba cambias de versión.' : '.')) +
       '</div>'
     : '';
   return '<div class="material" data-i="' + i + '">' +
     '<div class="mat-top"><span class="etq">Material</span>' + chips +
       '<label class="archivo"><span>Archivo</span>' +
       '<input value="' + esc(a.creativo || '') + '" data-c="creativo" placeholder="archivo del creativo"></label></div>' +
+    '<div class="mat-uso">' + usoMaterial(a) + '</div>' +
     (minis ? '<div class="tiras">' + minis + info + '</div>' : '<div class="pista">Sin material cargado.</div>') +
   '</div>';
 }
@@ -1144,9 +1430,8 @@ function enlazarMaterial(caja){
   caja.querySelectorAll('.mini').forEach(function(m){
     m.onclick = function(){
       var n = +m.dataset.n;
-      // También lleva la vista previa a esa pieza, para verla dentro del anuncio.
-      var actual = (el('pv-cual').value || '').split('|');
-      if(+actual[0] !== i) el('pv-cual').value = i + '|0';
+      // También lleva la vista previa a ese anuncio y esa tarjeta.
+      seleccionarPv(i);
       tarjeta = n; pintarPreview();
       abrirVisor(i, juegos(D.anuncios[i])[fmtVista[i]] ? fmtVista[i] : 0, n);
     };
@@ -1218,6 +1503,52 @@ document.addEventListener('keydown', function(e){
   if(e.key === 'ArrowRight') moverVisor(1);
 });
 
+// ------------------------------------------------------------------ anuncios
+// Igual que en el Administrador de anuncios: tres listas independientes (textos principales,
+// títulos y descripciones) que Meta combina. Mínimo 3 de cada una, máximo 5.
+var CAMPOS = [
+  { c:'textos', nombre:'Textos principales', uno:'Texto', tope: TOPES.texto, alto:'larga',
+    pista:'Lo primero que se lee. Meta combina cada texto con cada título y descripción.' },
+  { c:'titulos', nombre:'Títulos', uno:'Título', tope: TOPES.titulo, alto:'corta',
+    pista:'En negrita, junto al botón. Es lo segundo que se lee.' },
+  { c:'descs', nombre:'Descripciones', uno:'Descripción', tope: TOPES.desc, alto:'corta',
+    pista:'Solo sale en Facebook Feed: el anuncio tiene que funcionar sin ella.' }
+];
+function llenas(lista){ return (lista || []).filter(function(o){ return (o.v || '').trim(); }).length; }
+
+function pintarCampos(a, i){
+  return '<div class="campos">' + CAMPOS.map(function(C){
+    var lista = a[C.c] || [];
+    var n = llenas(lista);
+    return '<div class="gcampo" data-c="' + C.c + '">' +
+      '<div class="gc-head"><h4>' + C.nombre + '</h4>' +
+        '<span class="gc-n ' + (n >= MIN_OPCIONES ? 'ok' : 'falta') + '">' + n + (n === 1 ? ' opción' : ' opciones') +
+          (n >= MIN_OPCIONES ? '' : ' · faltan ' + (MIN_OPCIONES - n)) + '</span>' +
+        '<span class="gc-pista">' + C.pista + '</span>' +
+        (lista.length < MAX_OPCIONES ? '<button class="gc-mas" data-c="' + C.c + '" title="Meta acepta hasta ' + MAX_OPCIONES + '">+ Agregar</button>' : '') +
+      '</div>' +
+      '<div class="opciones">' + lista.map(function(o, j){
+        var cnt = contador((o.v || '').length, C.tope);
+        return '<div class="op">' +
+          '<div class="op-head"><span class="op-n">' + C.uno + ' ' + (j + 1) + '</span>' +
+            (tandaDe(a) === 'sep' && o.e != null && ENFOQUES[o.e] ? '<span class="enf">' + ENFOQUES[o.e] + '</span>' : '') +
+            (o.rinde ? '<span class="rinde' + (/^0 /.test(o.rinde) ? '' : ' si') + '">' + esc(o.rinde) + '</span>' : '') +
+            '<span class="cnt ' + cnt.clase + '">' + cnt.txt + '</span>' +
+            (lista.length > MIN_OPCIONES ? '<button class="op-quitar" data-c="' + C.c + '" data-j="' + j + '" title="Quitar esta opción">×</button>' : '') +
+          '</div>' +
+          '<textarea class="' + C.alto + '" data-c="' + C.c + '" data-i="' + i + '" data-j="' + j + '" data-max="' + C.tope + '">' + esc(o.v) + '</textarea>' +
+        '</div>';
+      }).join('') + '</div></div>';
+  }).join('') + '</div>';
+}
+
+/** Repinta la lista sin que la página salte: agregar o quitar una opción no debe mover la vista. */
+function repintarQuieto(){
+  var y = window.scrollY;
+  pintarAnuncios();
+  window.scrollTo(0, y);
+}
+
 function pintarAnuncios(){
   var visibles = [];
   D.anuncios.forEach(function(a, i){ if(enTanda(a)) visibles.push({ a:a, i:i }); });
@@ -1248,37 +1579,53 @@ function pintarAnuncios(){
       '<div class="ahead">' +
         '<span class="num">' + (k+1) + '</span>' +
         '<input class="nom" value="' + esc(a.nombre) + '" data-c="nombre" placeholder="Nombre del anuncio">' +
-        (D.anuncios.length > 1 ? '<button class="quitar" title="Quitar">×</button>' : '') +
+        (D.anuncios.length > 1 ? '<button class="quitar" title="Quitar el anuncio">×</button>' : '') +
       '</div>' +
       '<div class="meta">' + tags.join('') + '</div>' +
       pintarMaterial(a, i) +
       (a.porque ? '<div class="porque"><b>Por qué así:</b> ' + esc(a.porque) + '</div>' : '') +
-      '<div class="vars">' + a.vars.map(function(v, j){
-        var r = v.rinde ? '<span class="rinde' + (/^0 /.test(v.rinde) ? '' : ' si') + '">' + esc(v.rinde) + '</span>' : '';
-        return '<div class="v">' +
-          '<div class="vhead"><span class="vt">Variación ' + 'ABC'[j] + '</span>' +
-            (tandaDe(a) === 'sep' ? '<span class="enf">' + ENFOQUES[j] + '</span>' : '') + r + '</div>' +
-          campo('Texto primario', v.texto, 'texto', TOPES.texto, i, j, 'larga',
-                'Los primeros 125 caracteres son los que se leen sin tocar "Ver más".') +
-          campo('Título', v.titulo, 'titulo', TOPES.titulo, i, j, 'corta',
-                'Va en negrita debajo de la imagen. Es lo segundo que se lee.') +
-          campo('Descripción', v.desc, 'desc', TOPES.desc, i, j, 'corta',
-                'Solo aparece en algunas ubicaciones. Si se cae, el anuncio tiene que funcionar igual.') +
-        '</div>';
-      }).join('') + '</div></div>';
+      pintarCampos(a, i) +
+    '</div>';
   }).join('');
 
   // eventos
   el('lista').querySelectorAll('textarea[data-c]').forEach(function(t){
+    var i = +t.dataset.i, j = +t.dataset.j, c = t.dataset.c;
     t.addEventListener('input', function(){
-      var i = +t.dataset.i, j = +t.dataset.j;
-      D.anuncios[i].vars[j][t.dataset.c] = t.value;
+      D.anuncios[i][c][j].v = t.value;
+      var cn = contador(t.value.length, +t.dataset.max);
       var lab = t.parentNode.querySelector('.cnt');
-      var c = contador(t.value.length, +t.dataset.max);
-      lab.textContent = c.txt; lab.className = 'cnt ' + c.clase;
-      guardar();
-      if(i === pvIdx) pintarPreview();
+      lab.textContent = cn.txt; lab.className = 'cnt ' + cn.clase;
+      var n = llenas(D.anuncios[i][c]);
+      var gn = t.closest('.gcampo').querySelector('.gc-n');
+      gn.textContent = n + (n === 1 ? ' opción' : ' opciones') + (n >= MIN_OPCIONES ? '' : ' · faltan ' + (MIN_OPCIONES - n));
+      gn.className = 'gc-n ' + (n >= MIN_OPCIONES ? 'ok' : 'falta');
+      guardar(); pintarAviso();
+      seleccionarPv(i, c, j);
     });
+    // Al escribir en una opción, la vista previa muestra esa: se ve lo que se está editando.
+    t.addEventListener('focus', function(){ seleccionarPv(i, c, j); });
+  });
+  el('lista').querySelectorAll('.gc-mas').forEach(function(b){
+    b.onclick = function(){
+      var i = +b.closest('.anuncio').dataset.i, c = b.dataset.c;
+      if(D.anuncios[i][c].length >= MAX_OPCIONES) return;
+      D.anuncios[i][c].push({ v:'' });
+      guardar(); repintarQuieto();
+      var nuevas = el('anuncio-' + i).querySelectorAll('textarea[data-c="' + c + '"]');
+      if(nuevas.length) nuevas[nuevas.length - 1].focus({ preventScroll:true });
+    };
+  });
+  el('lista').querySelectorAll('.op-quitar').forEach(function(b){
+    b.onclick = function(){
+      var i = +b.closest('.anuncio').dataset.i, c = b.dataset.c, j = +b.dataset.j;
+      var lista = D.anuncios[i][c];
+      if(lista.length <= MIN_OPCIONES) return;
+      if((lista[j].v || '').trim() && !confirm('¿Quitar esta opción?\n\n' + lista[j].v)) return;
+      lista.splice(j, 1);
+      if(pvIdx === i && pvSel[c] >= lista.length) pvSel[c] = 0;
+      guardar(); repintarQuieto(); pintarPreview();
+    };
   });
   el('lista').querySelectorAll('input[data-c]').forEach(function(inp){
     inp.addEventListener('input', function(){
@@ -1301,74 +1648,79 @@ function pintarAnuncios(){
   pintarAviso();
 }
 
-function campo(etq, valor, clave, tope, i, j, alto, pista){
-  var c = contador((valor||'').length, tope);
-  return '<div class="campo">' +
-    '<label>' + etq + ' <span class="cnt ' + c.clase + '">' + c.txt + '</span></label>' +
-    '<textarea class="' + alto + '" data-c="' + clave + '" data-i="' + i + '" data-j="' + j + '" data-max="' + tope + '">' +
-      esc(valor) + '</textarea>' +
-    '<div class="pista">' + pista + '</div></div>';
-}
-
 /** Resumen honesto de qué falta, arriba de todo. */
 function pintarAviso(){
-  var vacias = 0, largos = 0, total = 0, n = 0;
+  var n = 0, faltan = [], largos = 0;
   D.anuncios.forEach(function(a){
     if(!enTanda(a)) return;
     n++;
-    a.vars.forEach(function(v){
-      total++;
-      if(!v.texto || !v.titulo) vacias++;
-      if((v.texto||'').length > TOPES.texto * 1.5) largos++;
-    });
+    var cortos = CAMPOS.filter(function(C){ return llenas(a[C.c]) < MIN_OPCIONES; })
+      .map(function(C){ return C.nombre.toLowerCase(); });
+    if(cortos.length) faltan.push(esc(a.nombre) + ': ' + cortos.join(', '));
+    (a.textos || []).forEach(function(o){ if((o.v || '').length > TOPES.texto * 1.5) largos++; });
   });
-  var partes = [];
-  partes.push('<b>' + n + ' anuncio(s)</b> con ' + total + ' variaciones.');
-  if(vacias) partes.push('<b>' + vacias + '</b> sin completar.');
-  if(largos) partes.push('<b>' + largos + '</b> con el texto muy largo.');
-  if(!vacias && !largos) partes.push('Todo completo y dentro de los largos que Meta muestra.');
+  var partes = ['<b>' + n + ' anuncio(s).</b>'];
+  if(faltan.length) partes.push('No llegan al mínimo de ' + MIN_OPCIONES + ': <b>' + faltan.join('</b> · <b>') + '</b>.');
+  if(largos) partes.push('<b>' + largos + '</b> texto(s) muy largos.');
+  if(!faltan.length && !largos) partes.push('Todos tienen al menos ' + MIN_OPCIONES + ' textos principales, ' + MIN_OPCIONES +
+    ' títulos y ' + MIN_OPCIONES + ' descripciones, dentro de los largos que Meta muestra.');
   el('aviso-datos').innerHTML = partes.join(' ');
-  el('aviso-datos').classList.toggle('ok', !vacias && !largos);
+  el('aviso-datos').classList.toggle('ok', !faltan.length && !largos);
 }
+
+// ------------------------------------------------------------------ vista previa
+var pvSel = { textos:0, titulos:0, descs:0 };   // qué opción de cada lista se está mirando
 
 function pintarSelector(){
   var s = el('pv-cual');
-  var opciones = [];
-  D.anuncios.forEach(function(a, i){
-    if(!enTanda(a)) return;
-    a.vars.forEach(function(v, j){
-      opciones.push('<option value="' + i + '|' + j + '">' + esc(a.nombre) + ' · ' + 'ABC'[j] + '</option>');
-    });
-  });
-  var antes = s.value;
-  s.innerHTML = opciones.join('');
-  if(antes) s.value = antes;
-  if(!s.value && opciones.length) s.selectedIndex = 0;
+  var vis = [];
+  D.anuncios.forEach(function(a, i){ if(enTanda(a)) vis.push(i); });
+  s.innerHTML = vis.map(function(i){ return '<option value="' + i + '">' + esc(D.anuncios[i].nombre) + '</option>'; }).join('');
+  if(vis.indexOf(pvIdx) < 0 && vis.length){ pvIdx = vis[0]; tarjeta = 0; pvSel = { textos:0, titulos:0, descs:0 }; }
+  s.value = String(pvIdx);
 }
 
-/**
- * Las piezas de septiembre vienen en varios formatos (4:5, 1:1, 9:16). Meta deja cargar una
- * versión por ubicación, así que la vista previa usa la más parecida a lo que pide cada una:
- * así el aviso de recorte habla de la pieza que de verdad se va a subir ahí.
- */
-function mediosPara(a, L){
-  if(!a.formatos) return { lista: a.media || [], clave: null };
-  var mejor = null, dif = 99;
-  Object.keys(a.formatos).forEach(function(k){
-    var p = k.split(':');
-    var d = Math.abs((+p[0]) / (+p[1]) - L.prop);
-    if(d < dif){ dif = d; mejor = k; }
+/** Lleva la vista previa a un anuncio y, si se indica, a una opción de una de sus listas. */
+function seleccionarPv(i, c, j){
+  if(pvIdx !== i){
+    pvIdx = i; tarjeta = 0; pvSel = { textos:0, titulos:0, descs:0 };
+    el('pv-cual').value = String(i);
+  }
+  if(c) pvSel[c] = j;
+  pintarPreview();
+}
+
+/** Elegir la combinación: Meta mezcla las listas, así que se puede mirar cualquier cruce. */
+function pintarCombo(a){
+  el('pv-combo').innerHTML = '<div class="combo">' + CAMPOS.map(function(C){
+    var lista = a[C.c] || [];
+    return '<div class="cb-fila"><span>' + C.uno + '</span>' + lista.map(function(o, j){
+      return '<button class="cb' + (pvSel[C.c] === j ? ' on' : '') + '" data-c="' + C.c + '" data-j="' + j + '" title="' +
+        esc((o.v || '(vacía)').replace(/\n+/g, ' ')) + '">' + (j + 1) + '</button>';
+    }).join('') + '</div>';
+  }).join('') + '</div>';
+  el('pv-combo').querySelectorAll('.cb').forEach(function(b){
+    b.onclick = function(){ pvSel[b.dataset.c] = +b.dataset.j; pintarPreview(); };
   });
-  return { lista: a.formatos[mejor] || a.media || [], clave: mejor };
+}
+
+/** Qué versión del material va en esta ubicación, según lo que entregó diseño. */
+function mediosPara(a, L){
+  if(!a.formatos) return { lista: a.media || [], clave: null, ideal: true };
+  for(var k = 0; k < L.usa.length; k++){
+    if(a.formatos[L.usa[k]]) return { lista: a.formatos[L.usa[k]], clave: L.usa[k], ideal: k === 0 };
+  }
+  var primera = Object.keys(a.formatos)[0];
+  return { lista: a.formatos[primera], clave: primera, ideal: false };
 }
 
 function pintarPreview(){
-  var sel = el('pv-cual').value || '0|0';
-  var p = sel.split('|');
-  var a = D.anuncios[+p[0]];
-  if(!a){ el('pv').innerHTML = ''; return; }
-  pvIdx = +p[0];
-  var v = a.vars[+p[1]] || {};
+  var a = D.anuncios[pvIdx];
+  if(!a || !enTanda(a)){ el('pv').innerHTML = ''; el('pv-formato').innerHTML = ''; el('pv-combo').innerHTML = ''; return; }
+  ['textos', 'titulos', 'descs'].forEach(function(c){ if(pvSel[c] >= (a[c] || []).length) pvSel[c] = 0; });
+  pintarCombo(a);
+  var op = function(c){ return ((a[c] || [])[pvSel[c]] || {}).v || ''; };
+  var v = { texto: op('textos'), titulo: op('titulos'), desc: op('descs') };
 
   var L = lugar();
   red = L.marca === 'instagram' ? 'ig' : 'fb';
@@ -1376,44 +1728,37 @@ function pintarPreview(){
   // Cada ubicación corta el texto en un punto distinto — y algunas no lo muestran.
   var txt = '';
   if(L.texto > 0){
-    txt = esc(v.texto || '');
-    if((v.texto||'').length > L.texto){
-      txt = esc(v.texto.slice(0, L.texto)) + '… <span class="mas">Ver más</span>';
-    }
+    txt = esc(v.texto);
+    if(v.texto.length > L.texto) txt = esc(v.texto.slice(0, L.texto)) + '… <span class="mas">Ver más</span>';
   }
-
   var cta = a.cta || 'Más información';
 
-  // El creativo de verdad. Antes decía el nombre del archivo, que no sirve para juzgar
-  // si el texto pisa la imagen o si el título repite lo que ya dice la pieza.
   var eleccion = mediosPara(a, L);
   var medios = eleccion.lista;
   if(tarjeta >= medios.length) tarjeta = 0;
   var actual = medios[tarjeta] || medios[0];
-
-  // Medidas reales del creativo, para saber qué se pierde en esta ubicación.
   var ficha = CREATIVOS.filter(function(c){ return c.archivo === actual; })[0];
-  var prop = ficha ? ficha.ancho / ficha.alto : null;
-  var corte = recorte(prop, L.prop);
+  var prop = ficha ? ficha.ancho / ficha.alto : (a.esVideo ? 9/16 : null);
+  var enc = encaje(L, prop);
+  var pantalla = L.tipo === 'pantalla';
 
-  var estilo = 'aspect-ratio:' + L.prop.toFixed(4) + ';';
-  // Las ubicaciones verticales (9:16) hacen un anuncio tan alto que el botón —lo último
-  // y lo que más se revisa— queda fuera de pantalla. Se limita por ANCHO para que la
-  // altura entre sin deformar la proporción: alto deseado × proporción = ancho.
-  // Medido: al creativo le quedan ~46vh una vez descontados selectores, ficha y pie.
+  var estilo = 'aspect-ratio:' + enc.caja.toFixed(4) + ';';
+  // Las piezas altas hacen un anuncio tan largo que el botón queda fuera de pantalla: se
+  // limita por ANCHO (alto deseado × proporción) para no deformar la proporción.
   var tope = '';
-  if(L.prop < 1){
-    tope = 'max-width:' + (L.prop * (L.pantalla ? 46 : 44)).toFixed(1) + 'vh;';
-    // En Historias/Reels el marco ES el creativo: si el tope va adentro, el marco
-    // queda más ancho y asoman barras negras a los costados.
-    if(!L.pantalla) estilo += tope;
+  if(enc.caja < 1){
+    tope = 'max-width:' + (enc.caja * (pantalla ? 46 : 44)).toFixed(1) + 'vh;';
+    if(!pantalla) estilo += tope;
   }
+  var cls = 'crfoto' + (enc.modo === 'fondo' ? ' contener' : '');
   var cuerpo;
   if(medios.length){
     cuerpo = '<div class="carru" style="' + estilo + '">' +
+      // Una pieza que no es 9:16 en Historias/Reels va entera al centro, sobre su propia imagen difuminada.
+      (enc.modo === 'fondo' ? '<img class="fondo" src="' + actual + '" alt="">' : '') +
       (a.video
-        ? '<video class="crfoto" src="' + a.video + '" poster="' + actual + '" preload="none" playsinline></video>'
-        : '<img class="crfoto" src="' + actual + '" alt="">') +
+        ? '<video class="' + cls + '" src="' + a.video + '" poster="' + actual + '" preload="none" playsinline></video>'
+        : '<img class="' + cls + '" src="' + actual + '" alt="">') +
       '<button class="ampliar" title="Ver la pieza completa, sin recorte">Ver completa</button>' +
       (medios.length > 1 ?
         '<button class="flecha izq" data-d="-1">‹</button>' +
@@ -1423,76 +1768,66 @@ function pintarPreview(){
         }).join('') + '</div>' +
         '<div class="tarjnum">' + (tarjeta+1) + ' de ' + medios.length + '</div>' : '') +
       (a.esVideo ? '<button class="playy boton" title="Reproducir"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>' : '') +
-      // Zonas que la interfaz de Historias y Reels tapa con botones y textos.
-      (L.pantalla ? '<div class="zona arriba"></div><div class="zona abajo"></div>' : '') +
+      (pantalla ? '<div class="zona arriba"></div><div class="zona abajo"></div>' : '') +
     '</div>';
   } else {
     cuerpo = '<div class="fbimg" style="' + estilo + '">' + (a.creativo ? esc(a.creativo) : 'sin creativo') + '</div>';
   }
 
-  // --- Ficha del formato, arriba de la vista previa ---
+  // --- Ficha: qué versión va aquí y cómo se ve ---
   var alertas = [];
-  if(corte && ficha){
-    var tuya = nombreProp(prop), pide = nombreProp(L.prop);
-    if(corte.corta && a.esVideo && prop < 0.6 && !L.pantalla){
-      // Un video vertical en Feed SIEMPRE se ve recortado: es lo esperado, no un error.
-      // Marcarlo en rojo con "exporta en 1080×1350" hacía pensar que el material estaba mal.
+  if(ficha){
+    var tuya = nombreProp(prop), aqui = nombreProp(enc.caja);
+    if(enc.modo === 'fondo'){
+      alertas.push('<div class="al media"><b>Se ve entera, al centro y con fondo.</b><br>' +
+        'La pieza es ' + tuya + ' y la pantalla es 9:16: Meta no la estira ni la recorta. Se entiende, ' +
+        'pero una versión de reel aprovecharía toda la pantalla.</div>');
+    } else if(enc.pierde >= 3 && a.esVideo && prop < 0.6){
       alertas.push('<div class="al media"><b>Aquí se ve el centro del video.</b><br>' +
-        'Es normal en video vertical: Meta muestra ' + pide + ' y se pierde un ' + Math.round(corte.pierde / 2) +
+        'Es normal en un video de reel: Meta lo muestra ' + aqui + ' y se pierde un ' + Math.round(enc.pierde / 2) +
         '% arriba y otro tanto abajo. Solo revisa que subtítulos y logo queden dentro del centro.</div>');
-    } else if(corte.corta){
-      // Explicar el mecanismo, no solo el número: Meta escala hasta llenar y lo que
-      // sobresale se pierde. Saberlo es lo que evita volver a exportar mal.
-      alertas.push('<div class="al ' + (corte.pierde >= 25 ? 'mala' : 'media') + '">' +
-        '<b>Se recorta ' + corte.pierde + '% por ' + corte.lado + '.</b><br>' +
-        'Tu pieza es <b>' + tuya + '</b> (' + ficha.ancho + '×' + ficha.alto + ') y aquí se muestra <b>' + pide + '</b>. ' +
-        'Meta la agranda hasta llenar el recuadro, y lo que sobresale se pierde.</div>');
-      alertas.push('<div class="al arreglo">' +
-        'Para que quede bien: exporta esta pieza en <b>' + medidaIdeal(L.prop) + '</b>' +
-        (corte.pierde >= 25
-          ? ', o deja los textos y logos dentro del centro para que el recorte no se los coma.'
-          : '. Con este recorte igual se entiende, pero revisa que no corte texto.') +
-        '</div>');
+    } else if(enc.pierde >= 3){
+      alertas.push('<div class="al ' + (enc.pierde >= 25 ? 'mala' : 'media') + '"><b>Se recorta ' + enc.pierde + '% por ' + enc.lado + '.</b><br>' +
+        'La pieza es ' + tuya + ' (' + ficha.ancho + '×' + ficha.alto + ') y aquí se muestra ' + aqui + '.</div>');
+      alertas.push('<div class="al arreglo">Para que quede bien: sube una versión ' + aqui + ' (' + medidaIdeal(enc.caja) + ').</div>');
     } else {
-      alertas.push('<div class="al buena">' +
-        '<b>Queda bien, no se recorta nada.</b><br>' +
-        'Tu pieza es ' + tuya + ' (' + ficha.ancho + '×' + ficha.alto + '), justo lo que pide esta ubicación.</div>');
+      alertas.push('<div class="al buena"><b>Se ve completa, sin recorte.</b></div>');
     }
-  } else if(!ficha && medios.length){
+    if(eleccion.clave){
+      alertas.push('<div class="al al-arch">' + (eleccion.ideal
+          ? 'Aquí va la versión <b>' + esc(FMT_NOMBRE[eleccion.clave]) + '</b>'
+          : 'No trae versión ' + (pantalla ? 'de <b>reel</b>' : '<b>cuadrada</b>') + ': se usa la <b>' + esc(FMT_NOMBRE[eleccion.clave]) + '</b>') +
+        ' · <b>' + esc(ficha.original) + '</b>' + (medios.length > 1 ? ' (tarjeta ' + (tarjeta + 1) + ' de ' + medios.length + ')' : '') + '</div>');
+    }
+  } else if(medios.length){
     alertas.push('<div class="al media">No pude leer las medidas de este creativo, así que no puedo avisarte del recorte. Prueba con el botón de recargar.</div>');
   }
-  if(eleccion.clave && ficha){
-    // Qué archivo cargar en esta ubicación: es la pregunta que uno se hace en el Administrador.
-    alertas.push('<div class="al buena">Para esta ubicación sube la versión <b>' + eleccion.clave + '</b>' +
-      (medios.length > 1 ? ' (tarjeta ' + (tarjeta+1) + ': <b>' + esc(ficha.original) + '</b>)' : ': <b>' + esc(ficha.original) + '</b>') + '</div>');
+  if(L.texto === 0 && v.texto.trim()){
+    alertas.push('<div class="al media">Aquí <b>no se muestra el texto principal</b>: lo que no esté en la pieza, no se lee.</div>');
   }
-  if(L.texto === 0 && (v.texto||'').trim()){
-    alertas.push('<div class="al media">Aquí <b>no se muestra el texto primario</b>: lo que no esté en la pieza, se pierde</div>');
+  if(L.desc === 0 && v.desc.trim()){
+    alertas.push('<div class="al media">La descripción no aparece en esta ubicación.</div>');
   }
-  if(L.desc === 0 && (v.desc||'').trim()){
-    alertas.push('<div class="al media">La descripción no aparece en esta ubicación</div>');
-  }
-  if(L.titulo && (v.titulo||'').length > L.titulo){
-    alertas.push('<div class="al media">El título se corta: ' + v.titulo.length + ' de ' + L.titulo + '</div>');
+  if(L.titulo && v.titulo.length > L.titulo){
+    alertas.push('<div class="al media">El título se corta: ' + v.titulo.length + ' de ' + L.titulo + '.</div>');
   }
   el('pv-formato').innerHTML =
-    '<div class="formato"><div class="ideal">Formato ideal: <b>' + L.ideal + '</b></div>' +
+    '<div class="formato"><div class="ideal">Formato ideal: <b>' +
+      (a.esVideo ? (pantalla ? 'reel 1080×1920' : 'el reel sirve; aquí Meta muestra el centro') : L.ideal) + '</b></div>' +
     alertas.join('') +
     '<div class="lnota">' + L.nota + '</div></div>';
 
-  // Historias y Reels no llevan la caja de texto de siempre: son pantalla completa.
-  if(L.pantalla){
+  if(pantalla){
     el('pv').innerHTML =
       '<div class="fb historia" style="' + tope + 'margin:0 auto">' +
         cuerpo +
         '<div class="hcab"><div class="fbav" style="width:26px;height:26px;font-size:.6rem">E</div>' +
           '<div style="color:#fff;font-size:.72rem;font-weight:700">ECUS Agency</div>' +
           '<div style="color:rgba(255,255,255,.75);font-size:.66rem">Publicidad</div></div>' +
-        (L.texto ? '<div class="htxt">' + (txt || '') + '</div>' : '') +
+        (L.texto ? '<div class="htxt">' + txt + '</div>' : '') +
         '<div class="hbtn">' + esc(cta) + ' &#8593;</div>' +
       '</div>';
   } else if(L.chico){
-    // Columna derecha: miniatura al costado, solo el título.
     el('pv').innerHTML =
       '<div class="fb derecha">' +
         '<div class="dcol">' + cuerpo + '</div>' +
@@ -1505,12 +1840,14 @@ function pintarPreview(){
         '<div class="fbh"><div class="fbav">' + (red === 'ig' ? '' : 'E') + '</div>' +
           '<div><div class="fbn">ECUS Agency</div>' +
           '<div class="fbp">' + (red === 'ig' ? 'Publicidad' : 'Publicidad · &#127760;') + '</div></div></div>' +
-        (L.texto ? '<div class="fbtx">' + (txt || '<span class="mas">(sin texto primario)</span>') + '</div>' : '') +
+        (L.texto ? '<div class="fbtx">' + (txt || '<span class="mas">(sin texto principal)</span>') + '</div>' : '') +
         cuerpo +
         '<div class="fbcta">' +
           '<div class="izq">' +
-            (L.desc ? '<div class="fbd">' + esc(v.desc || '') + '</div>' : '') +
+            // Como en Facebook: la fuente en mayúsculas chicas, el título y debajo la descripción.
+            (red === 'fb' ? '<div class="fbd">' + (/mensaje/i.test(cta) ? 'WhatsApp' : 'ecus.agency') + '</div>' : '') +
             '<div class="fbt">' + esc(v.titulo || '(sin título)') + '</div>' +
+            (L.desc && v.desc.trim() ? '<div class="fbdesc">' + esc(v.desc) + '</div>' : '') +
           '</div>' +
           (red === 'ig' ? '' : '<button class="fbb">' + esc(cta) + '</button>') +
         '</div>' +
@@ -1522,7 +1859,7 @@ function pintarPreview(){
   el('pv').querySelectorAll('.flecha').forEach(function(b){
     b.onclick = function(){
       var n = medios.length;
-      tarjeta = (tarjeta + (+b.dataset.d) + n) % n;   // da la vuelta en los dos sentidos
+      tarjeta = (tarjeta + (+b.dataset.d) + n) % n;
       pintarPreview();
     };
   });
@@ -1541,8 +1878,8 @@ function pintarPreview(){
       if(!vid){ abrirVisor(pvIdx, fIdx, tarjeta); return; }
       vid.controls = true;
       b.remove();
-      var p = vid.play();
-      if(p && p.catch) p.catch(function(){ abrirVisor(pvIdx, fIdx, tarjeta); });
+      var pr = vid.play();
+      if(pr && pr.catch) pr.catch(function(){ abrirVisor(pvIdx, fIdx, tarjeta); });
     };
   });
 }
@@ -1620,7 +1957,7 @@ function pintarPvForm(){
 // ------------------------------------------------------------------ acciones
 el('b-nuevo').onclick = function(){
   D.anuncios.push({ tanda: tanda === 'todas' ? 'sep' : tanda, grupo:'Nuevos', nombre:'Anuncio nuevo', creativo:'', cta:'Enviar mensaje',
-    vars:[{titulo:'',texto:'',desc:''},{titulo:'',texto:'',desc:''},{titulo:'',texto:'',desc:''}] });
+    textos:[{v:''},{v:''},{v:''}], titulos:[{v:''},{v:''},{v:''}], descs:[{v:''},{v:''},{v:''}] });
   guardar(); pintarTandas(); pintarAnuncios(); pintarSelector(); pintarPreview();
   window.scrollTo({ top: document.body.scrollHeight, behavior:'smooth' });
 };
@@ -1659,6 +1996,7 @@ el('archivo').onchange = function(e){
     try {
       var nuevo = JSON.parse(r.result);
       if(!nuevo.anuncios) throw new Error('el archivo no tiene anuncios');
+      nuevo.anuncios.forEach(aListas);
       D = nuevo; guardar(); pintarTandas(); pintarAnuncios(); pintarSelector(); pintarPreview(); pintarFormulario();
       alert('Cargado.');
     } catch(err){ alert('No se pudo leer: ' + err.message); }
@@ -1677,12 +2015,17 @@ el('b-copiar').onclick = function(){
     if(a.creativo) L.push('Creativo: ' + a.creativo);
     if(a.servicio) L.push('Servicio: ' + a.servicio + (a.prioridad ? ' · ' + a.prioridad : ''));
     L.push('Botón: ' + (a.cta || 'Más información'));
-    a.vars.forEach(function(v, j){
+    if(a.formatos){
+      L.push('Material: Feed y Marketplace → ' + (a.formatos['1:1'] ? 'versión cuadrada (FORMATO PAUTA)' : 'versión 4:5') +
+             ' · Historias y Reels → ' + (a.formatos['9:16'] ? 'versión de reel (FORMATO HISTORIA)' : 'no trae reel, va la cuadrada'));
+    }
+    // En el mismo orden que pide el Administrador de anuncios: una lista por campo.
+    CAMPOS.forEach(function(C){
       L.push('');
-      L.push('-- Variación ' + 'ABC'[j] + (tandaDe(a) === 'sep' ? ' · ' + ENFOQUES[j] : '') + ' --');
-      L.push('Texto primario: ' + (v.texto || ''));
-      L.push('Título: ' + (v.titulo || ''));
-      L.push('Descripción: ' + (v.desc || ''));
+      L.push(C.nombre + ':');
+      (a[C.c] || []).forEach(function(o, j){
+        if((o.v || '').trim()) L.push('  ' + (j + 1) + '. ' + o.v.split('\n').join('\n     '));
+      });
     });
     L.push('');
   });
@@ -1730,7 +2073,7 @@ document.querySelectorAll('.pvtab').forEach(function(t){
   };
 });
 
-el('pv-cual').onchange = pintarPreview;
+el('pv-cual').onchange = function(){ seleccionarPv(+el('pv-cual').value); };
 
 // ------------------------------------------------------------------ arranque
 // Selector de ubicaciones
@@ -1790,7 +2133,7 @@ el('b-recrea').onclick = function(){
 if(fusionado){
   var aviso = document.createElement('div');
   aviso.className = 'nuevoMat';
-  aviso.innerHTML = 'Material actualizado: septiembre completo, videos que se reproducen y piezas en alta. Lo que habías editado quedó igual. ' +
+  aviso.innerHTML = 'Material actualizado: textos, títulos y descripciones como en Meta (mínimo 3 de cada uno), y la vista previa usa la versión cuadrada o de reel según la ubicación. Lo que habías editado quedó igual. ' +
                     '<button class="x" id="b-ok-fus">entendido</button>';
   document.querySelector('.wrap').prepend(aviso);
   document.getElementById('b-ok-fus').onclick = function(){ aviso.remove(); };
@@ -1814,7 +2157,7 @@ pintarSelector();
 // sirve para mandarle a alguien el link de una pieza puntual en vez de "fíjate en el tercero".
 var pedido = (location.search.match(/[?&]a=(\d+)/) || [])[1];
 var enVista = D.anuncios.map(function(a, i){ return enTanda(a) ? i : -1; }).filter(function(i){ return i >= 0; });
-if(pedido && enVista[+pedido - 1] != null) el('pv-cual').value = enVista[+pedido - 1] + '|0';
+if(pedido && enVista[+pedido - 1] != null){ pvIdx = enVista[+pedido - 1]; el('pv-cual').value = String(pvIdx); }
 
 // ?p=analisis abre directo la pestaña del análisis.
 var pestana = (location.search.match(/[?&]p=(anuncios|analisis|formulario)/) || [])[1];
