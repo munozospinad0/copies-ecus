@@ -349,6 +349,137 @@
   .hcab,.htxt,.hbtn{z-index:3}
   .fbdesc{font-size:.74rem;color:#65676b;margin-top:2px;line-height:1.35;word-break:break-word}
   .al.al-arch{background:#fff;color:var(--ink);border:1px solid var(--line);font-weight:600}
+
+  /* --- header: las acciones técnicas solo al editar --- */
+  .acc{display:none}
+  body.modo-editar .acc{display:flex}
+
+  /* --- revisar --- */
+  .guia{background:linear-gradient(135deg,#fff 0%,#f5f2ff 100%);border:1px solid var(--line);border-radius:22px;padding:22px 24px;margin-bottom:18px;box-shadow:var(--sh)}
+  .guia h2{font-size:1.2rem;font-weight:800;letter-spacing:-.02em}
+  .guia-txt p{font-size:.86rem;color:var(--ink);font-weight:600;margin-top:4px}
+  .pasos{list-style:none;counter-reset:paso;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+  .pasos li{counter-increment:paso;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 14px 14px 54px;position:relative;font-size:.8rem;color:var(--ink);line-height:1.55;font-weight:500}
+  .pasos li::before{content:counter(paso);position:absolute;left:14px;top:14px;width:28px;height:28px;border-radius:9px;background:var(--vio);color:#fff;font-weight:800;display:grid;place-items:center;font-size:.82rem}
+  .pasos b{color:var(--dark)}
+  .guia-nota{font-size:.74rem;color:var(--ink);font-weight:500;margin-top:12px;line-height:1.55}
+  .mini-va,.mini-cambiar{font-size:.7rem;font-weight:800;padding:1px 8px;border-radius:8px;white-space:nowrap}
+  .mini-va{background:#dcfce7;color:#15803d}
+  .mini-cambiar{background:#fef3c7;color:#92400e}
+  @media(max-width:760px){ .pasos{grid-template-columns:1fr} .guia{padding:18px} }
+
+  .rev-indice{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px;margin-bottom:8px;scrollbar-width:thin}
+  .ri{flex:none;display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:6px 12px 6px 6px;font-family:inherit;font-size:.74rem;font-weight:700;color:var(--dark);cursor:pointer;white-space:nowrap}
+  .ri:hover{border-color:var(--lila)}
+  .ri .num{width:26px;height:26px;border-radius:9px;background:var(--pink);color:var(--vio);display:grid;place-items:center;font-size:.68rem;font-weight:800}
+  .ri.listo .num{background:var(--ok);color:#fff}
+  .ri small{color:var(--soft);font-weight:800;font-size:.64rem}
+
+  .rev{background:#fff;border-radius:24px;box-shadow:var(--sh);margin-bottom:22px;container-type:inline-size;scroll-margin-top:12px}
+  /* Banda morada por anuncio: separa bien uno de otro al bajar, sobre todo en celular. */
+  .rev-cab{display:flex;align-items:center;gap:14px;padding:16px 22px;flex-wrap:wrap;border-radius:24px 24px 0 0;
+    background:linear-gradient(128deg,#2c1d77 0%,var(--vio) 45%,var(--vio2) 100%);color:#fff}
+  .rev-cab .num{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);color:#fff;display:grid;place-items:center;font-weight:800;flex:none}
+  .rev-tit{flex:1;min-width:200px}
+  .rev-tit h3{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:#fff}
+  .rev-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+  .rev-prog{font-size:.72rem;font-weight:800;padding:7px 13px;border-radius:14px;background:#fff;color:var(--vio);white-space:nowrap}
+  .rev-prog.listo{background:#dcfce7;color:#15803d}
+  .rev-porque{margin:14px 22px 0;padding:10px 13px;border-left:3px solid var(--org);background:#fff8f1;border-radius:0 10px 10px 0;font-size:.76rem;color:#7a4300;font-weight:600;line-height:1.5}
+  .rev-cuerpo{display:grid;grid-template-columns:minmax(300px,380px) minmax(0,1fr);gap:28px;padding:18px 22px 22px;align-items:start}
+  .rev-vista{position:sticky;top:14px}
+  .rev-cuerpo > *{min-width:0}
+  @container (max-width: 760px){
+    /* minmax(0,1fr) y no 1fr: con 1fr la columna crece hasta el ancho del anuncio simulado y la página se corre de costado. */
+    .rev-cuerpo{grid-template-columns:minmax(0,1fr);gap:18px;padding:16px}
+    .rev-vista{position:static}
+    .rev-cab{padding:16px}
+    .rev-porque{margin:12px 16px 0}
+  }
+  .rev-lugares{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;justify-content:center}
+  .rev-lugares .chip{padding:7px 13px;font-size:.72rem}
+  .rev-mock{max-width:380px;margin:0 auto}
+  .rev-mock.es-pantalla{max-width:290px}
+  .rev-mock .fb{box-shadow:0 10px 30px rgba(22,15,56,.12)}
+  .rev-nota{font-size:.72rem;color:var(--ink);font-weight:600;line-height:1.5;margin-top:10px;text-align:center;min-height:1em}
+  .rev-mat{margin-top:14px;border-top:1px dashed var(--line);padding-top:8px}
+  .rev-mat summary{font-size:.74rem;font-weight:800;color:var(--vio);cursor:pointer;padding:6px 0;list-style-position:inside}
+  .rev-mat .material{margin:8px 0 0}
+  .rev .archivo{display:none !important}
+  .rev .mat-top{margin-bottom:6px}
+  .rev .mini{height:112px}
+  .rev .mini.vid{height:150px}
+
+  .rgrupo{margin-bottom:22px}
+  .rgrupo:last-child{margin-bottom:0}
+  .rgrupo h4{font-size:.9rem;font-weight:800;margin-bottom:10px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .rgrupo h4 small{font-size:.68rem;color:var(--soft);font-weight:600}
+  .rop{border:2px solid var(--line);border-radius:16px;margin-bottom:10px;background:#fff;transition:border-color .15s,box-shadow .15s,background .15s}
+  .rop.sel{border-color:var(--lila);box-shadow:0 0 0 3px rgba(166,136,248,.18)}
+  .rop.va{border-color:#86efac;background:#f6fef8}
+  .rop.cambiar{border-color:#fcd34d;background:#fffcf2}
+  .rop.va.sel,.rop.cambiar.sel{box-shadow:0 0 0 3px rgba(166,136,248,.22)}
+  .rop-ver{display:block;width:100%;text-align:left;background:transparent;border:0;padding:12px 14px 8px;cursor:pointer;font-family:inherit;border-radius:14px 14px 0 0}
+  .rop-top{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:7px}
+  .rop-ojo{margin-left:auto;font-size:.64rem;font-weight:800;color:var(--soft)}
+  .rop.sel .rop-ojo{color:var(--vio)}
+  .rop-txt{display:block;font-size:.92rem;line-height:1.55;color:var(--dark);white-space:pre-wrap;word-break:break-word;font-weight:500}
+  .rop-acc{display:flex;gap:8px;padding:2px 14px 12px}
+  .rb{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);background:#fff;color:var(--ink);padding:8px 15px;border-radius:12px;font-family:inherit;font-size:.76rem;font-weight:800;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+  .rb svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  .rb.va:hover{border-color:#86efac;color:#15803d}
+  .rb.cambiar:hover{border-color:#fcd34d;color:#92400e}
+  .rb.va.on{background:#16a34a;border-color:#16a34a;color:#fff}
+  .rb.cambiar.on{background:#f59e0b;border-color:#f59e0b;color:#fff}
+  .rop-nota{display:block;width:calc(100% - 28px);margin:0 14px 14px;border:2px solid #fcd34d;border-radius:12px;padding:9px 11px;font-family:inherit;font-size:.84rem;line-height:1.45;min-height:68px;resize:vertical;background:#fff;color:var(--dark)}
+  .rop-nota:focus{outline:none;border-color:#f59e0b}
+
+  .rev-barra{position:sticky;bottom:10px;z-index:20;margin-top:6px;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:18px;box-shadow:0 -4px 30px rgba(22,15,56,.14);padding:12px 14px 12px 18px;display:flex;align-items:center;gap:16px}
+  .rb-prog{flex:1;min-width:0}
+  .rb-txt{font-size:.76rem;font-weight:600;color:var(--ink);margin-bottom:6px}
+  .rb-txt b{color:var(--dark);font-weight:800}
+  .rb-riel{height:8px;background:#efeafd;border-radius:6px;overflow:hidden}
+  .rb-riel i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--vio2),var(--ok));border-radius:6px;transition:width .3s}
+  .rb-enviar{border:0;background:var(--vio);color:#fff;padding:12px 20px;border-radius:14px;font-family:inherit;font-size:.84rem;font-weight:800;cursor:pointer;white-space:nowrap;box-shadow:0 6px 18px rgba(62,42,155,.3)}
+  .rb-enviar:hover{background:var(--vio2)}
+  @media(max-width:520px){ .rb-txt{font-size:.7rem} .rb-enviar{padding:11px 14px;font-size:.78rem} }
+
+  .modal{position:fixed;inset:0;z-index:60;background:rgba(9,6,26,.62);display:flex;align-items:center;justify-content:center;padding:16px}
+  .modal.oculto{display:none}
+  .modal-caja{background:#fff;border-radius:22px;max-width:640px;width:100%;max-height:calc(100vh - 32px);overflow:auto;padding:22px}
+  .modal-caja h3{font-size:1.15rem;font-weight:800}
+  .modal-caja .sub2{font-size:.78rem;color:var(--ink);font-weight:600;margin:4px 0 14px;line-height:1.5}
+  .modal-caja label{display:block;font-size:.66rem;font-weight:800;color:var(--ink);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+  .modal-caja input{width:100%;border:2px solid var(--line);border-radius:12px;padding:10px 12px;font-family:inherit;font-size:.92rem;margin-bottom:14px}
+  .modal-caja input:focus{outline:none;border-color:var(--vio2)}
+  .modal-caja textarea{width:100%;min-height:230px;border:2px solid var(--line);border-radius:12px;padding:10px 12px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.74rem;line-height:1.5;background:#f8f7fd;resize:vertical;color:var(--dark)}
+  .modal-acc{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px}
+  .b-wa{display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;text-decoration:none;padding:11px 18px;border-radius:13px;font-weight:800;font-size:.84rem}
+  .b-wa:hover{background:#1ebe5a}
+  .b-sec{border:1.5px solid var(--line);background:#fff;color:var(--dark);padding:10px 16px;border-radius:13px;font-family:inherit;font-weight:800;font-size:.8rem;cursor:pointer}
+  .b-borrar{margin-left:auto;border:0;background:transparent;color:var(--soft);font-family:inherit;font-weight:700;font-size:.72rem;cursor:pointer;text-decoration:underline}
+  .rev-aviso{font-size:.74rem;color:#b45309;font-weight:700;margin-top:8px;min-height:1em}
+
+  /* --- anuncios simulados más fieles --- */
+  .historia .hcab{top:16px}
+  .hprog{position:absolute;top:7px;left:9px;right:9px;display:flex;gap:3px;z-index:3}
+  .hprog i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.38)}
+  .hprog i.on{background:#fff}
+  .rside{position:absolute;right:9px;bottom:27%;display:grid;gap:16px;z-index:3}
+  .rside svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 2px rgba(0,0,0,.55))}
+  .cr-wrap{position:relative;padding-top:2px}
+  .cr-tira{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 12px 10px;scrollbar-width:none}
+  .cr-tira::-webkit-scrollbar{display:none}
+  .cr-tarj{flex:none;width:76%;scroll-snap-align:start;border:1px solid #dfe1e6;border-radius:8px;overflow:hidden;background:#fff}
+  .cr-tarj .carru{border:0}
+  .cr-pie{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#f7f8fa;min-height:56px}
+  .cr-pie .izq{flex:1;min-width:0}
+  .cr-pie .fbt{font-size:.76rem;line-height:1.25}
+  .cr-pie .fbdesc{font-size:.68rem}
+  .cr-pie .fbb{padding:6px 10px;font-size:.68rem}
+  .cr-flecha{position:absolute;top:38%;z-index:4;width:30px;height:30px;border-radius:50%;border:0;background:rgba(255,255,255,.96);box-shadow:0 2px 8px rgba(0,0,0,.28);font-size:1.15rem;font-weight:700;cursor:pointer;display:grid;place-items:center;padding-bottom:3px;color:#050505}
+  .cr-flecha.izq{left:4px}
+  .cr-flecha.der{right:4px}
 </style>
 </head>
 <body>
@@ -358,7 +489,7 @@
     <div class="marca">
       <div class="logo">E</div>
       <div>
-        <h1>Copies y formulario</h1>
+        <h1>Copies de anuncios</h1>
         <small>ECUS AGENCY</small>
       </div>
     </div>
@@ -371,7 +502,8 @@
     </div>
   </div>
   <div class="tabs">
-    <button class="tab on" data-p="anuncios">Anuncios</button>
+    <button class="tab on" data-p="revisar">Revisar</button>
+    <button class="tab" data-p="anuncios">Editar</button>
     <button class="tab" data-p="analisis">Qué vende</button>
     <button class="tab" data-p="formulario">Formulario</button>
   </div>
@@ -380,8 +512,55 @@
 <div class="wrap">
   <input type="file" id="archivo" accept="application/json" class="oculto">
 
-  <!-- ANUNCIOS -->
-  <div id="p-anuncios">
+  <!-- REVISAR: la entrada para el equipo de ECUS -->
+  <div id="p-revisar">
+    <section class="guia">
+      <div class="guia-txt">
+        <h2>Revisión de copies</h2>
+        <p>Cada anuncio muestra cómo se va a ver y sus opciones de texto. Solo hay que mirar, leer y marcar.</p>
+      </div>
+      <ol class="pasos">
+        <li><b>Mira el anuncio.</b> Cambia entre Facebook, Instagram, Historias y Reels. Toca una pieza para verla en grande; los videos suenan.</li>
+        <li><b>Lee cada opción y márcala</b> <span class="mini-va">Va</span> o <span class="mini-cambiar">Cambiar</span>. Si es Cambiar, escribe qué cambiarías. Toca un texto para verlo dentro del anuncio.</li>
+        <li><b>Envía tu revisión</b> con el botón de abajo: se arma un mensaje de WhatsApp con todo lo que marcaste.</li>
+      </ol>
+      <p class="guia-nota">Meta combina solo los textos, títulos y descripciones, y muestra más los que mejor funcionan: marca
+        <b>Cambiar</b> lo que no dirías así. Lo que marques se guarda en este teléfono o computador.</p>
+    </section>
+
+    <div class="barra" id="rev-tandas"></div>
+    <nav class="rev-indice" id="rev-indice"></nav>
+    <div id="rev-lista"></div>
+
+    <div class="rev-barra">
+      <div class="rb-prog">
+        <div class="rb-txt" id="rev-txt"></div>
+        <div class="rb-riel"><i id="rev-riel"></i></div>
+      </div>
+      <button class="rb-enviar" id="rev-enviar">Enviar revisión</button>
+    </div>
+  </div>
+
+  <div class="modal oculto" id="m-enviar">
+    <div class="modal-caja" role="dialog" aria-labelledby="m-enviar-t">
+      <h3 id="m-enviar-t">Enviar revisión</h3>
+      <p class="sub2">Escribe tu nombre y toca <b>Enviar por WhatsApp</b>: se abre WhatsApp con el mensaje listo para enviárselo a Daniel.</p>
+      <label for="rev-nombre">Tu nombre</label>
+      <input id="rev-nombre" placeholder="Ej.: Nicole" autocomplete="name">
+      <label for="rev-resumen">Así sale el mensaje</label>
+      <textarea id="rev-resumen" readonly></textarea>
+      <div class="rev-aviso" id="rev-aviso"></div>
+      <div class="modal-acc">
+        <a class="b-wa" id="rev-wa" href="#" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+        <button class="b-sec" id="rev-copiar">Copiar</button>
+        <button class="b-sec" id="rev-cerrar">Seguir revisando</button>
+        <button class="b-borrar" id="rev-borrar">Borrar mis marcas</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDITAR -->
+  <div id="p-anuncios" class="oculto">
     <p class="intro">Cada anuncio trae su material (toca una pieza para verla en grande; los videos suenan) y, como en el
       Administrador de anuncios, <b>mínimo 3 textos principales, 3 títulos y 3 descripciones</b> que Meta combina. Los
       contadores marcan lo que Meta muestra sin "Ver más": <b>125</b> el texto, <b>40</b> el título y <b>30</b> la
@@ -622,7 +801,7 @@ var MIN_OPCIONES = 3, MAX_OPCIONES = 5;
 
 var INICIAL = {
   // Subir esto cuando cambie el material: dispara la actualización de lo guardado.
-  version: "2026-09-16c",
+  version: "2026-09-16d",
   anuncios: [
     { tanda:"sep",
       grupo:"Videos",
@@ -1324,16 +1503,18 @@ var NOTA_GRUPO = {
 };
 
 function pintarTandas(){
-  el('tandas').innerHTML = '<span class="etq">Material</span>' + TANDAS.map(function(t){
-    var n = D.anuncios.filter(function(a){ return t.id === 'todas' || tandaDe(a) === t.id; }).length;
-    return '<button class="chip' + (t.id === tanda ? ' on' : '') + '" data-t="' + t.id + '">' + t.nombre +
-      ' <span class="n">' + n + '</span></button>';
-  }).join('');
-  el('tandas').querySelectorAll('.chip').forEach(function(b){
-    b.onclick = function(){
-      tanda = b.dataset.t; tarjeta = 0;
-      pintarTandas(); pintarAnuncios(); pintarSelector(); pintarPreview();
-    };
+  ['tandas', 'rev-tandas'].forEach(function(id){
+    el(id).innerHTML = '<span class="etq">Material</span>' + TANDAS.map(function(t){
+      var n = D.anuncios.filter(function(a){ return t.id === 'todas' || tandaDe(a) === t.id; }).length;
+      return '<button class="chip' + (t.id === tanda ? ' on' : '') + '" data-t="' + t.id + '">' + t.nombre +
+        ' <span class="n">' + n + '</span></button>';
+    }).join('');
+    el(id).querySelectorAll('.chip').forEach(function(b){
+      b.onclick = function(){
+        tanda = b.dataset.t; tarjeta = 0;
+        pintarTandas(); pintarAnuncios(); pintarSelector(); pintarPreview(); pintarRevision();
+      };
+    });
   });
 }
 
@@ -1675,7 +1856,7 @@ function pintarAviso(){
 }
 
 // ------------------------------------------------------------------ vista previa
-var pvSel = { textos:0, titulos:0, descs:0 };   // qué opción de cada lista se está mirando
+var pvSel = { textos:0, titulos:0, descs:0 };   // qué opción de cada lista se está mirando en Editar
 
 function pintarSelector(){
   var s = el('pv-cual');
@@ -1720,16 +1901,22 @@ function mediosPara(a, L){
   return { lista: a.formatos[primera], clave: primera, ideal: false };
 }
 
-function pintarPreview(){
-  var a = D.anuncios[pvIdx];
-  if(!a || !enTanda(a)){ el('pv').innerHTML = ''; el('pv-formato').innerHTML = ''; el('pv-combo').innerHTML = ''; return; }
-  ['textos', 'titulos', 'descs'].forEach(function(c){ if(pvSel[c] >= (a[c] || []).length) pvSel[c] = 0; });
-  pintarCombo(a);
-  var op = function(c){ return ((a[c] || [])[pvSel[c]] || {}).v || ''; };
-  var v = { texto: op('textos'), titulo: op('titulos'), desc: op('descs') };
+var ICONOS_REELS =
+  '<svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>' +
+  '<svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20l1.3-5A8.5 8.5 0 1 1 21 11.5z"/></svg>' +
+  '<svg viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>';
 
-  var L = lugar();
-  red = L.marca === 'instagram' ? 'ig' : 'fb';
+/**
+ * Arma el anuncio simulado de UNA combinación en UNA ubicación. Lo usan la vista previa de Editar
+ * y cada tarjeta de Revisar, así que no toca nada global: recibe su propio estado `st` (la
+ * tarjeta del carrusel que se mira). `opts.compacto` = sin tope por alto de pantalla.
+ */
+function armarVista(a, i, L, sel, st, opts){
+  opts = opts || {};
+  var op = function(c){ return ((a[c] || [])[sel[c]] || {}).v || ''; };
+  var v = { texto: op('textos'), titulo: op('titulos'), desc: op('descs') };
+  var red = L.marca === 'instagram' ? 'ig' : 'fb';
+  var pantalla = L.tipo === 'pantalla';
 
   // Cada ubicación corta el texto en un punto distinto — y algunas no lo muestran.
   var txt = '';
@@ -1741,47 +1928,148 @@ function pintarPreview(){
 
   var eleccion = mediosPara(a, L);
   var medios = eleccion.lista;
-  if(tarjeta >= medios.length) tarjeta = 0;
-  var actual = medios[tarjeta] || medios[0];
+  if(st.tarjeta >= medios.length) st.tarjeta = 0;
+  var actual = medios[st.tarjeta] || medios[0];
   var ficha = CREATIVOS.filter(function(c){ return c.archivo === actual; })[0];
   var prop = ficha ? ficha.ancho / ficha.alto : (a.esVideo ? 9/16 : null);
   var enc = encaje(L, prop);
-  var pantalla = L.tipo === 'pantalla';
+  var fIdx = 0;
+  juegos(a).forEach(function(x, n){ if(x.clave === eleccion.clave) fIdx = n; });
 
   var estilo = 'aspect-ratio:' + enc.caja.toFixed(4) + ';';
-  // Las piezas altas hacen un anuncio tan largo que el botón queda fuera de pantalla: se
-  // limita por ANCHO (alto deseado × proporción) para no deformar la proporción.
+  // En Editar las piezas altas harían un anuncio tan largo que el botón queda fuera de pantalla:
+  // se limita por ANCHO (alto deseado × proporción) para no deformar la proporción.
   var tope = '';
-  if(enc.caja < 1){
+  if(enc.caja < 1 && !opts.compacto){
     tope = 'max-width:' + (enc.caja * (pantalla ? 46 : 44)).toFixed(1) + 'vh;';
     if(!pantalla) estilo += tope;
   }
   var cls = 'crfoto' + (enc.modo === 'fondo' ? ' contener' : '');
-  var cuerpo;
-  if(medios.length){
-    cuerpo = '<div class="carru" style="' + estilo + '">' +
+  var tiraFb = medios.length > 1 && red === 'fb' && !pantalla && !L.chico;
+
+  function pieza(src, k, conFlechas){
+    return '<div class="carru" style="' + estilo + '">' +
       // Una pieza que no es 9:16 en Historias/Reels va entera al centro, sobre su propia imagen difuminada.
-      (enc.modo === 'fondo' ? '<img class="fondo" src="' + actual + '" alt="">' : '') +
+      (enc.modo === 'fondo' ? '<img class="fondo" src="' + src + '" alt="">' : '') +
       (a.video
-        ? '<video class="' + cls + '" src="' + a.video + '" poster="' + actual + '" preload="none" playsinline></video>'
-        : '<img class="' + cls + '" src="' + actual + '" alt="">') +
-      '<button class="ampliar" title="Ver la pieza completa, sin recorte">Ver completa</button>' +
-      (medios.length > 1 ?
-        '<button class="flecha izq" data-d="-1">‹</button>' +
-        '<button class="flecha der" data-d="1">›</button>' +
-        '<div class="puntos">' + medios.map(function(_, k){
-          return '<i class="' + (k === tarjeta ? 'on' : '') + '"></i>';
-        }).join('') + '</div>' +
-        '<div class="tarjnum">' + (tarjeta+1) + ' de ' + medios.length + '</div>' : '') +
+        ? '<video class="' + cls + '" src="' + a.video + '" poster="' + src + '" preload="none" playsinline></video>'
+        : '<img class="' + cls + '" src="' + src + '" alt="" loading="lazy">') +
+      '<button class="ampliar" data-k="' + k + '" title="Ver la pieza completa, sin recorte">Ver completa</button>' +
+      (conFlechas && medios.length > 1
+        ? '<button class="flecha izq" data-d="-1">‹</button><button class="flecha der" data-d="1">›</button>' +
+          (pantalla ? '' : '<div class="puntos">' + medios.map(function(_, n){
+            return '<i class="' + (n === st.tarjeta ? 'on' : '') + '"></i>';
+          }).join('') + '</div>') +
+          '<div class="tarjnum">' + (st.tarjeta + 1) + ' de ' + medios.length + '</div>'
+        : '') +
       (a.esVideo ? '<button class="playy boton" title="Reproducir"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>' : '') +
       (pantalla ? '<div class="zona arriba"></div><div class="zona abajo"></div>' : '') +
     '</div>';
-  } else {
-    cuerpo = '<div class="fbimg" style="' + estilo + '">' + (a.creativo ? esc(a.creativo) : 'sin creativo') + '</div>';
   }
 
-  // --- Ficha: qué versión va aquí y cómo se ve ---
+  var cuerpo;
+  if(!medios.length){
+    cuerpo = '<div class="fbimg" style="' + estilo + '">' + (a.creativo ? esc(a.creativo) : 'sin creativo') + '</div>';
+  } else if(tiraFb){
+    // Carrusel en Facebook: tarjetas en fila con la siguiente asomando, cada una con su título
+    // y su botón (en carrusel los títulos y descripciones van uno por tarjeta).
+    cuerpo = '<div class="cr-wrap"><div class="cr-tira">' + medios.map(function(src, k){
+      var t = ((a.titulos || [])[k] || {}).v || '';
+      var d = ((a.descs || [])[k] || {}).v || '';
+      return '<div class="cr-tarj">' + pieza(src, k, false) +
+        '<div class="cr-pie"><div class="izq"><div class="fbt">' + esc(t) + '</div>' +
+          (L.desc && d ? '<div class="fbdesc">' + esc(d) + '</div>' : '') + '</div>' +
+          '<button class="fbb">' + esc(cta) + '</button></div></div>';
+    }).join('') + '</div>' +
+    '<button class="cr-flecha izq" data-d="-1" title="Anterior">‹</button>' +
+    '<button class="cr-flecha der" data-d="1" title="Siguiente">›</button></div>';
+  } else {
+    cuerpo = pieza(actual, st.tarjeta, true);
+  }
+
+  var html;
+  if(pantalla){
+    var reels = L.id === 'reels';
+    html = '<div class="fb historia" style="' + tope + 'margin:0 auto">' +
+      cuerpo +
+      (reels ? '' : '<div class="hprog">' + (medios.length > 1 ? medios : [0]).map(function(_, n){
+        return '<i class="' + (n <= st.tarjeta ? 'on' : '') + '"></i>';
+      }).join('') + '</div>') +
+      '<div class="hcab"><div class="fbav" style="width:26px;height:26px;font-size:.6rem">E</div>' +
+        '<div style="color:#fff;font-size:.72rem;font-weight:700">ECUS Agency</div>' +
+        '<div style="color:rgba(255,255,255,.75);font-size:.66rem">Publicidad</div></div>' +
+      (reels ? '<div class="rside">' + ICONOS_REELS + '</div>' : '') +
+      (L.texto ? '<div class="htxt">' + txt + '</div>' : '') +
+      '<div class="hbtn">' + esc(cta) + ' &#8593;</div>' +
+    '</div>';
+  } else if(L.chico){
+    html = '<div class="fb derecha">' +
+      '<div class="dcol">' + cuerpo + '</div>' +
+      '<div class="dtxt"><div class="fbt">' + esc(v.titulo || '(sin título)') + '</div>' +
+        '<div class="fbp">ecus.agency</div></div>' +
+    '</div>';
+  } else {
+    html = '<div class="fb ' + (red === 'ig' ? 'ig' : '') + '">' +
+      '<div class="fbh"><div class="fbav">' + (red === 'ig' ? '' : 'E') + '</div>' +
+        '<div><div class="fbn">ECUS Agency</div>' +
+        '<div class="fbp">' + (red === 'ig' ? 'Publicidad' : 'Publicidad · &#127760;') + '</div></div></div>' +
+      (L.texto ? '<div class="fbtx">' + (txt || '<span class="mas">(sin texto principal)</span>') + '</div>' : '') +
+      cuerpo +
+      (tiraFb ? '' :
+        '<div class="fbcta">' +
+          '<div class="izq">' +
+            // Como en Facebook: la fuente en mayúsculas chicas, el título y debajo la descripción.
+            (red === 'fb' ? '<div class="fbd">' + (/mensaje/i.test(cta) ? 'WhatsApp' : 'ecus.agency') + '</div>' : '') +
+            '<div class="fbt">' + esc(v.titulo || '(sin título)') + '</div>' +
+            (L.desc && v.desc.trim() ? '<div class="fbdesc">' + esc(v.desc) + '</div>' : '') +
+          '</div>' +
+          (red === 'ig' ? '' : '<button class="fbb">' + esc(cta) + '</button>') +
+        '</div>' +
+        (red === 'ig' ? '<div style="padding:0 12px 12px"><button class="fbb">' + esc(cta) + '</button></div>' : '')) +
+      '<div class="fbacc"><span>Me gusta</span><span>Comentar</span><span>Compartir</span></div>' +
+    '</div>';
+  }
+  return { html:html, eleccion:eleccion, medios:medios, ficha:ficha, prop:prop, enc:enc, v:v, pantalla:pantalla, fIdx:fIdx, tira:tiraFb };
+}
+
+/** Enlaza los controles de un anuncio simulado ya pintado en `cont`. */
+function enlazarVista(cont, a, i, st, r, repintar){
+  cont.querySelectorAll('.flecha').forEach(function(b){
+    b.onclick = function(){
+      var n = r.medios.length;
+      st.tarjeta = (st.tarjeta + (+b.dataset.d) + n) % n;   // da la vuelta en los dos sentidos
+      repintar();
+    };
+  });
+  cont.querySelectorAll('.cr-flecha').forEach(function(b){
+    b.onclick = function(){
+      var t = cont.querySelector('.cr-tira');
+      t.scrollBy({ left: (+b.dataset.d) * t.clientWidth * 0.8, behavior:'smooth' });
+    };
+  });
+  cont.querySelectorAll('.ampliar').forEach(function(b){
+    b.onclick = function(){
+      var vid = cont.querySelector('video');
+      if(vid) vid.pause();
+      abrirVisor(i, r.fIdx, b.dataset.k != null ? +b.dataset.k : st.tarjeta);
+    };
+  });
+  cont.querySelectorAll('.playy.boton').forEach(function(b){
+    b.onclick = function(){
+      var vid = b.parentNode.querySelector('video');
+      if(!vid){ abrirVisor(i, r.fIdx, st.tarjeta); return; }
+      vid.controls = true;
+      b.remove();
+      var pr = vid.play();
+      if(pr && pr.catch) pr.catch(function(){ abrirVisor(i, r.fIdx, st.tarjeta); });
+    };
+  });
+}
+
+/** Ficha técnica de la vista previa de Editar: qué versión va y cómo se ve. */
+function fichaVista(a, L, r){
   var alertas = [];
+  var ficha = r.ficha, prop = r.prop, enc = r.enc, v = r.v;
   if(ficha){
     var tuya = nombreProp(prop), aqui = nombreProp(enc.caja);
     if(enc.modo === 'fondo'){
@@ -1799,13 +2087,13 @@ function pintarPreview(){
     } else {
       alertas.push('<div class="al buena"><b>Se ve completa, sin recorte.</b></div>');
     }
-    if(eleccion.clave){
-      alertas.push('<div class="al al-arch">' + (eleccion.ideal
-          ? 'Aquí va la versión <b>' + esc(FMT_NOMBRE[eleccion.clave]) + '</b>'
-          : 'No trae versión ' + (pantalla ? 'de <b>reel</b>' : '<b>cuadrada</b>') + ': se usa la <b>' + esc(FMT_NOMBRE[eleccion.clave]) + '</b>') +
-        ' · <b>' + esc(ficha.original) + '</b>' + (medios.length > 1 ? ' (tarjeta ' + (tarjeta + 1) + ' de ' + medios.length + ')' : '') + '</div>');
+    if(r.eleccion.clave){
+      alertas.push('<div class="al al-arch">' + (r.eleccion.ideal
+          ? 'Aquí va la versión <b>' + esc(FMT_NOMBRE[r.eleccion.clave]) + '</b>'
+          : 'No trae versión ' + (r.pantalla ? 'de <b>reel</b>' : '<b>cuadrada</b>') + ': se usa la <b>' + esc(FMT_NOMBRE[r.eleccion.clave]) + '</b>') +
+        ' · <b>' + esc(ficha.original) + '</b>' + (r.medios.length > 1 ? ' (' + r.medios.length + ' tarjetas)' : '') + '</div>');
     }
-  } else if(medios.length){
+  } else if(r.medios.length){
     alertas.push('<div class="al media">No pude leer las medidas de este creativo, así que no puedo avisarte del recorte. Prueba con el botón de recargar.</div>');
   }
   if(L.texto === 0 && v.texto.trim()){
@@ -1817,78 +2105,345 @@ function pintarPreview(){
   if(L.titulo && v.titulo.length > L.titulo){
     alertas.push('<div class="al media">El título se corta: ' + v.titulo.length + ' de ' + L.titulo + '.</div>');
   }
-  el('pv-formato').innerHTML =
-    '<div class="formato"><div class="ideal">Formato ideal: <b>' +
-      (a.esVideo ? (pantalla ? 'reel 1080×1920' : 'el reel sirve; aquí Meta muestra el centro') : L.ideal) + '</b></div>' +
+  return '<div class="formato"><div class="ideal">Formato ideal: <b>' +
+      (a.esVideo ? (r.pantalla ? 'reel 1080×1920' : 'el reel sirve; aquí Meta muestra el centro') : L.ideal) + '</b></div>' +
     alertas.join('') +
     '<div class="lnota">' + L.nota + '</div></div>';
+}
 
-  if(pantalla){
-    el('pv').innerHTML =
-      '<div class="fb historia" style="' + tope + 'margin:0 auto">' +
-        cuerpo +
-        '<div class="hcab"><div class="fbav" style="width:26px;height:26px;font-size:.6rem">E</div>' +
-          '<div style="color:#fff;font-size:.72rem;font-weight:700">ECUS Agency</div>' +
-          '<div style="color:rgba(255,255,255,.75);font-size:.66rem">Publicidad</div></div>' +
-        (L.texto ? '<div class="htxt">' + txt + '</div>' : '') +
-        '<div class="hbtn">' + esc(cta) + ' &#8593;</div>' +
-      '</div>';
-  } else if(L.chico){
-    el('pv').innerHTML =
-      '<div class="fb derecha">' +
-        '<div class="dcol">' + cuerpo + '</div>' +
-        '<div class="dtxt"><div class="fbt">' + esc(v.titulo || '(sin título)') + '</div>' +
-          '<div class="fbp">ecus.agency</div></div>' +
-      '</div>';
-  } else {
-    el('pv').innerHTML =
-      '<div class="fb ' + (red === 'ig' ? 'ig' : '') + '">' +
-        '<div class="fbh"><div class="fbav">' + (red === 'ig' ? '' : 'E') + '</div>' +
-          '<div><div class="fbn">ECUS Agency</div>' +
-          '<div class="fbp">' + (red === 'ig' ? 'Publicidad' : 'Publicidad · &#127760;') + '</div></div></div>' +
-        (L.texto ? '<div class="fbtx">' + (txt || '<span class="mas">(sin texto principal)</span>') + '</div>' : '') +
-        cuerpo +
-        '<div class="fbcta">' +
-          '<div class="izq">' +
-            // Como en Facebook: la fuente en mayúsculas chicas, el título y debajo la descripción.
-            (red === 'fb' ? '<div class="fbd">' + (/mensaje/i.test(cta) ? 'WhatsApp' : 'ecus.agency') + '</div>' : '') +
-            '<div class="fbt">' + esc(v.titulo || '(sin título)') + '</div>' +
-            (L.desc && v.desc.trim() ? '<div class="fbdesc">' + esc(v.desc) + '</div>' : '') +
-          '</div>' +
-          (red === 'ig' ? '' : '<button class="fbb">' + esc(cta) + '</button>') +
-        '</div>' +
-        (red === 'ig' ? '<div style="padding:0 12px 12px"><button class="fbb">' + esc(cta) + '</button></div>' : '') +
-        '<div class="fbacc"><span>Me gusta</span><span>Comentar</span><span>Compartir</span></div>' +
-      '</div>';
-  }
+function pintarPreview(){
+  var a = D.anuncios[pvIdx];
+  if(!a || !enTanda(a)){ el('pv').innerHTML = ''; el('pv-formato').innerHTML = ''; el('pv-combo').innerHTML = ''; return; }
+  ['textos', 'titulos', 'descs'].forEach(function(c){ if(pvSel[c] >= (a[c] || []).length) pvSel[c] = 0; });
+  pintarCombo(a);
+  var L = lugar();
+  red = L.marca === 'instagram' ? 'ig' : 'fb';
+  var st = { tarjeta: tarjeta };
+  var r = armarVista(a, pvIdx, L, pvSel, st, {});
+  tarjeta = st.tarjeta;
+  el('pv-formato').innerHTML = fichaVista(a, L, r);
+  el('pv').innerHTML = r.html;
+  enlazarVista(el('pv'), a, pvIdx, st, r, function(){ tarjeta = st.tarjeta; pintarPreview(); });
+}
 
-  el('pv').querySelectorAll('.flecha').forEach(function(b){
-    b.onclick = function(){
-      var n = medios.length;
-      tarjeta = (tarjeta + (+b.dataset.d) + n) % n;
-      pintarPreview();
-    };
+// ------------------------------------------------------------------ revisar
+// Para que el equipo de ECUS revise sin tocar nada técnico: ve cada anuncio como se va a ver,
+// lee las opciones como texto y marca "Va" o "Cambiar" con un comentario. Las marcas viven
+// aparte de los copies (clave propia en este navegador) y se mandan por WhatsApp.
+var LS_REV = 'ecus_revision_v1';
+var REV = (function(){
+  try { var r = JSON.parse(localStorage.getItem(LS_REV) || 'null'); if(r && r.marcas) return r; } catch(e){}
+  return { nombre:'', marcas:{} };
+})();
+function guardarRevision(){ try { localStorage.setItem(LS_REV, JSON.stringify(REV)); } catch(e){} }
+function claveMarca(a, c, j){ return a.nombre + '|' + c + '|' + j; }
+/** Una marca vale solo si el texto sigue igual al que se revisó: si cambió, hay que volver a mirarlo. */
+function marcaDe(a, c, j){
+  var m = REV.marcas[claveMarca(a, c, j)];
+  var o = (a[c] || [])[j];
+  if(!m || !o || m.texto !== (o.v || '')) return null;
+  return m;
+}
+
+var ICONO_VA = '<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>';
+var ICONO_CAMBIAR = '<svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>';
+var LUGARES_REV = [
+  { id:'fb-feed', nombre:'Facebook' },
+  { id:'ig-feed', nombre:'Instagram' },
+  { id:'ig-story', nombre:'Historias' },
+  { id:'reels', nombre:'Reels' }
+];
+var revSt = {};   // por anuncio: ubicación, tarjeta y combinación que se está mirando
+function estadoRev(i){
+  return revSt[i] || (revSt[i] = { lugar:'fb-feed', tarjeta:0, sel:{ textos:0, titulos:0, descs:0 } });
+}
+
+function conteoRev(filtro){
+  var r = { total:0, va:0, cambiar:0, hechas:0 };
+  D.anuncios.forEach(function(a){
+    if(filtro && !filtro(a)) return;
+    CAMPOS.forEach(function(C){
+      (a[C.c] || []).forEach(function(o, j){
+        if(!(o.v || '').trim()) return;
+        r.total++;
+        var m = marcaDe(a, C.c, j);
+        if(m) r[m.estado]++;
+      });
+    });
   });
-  var fIdx = 0;
-  juegos(a).forEach(function(x, n){ if(x.clave === eleccion.clave) fIdx = n; });
-  el('pv').querySelectorAll('.ampliar').forEach(function(b){
-    b.onclick = function(){
-      var vid = el('pv').querySelector('video');
-      if(vid) vid.pause();
-      abrirVisor(pvIdx, fIdx, tarjeta);
-    };
-  });
-  el('pv').querySelectorAll('.playy.boton').forEach(function(b){
-    b.onclick = function(){
-      var vid = el('pv').querySelector('video');
-      if(!vid){ abrirVisor(pvIdx, fIdx, tarjeta); return; }
-      vid.controls = true;
-      b.remove();
-      var pr = vid.play();
-      if(pr && pr.catch) pr.catch(function(){ abrirVisor(pvIdx, fIdx, tarjeta); });
-    };
+  r.hechas = r.va + r.cambiar;
+  return r;
+}
+
+function totalPiezas(a){ return juegos(a).reduce(function(s, x){ return s + x.lista.length; }, 0); }
+
+function pintarRevision(){
+  var visibles = [];
+  D.anuncios.forEach(function(a, i){ if(enTanda(a)) visibles.push({ a:a, i:i }); });
+  el('rev-lista').innerHTML = visibles.length
+    ? visibles.map(function(x, k){ return tarjetaRev(x.a, x.i, k); }).join('')
+    : '<div class="aviso">No hay anuncios en esta tanda.</div>';
+  visibles.forEach(function(x){ enlazarRev(x.i); pintarVistaRev(x.i); });
+  pintarIndiceRev(visibles);
+  pintarBarraRev();
+}
+
+function refrescarVistasRev(){
+  D.anuncios.forEach(function(a, i){ if(enTanda(a) && el('rev-' + i)) pintarVistaRev(i); });
+}
+
+function pintarIndiceRev(visibles){
+  visibles = visibles || D.anuncios.map(function(a, i){ return { a:a, i:i }; }).filter(function(x){ return enTanda(x.a); });
+  el('rev-indice').innerHTML = visibles.map(function(x, k){
+    var c = conteoRev(function(b){ return b === x.a; });
+    return '<button class="ri' + (c.total && c.hechas === c.total ? ' listo' : '') + '" data-i="' + x.i + '">' +
+      '<span class="num">' + (c.total && c.hechas === c.total ? '✓' : (k + 1)) + '</span>' +
+      '<span>' + esc(x.a.nombre.replace(/^(Video|Carrusel|Imagen) · /, '')) + '</span>' +
+      '<small>' + c.hechas + '/' + c.total + '</small></button>';
+  }).join('');
+  el('rev-indice').querySelectorAll('.ri').forEach(function(b){
+    b.onclick = function(){ var t = el('rev-' + b.dataset.i); if(t) t.scrollIntoView({ behavior:'smooth', block:'start' }); };
   });
 }
+
+function tarjetaRev(a, i, k){
+  var st = estadoRev(i);
+  var c = conteoRev(function(b){ return b === a; });
+  return '<article class="rev" id="rev-' + i + '" data-i="' + i + '">' +
+    '<div class="rev-cab">' +
+      '<span class="num">' + (k + 1) + '</span>' +
+      '<div class="rev-tit"><h3>' + esc(a.nombre) + '</h3>' +
+        '<div class="rev-tags">' +
+          (a.prioridad ? '<span class="tag ' + (a.prioridad === 'Primero' ? 'pri' : 'prob') + '">' + esc(a.prioridad) + '</span>' : '') +
+          (a.servicio ? '<span class="tag">' + esc(a.servicio) + '</span>' : '') +
+          '<span class="tag">Botón: ' + esc(a.cta || 'Más información') + '</span>' +
+          (a.resumen ? '<span class="tag ' + (a.estrella ? 'venta' : 'res') + '">' + esc(a.resumen) + '</span>' : '') +
+        '</div></div>' +
+      '<span class="rev-prog' + (c.total && c.hechas === c.total ? ' listo' : '') + '">' + c.hechas + ' de ' + c.total + ' revisadas</span>' +
+    '</div>' +
+    (a.porque ? '<p class="rev-porque"><b>Por qué así:</b> ' + esc(a.porque) + '</p>' : '') +
+    '<div class="rev-cuerpo">' +
+      '<div class="rev-vista">' +
+        '<div class="rev-lugares">' + LUGARES_REV.map(function(l){
+          return '<button class="chip' + (st.lugar === l.id ? ' on' : '') + '" data-l="' + l.id + '">' + l.nombre + '</button>';
+        }).join('') + '</div>' +
+        '<div class="rev-mock"></div>' +
+        '<div class="rev-nota"></div>' +
+        '<details class="rev-mat" open><summary>Todo el material · ' + totalPiezas(a) + (totalPiezas(a) === 1 ? ' pieza' : ' piezas') + '</summary>' +
+          pintarMaterial(a, i) + '</details>' +
+      '</div>' +
+      '<div class="rev-opciones">' + CAMPOS.map(function(C){ return grupoRev(a, i, C); }).join('') + '</div>' +
+    '</div>' +
+  '</article>';
+}
+
+function grupoRev(a, i, C){
+  var st = estadoRev(i);
+  var lista = a[C.c] || [];
+  var carrusel = !a.esVideo && juegos(a)[0].lista.length > 1;
+  return '<section class="rgrupo" data-c="' + C.c + '">' +
+    '<h4>' + C.nombre + ' <small>' +
+      (carrusel && C.c !== 'textos' ? 'en carrusel va uno por tarjeta' : 'toca una para verla en el anuncio') + '</small></h4>' +
+    lista.map(function(o, j){
+      if(!(o.v || '').trim()) return '';
+      var m = marcaDe(a, C.c, j);
+      var est = m ? m.estado : '';
+      var enAnuncio = st.sel[C.c] === j;
+      return '<div class="rop' + (enAnuncio ? ' sel' : '') + (est ? ' ' + est : '') + '" data-c="' + C.c + '" data-j="' + j + '">' +
+        '<button class="rop-ver" title="Ver esta opción en el anuncio">' +
+          '<span class="rop-top"><span class="op-n">' + C.uno + ' ' + (j + 1) + '</span>' +
+            (tandaDe(a) === 'sep' && o.e != null && ENFOQUES[o.e] ? '<span class="enf">' + ENFOQUES[o.e] + '</span>' : '') +
+            (o.rinde ? '<span class="rinde' + (/^0 /.test(o.rinde) ? '' : ' si') + '">' + esc(o.rinde) + '</span>' : '') +
+            '<span class="rop-ojo">' + (enAnuncio ? 'En el anuncio' : 'Ver en el anuncio') + '</span></span>' +
+          '<span class="rop-txt">' + esc(o.v) + '</span>' +
+        '</button>' +
+        '<div class="rop-acc">' +
+          '<button class="rb va' + (est === 'va' ? ' on' : '') + '" data-e="va">' + ICONO_VA + 'Va</button>' +
+          '<button class="rb cambiar' + (est === 'cambiar' ? ' on' : '') + '" data-e="cambiar">' + ICONO_CAMBIAR + 'Cambiar</button>' +
+        '</div>' +
+        (est === 'cambiar'
+          ? '<textarea class="rop-nota" placeholder="¿Qué cambiarías? Si quieres, escribe cómo lo dirías tú.">' + esc(m.nota || '') + '</textarea>'
+          : '') +
+      '</div>';
+    }).join('') +
+  '</section>';
+}
+
+function enlazarRev(i){
+  var card = el('rev-' + i);
+  if(!card) return;
+  var a = D.anuncios[i], st = estadoRev(i);
+  card.querySelectorAll('.rev-lugares .chip').forEach(function(b){
+    b.onclick = function(){
+      st.lugar = b.dataset.l;
+      card.querySelectorAll('.rev-lugares .chip').forEach(function(x){ x.classList.toggle('on', x === b); });
+      pintarVistaRev(i);
+    };
+  });
+  card.querySelectorAll('.rop-ver').forEach(function(b){
+    b.onclick = function(){
+      var op = b.closest('.rop'), c = op.dataset.c;
+      st.sel[c] = +op.dataset.j;
+      card.querySelectorAll('.rop[data-c="' + c + '"]').forEach(function(x){
+        var on = x === op;
+        x.classList.toggle('sel', on);
+        x.querySelector('.rop-ojo').textContent = on ? 'En el anuncio' : 'Ver en el anuncio';
+      });
+      pintarVistaRev(i);
+      // En celular el anuncio queda arriba: se lleva a la vista para que se note el cambio.
+      if(window.innerWidth < 900) card.querySelector('.rev-mock').scrollIntoView({ behavior:'smooth', block:'center' });
+    };
+  });
+  card.querySelectorAll('.rb').forEach(function(b){
+    b.onclick = function(){
+      var op = b.closest('.rop'), c = op.dataset.c, j = +op.dataset.j, e = b.dataset.e;
+      var k = claveMarca(a, c, j), actual = marcaDe(a, c, j);
+      if(actual && actual.estado === e){
+        // Tocar de nuevo desmarca; si ya escribió un comentario, no se pierde por un toque.
+        if(e === 'cambiar' && (actual.nota || '').trim()) return;
+        delete REV.marcas[k];
+      } else {
+        REV.marcas[k] = { estado:e, nota: actual ? (actual.nota || '') : '', texto: a[c][j].v, fecha: Date.now() };
+      }
+      guardarRevision();
+      var sec = card.querySelector('.rgrupo[data-c="' + c + '"]');
+      var tmp = document.createElement('div');
+      tmp.innerHTML = grupoRev(a, i, CAMPOS.filter(function(C){ return C.c === c; })[0]);
+      sec.parentNode.replaceChild(tmp.firstChild, sec);
+      enlazarRev(i);
+      actualizarProgresoRev(i);
+      if(e === 'cambiar' && REV.marcas[k]){
+        var nota = card.querySelector('.rop[data-c="' + c + '"][data-j="' + j + '"] .rop-nota');
+        if(nota) nota.focus({ preventScroll:true });
+      }
+    };
+  });
+  card.querySelectorAll('.rop-nota').forEach(function(t){
+    t.oninput = function(){
+      var op = t.closest('.rop');
+      var m = REV.marcas[claveMarca(a, op.dataset.c, +op.dataset.j)];
+      if(m){ m.nota = t.value; guardarRevision(); }
+    };
+  });
+  card.querySelectorAll('.material').forEach(enlazarMaterial);
+}
+
+function actualizarProgresoRev(i){
+  var a = D.anuncios[i], card = el('rev-' + i);
+  var c = conteoRev(function(b){ return b === a; });
+  var p = card.querySelector('.rev-prog');
+  p.textContent = c.hechas + ' de ' + c.total + ' revisadas';
+  p.classList.toggle('listo', c.total > 0 && c.hechas === c.total);
+  pintarIndiceRev();
+  pintarBarraRev();
+}
+
+function pintarBarraRev(){
+  var c = conteoRev(enTanda);
+  el('rev-txt').innerHTML = '<b>' + c.hechas + ' de ' + c.total + '</b> opciones revisadas' +
+    (c.hechas ? ' · ' + c.va + (c.va === 1 ? ' va' : ' van') + ' · ' + c.cambiar + ' para cambiar' : '');
+  el('rev-riel').style.width = (c.total ? Math.round(c.hechas / c.total * 100) : 0) + '%';
+}
+
+/** Una línea en lenguaje simple debajo del anuncio: qué versión es y qué no se ve. */
+function notaRev(a, L, r){
+  var partes = [];
+  if(r.eleccion.clave === '1:1') partes.push('Versión cuadrada');
+  if(r.eleccion.clave === '9:16') partes.push('Versión de reel');
+  if(r.enc.modo === 'fondo') partes.push('no trae versión de reel: se ve al centro, con fondo');
+  else if(a.esVideo && r.enc.pierde >= 3) partes.push('en el feed se ve el centro del video');
+  if(L.texto === 0) partes.push('en Historias el texto no se ve: solo lo que está en la pieza');
+  if(r.pantalla && L.texto) partes.push('en Reels el texto se corta enseguida');
+  if(!r.pantalla && !L.desc) partes.push('Instagram no muestra la descripción');
+  if(r.tira) partes.push('desliza las tarjetas');
+  if(!partes.length) return '';
+  var t = partes.join(' · ');
+  return t.charAt(0).toUpperCase() + t.slice(1) + '.';
+}
+
+function pintarVistaRev(i){
+  var card = el('rev-' + i);
+  if(!card) return;
+  var a = D.anuncios[i], st = estadoRev(i);
+  var L = LUGARES.filter(function(l){ return l.id === st.lugar; })[0] || LUGARES[0];
+  var r = armarVista(a, i, L, st.sel, st, { compacto:true });
+  var cont = card.querySelector('.rev-mock');
+  cont.className = 'rev-mock ' + (r.pantalla ? 'es-pantalla' : 'es-feed');
+  cont.innerHTML = r.html;
+  enlazarVista(cont, a, i, st, r, function(){ pintarVistaRev(i); });
+  card.querySelector('.rev-nota').textContent = notaRev(a, L, r);
+}
+
+// --- enviar la revisión ---
+function recortar(s, n){ s = String(s || '').replace(/\s*\n+\s*/g, ' / '); return s.length > n ? s.slice(0, n - 1) + '…' : s; }
+
+function resumenRev(){
+  var hoy = new Date().toLocaleDateString('es-PA', { day:'numeric', month:'long' });
+  var c = conteoRev(enTanda);
+  var L = ['*Revisión de copies · ECUS*',
+           'Revisó: ' + (REV.nombre || '(sin nombre)') + ' · ' + hoy,
+           c.hechas + ' de ' + c.total + ' opciones revisadas: ' + c.va + (c.va === 1 ? ' va' : ' van') + ' y ' + c.cambiar + ' para cambiar.'];
+  var n = 0;
+  D.anuncios.forEach(function(a){
+    if(!enTanda(a)) return;
+    n++;
+    var va = [], cambiar = [], sin = [];
+    CAMPOS.forEach(function(C){
+      (a[C.c] || []).forEach(function(o, j){
+        if(!(o.v || '').trim()) return;
+        var etq = C.uno.toLowerCase() + ' ' + (j + 1);
+        var m = marcaDe(a, C.c, j);
+        if(!m) sin.push(etq);
+        else if(m.estado === 'va') va.push(etq);
+        else cambiar.push('• ' + C.uno + ' ' + (j + 1) + ': "' + recortar(o.v, 80) + '"' +
+          ((m.nota || '').trim() ? '\n   → ' + m.nota.trim().replace(/\n+/g, ' ') : ''));
+      });
+    });
+    if(!va.length && !cambiar.length) return;   // los anuncios sin tocar no se listan
+    L.push('');
+    L.push('*' + n + '. ' + a.nombre + '*');
+    if(va.length) L.push('Van: ' + va.join(', '));
+    if(cambiar.length){ L.push('Cambiar:'); cambiar.forEach(function(x){ L.push(x); }); }
+    if(sin.length) L.push('Sin revisar: ' + sin.join(', '));
+  });
+  L.push('');
+  L.push('Documento: ' + location.origin + location.pathname);
+  return L.join('\n');
+}
+
+function actualizarResumen(){
+  var t = resumenRev();
+  el('rev-resumen').value = t;
+  el('rev-wa').href = 'https://wa.me/?text=' + encodeURIComponent(t);
+  var c = conteoRev(enTanda);
+  el('rev-aviso').textContent = c.hechas ? '' : 'Todavía no marcaste ninguna opción: el mensaje saldría casi vacío.';
+}
+function abrirEnviar(){
+  el('rev-nombre').value = REV.nombre || '';
+  actualizarResumen();
+  el('m-enviar').classList.remove('oculto');
+  document.body.style.overflow = 'hidden';
+  if(!REV.nombre) el('rev-nombre').focus();
+}
+function cerrarEnviar(){
+  el('m-enviar').classList.add('oculto');
+  document.body.style.overflow = '';
+}
+el('rev-enviar').onclick = abrirEnviar;
+el('rev-cerrar').onclick = cerrarEnviar;
+el('m-enviar').onclick = function(e){ if(e.target === el('m-enviar')) cerrarEnviar(); };
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !el('m-enviar').classList.contains('oculto')) cerrarEnviar(); });
+el('rev-nombre').oninput = function(){ REV.nombre = el('rev-nombre').value.trim(); guardarRevision(); actualizarResumen(); };
+el('rev-copiar').onclick = function(){
+  var b = el('rev-copiar'), t = el('rev-resumen').value;
+  var listo = function(){ var antes = b.textContent; b.textContent = 'Copiado'; setTimeout(function(){ b.textContent = antes; }, 1600); };
+  if(navigator.clipboard) navigator.clipboard.writeText(t).then(listo).catch(function(){ el('rev-resumen').select(); document.execCommand('copy'); listo(); });
+  else { el('rev-resumen').select(); document.execCommand('copy'); listo(); }
+};
+el('rev-borrar').onclick = function(){
+  if(!confirm('¿Borrar todas tus marcas y comentarios de este navegador?')) return;
+  REV.marcas = {}; guardarRevision(); cerrarEnviar(); pintarRevision();
+};
 
 // ------------------------------------------------------------------ formulario
 function pintarFormulario(){
@@ -2059,15 +2614,18 @@ el('b-copiar').onclick = function(){
   });
 };
 
+function irA(p){
+  pagina = p;
+  document.querySelectorAll('.tab').forEach(function(x){ x.classList.toggle('on', x.dataset.p === p); });
+  ['revisar', 'anuncios', 'analisis', 'formulario'].forEach(function(n){ el('p-' + n).classList.toggle('oculto', n !== p); });
+  // Descargar, Cargar, Traer material y Copiar todo son de quien edita: en Revisar solo confunden.
+  document.body.classList.toggle('modo-editar', p === 'anuncios' || p === 'formulario');
+  if(p === 'revisar') pintarRevision();
+  if(p === 'anuncios') pintarPreview();
+  try { localStorage.setItem('ecus_pestana', p); } catch(e){}
+}
 document.querySelectorAll('.tab').forEach(function(t){
-  t.onclick = function(){
-    pagina = t.dataset.p;
-    document.querySelectorAll('.tab').forEach(function(x){ x.classList.remove('on'); });
-    t.classList.add('on');
-    el('p-anuncios').classList.toggle('oculto', pagina !== 'anuncios');
-    el('p-analisis').classList.toggle('oculto', pagina !== 'analisis');
-    el('p-formulario').classList.toggle('oculto', pagina !== 'formulario');
-  };
+  t.onclick = function(){ irA(t.dataset.p); window.scrollTo(0, 0); };
 });
 
 document.querySelectorAll('.pvtab').forEach(function(t){
@@ -2113,6 +2671,7 @@ function traerCatalogo(manual){
           : '';
         if(manual) setTimeout(function(){ caja.innerHTML = ''; }, 2600);
         pintarPreview();
+        refrescarVistasRev();
       })
       .catch(function(e){
         if(intento < 3) return new Promise(function(r){ setTimeout(r, 700 * intento); }).then(pedir);
@@ -2141,14 +2700,14 @@ if(fusionado){
   aviso.className = 'nuevoMat';
   aviso.innerHTML = 'Material actualizado: textos, títulos y descripciones como en Meta (mínimo 3 de cada uno), y la vista previa usa la versión cuadrada o de reel según la ubicación. Lo que habías editado quedó igual. ' +
                     '<button class="x" id="b-ok-fus">entendido</button>';
-  document.querySelector('.wrap').prepend(aviso);
+  el('p-anuncios').prepend(aviso);
   document.getElementById('b-ok-fus').onclick = function(){ aviso.remove(); };
 } else if(D.version !== INICIAL.version){
   var b = document.createElement('div');
   b.className = 'nuevoMat';
   b.innerHTML = 'Hay material nuevo cargado. <button id="b-traer2">Traerlo</button>' +
                 '<button id="b-cerrar2" class="x">no, gracias</button>';
-  document.querySelector('.wrap').prepend(b);
+  el('p-anuncios').prepend(b);
   document.getElementById('b-traer2').onclick = function(){ el('b-restaurar').click(); };
   document.getElementById('b-cerrar2').onclick = function(){
     D.version = INICIAL.version; guardar(); b.remove();
@@ -2166,8 +2725,10 @@ var enVista = D.anuncios.map(function(a, i){ return enTanda(a) ? i : -1; }).filt
 if(pedido && enVista[+pedido - 1] != null){ pvIdx = enVista[+pedido - 1]; el('pv-cual').value = String(pvIdx); }
 
 // ?p=analisis abre directo la pestaña del análisis.
-var pestana = (location.search.match(/[?&]p=(anuncios|analisis|formulario)/) || [])[1];
-if(pestana){ var bt = document.querySelector('.tab[data-p="' + pestana + '"]'); if(bt) bt.click(); }
+// ?p=revisar|editar|analisis|formulario abre esa pestaña; si no, la última que usó esta persona.
+var pestana = (location.search.match(/[?&]p=(revisar|editar|anuncios|analisis|formulario)/) || [])[1];
+if(pestana === 'editar') pestana = 'anuncios';
+if(!pestana){ try { pestana = localStorage.getItem('ecus_pestana'); } catch(e){} }
 
 // ?l=ig-story abre directo esa ubicación: sirve para mandar "mira cómo se recorta aquí".
 var lugarPedido = (location.search.match(/[?&]l=([a-z-]+)/) || [])[1];
@@ -2179,6 +2740,7 @@ if(lugarPedido && LUGARES.some(function(x){ return x.id === lugarPedido; })){
 pintarPreview();
 pintarFormulario();
 el('est').textContent = 'guardado';
+irA(['revisar', 'anuncios', 'analisis', 'formulario'].indexOf(pestana) >= 0 ? pestana : 'revisar');
 
 })();
 </script>
