@@ -801,7 +801,7 @@ var MIN_OPCIONES = 3, MAX_OPCIONES = 5;
 
 var INICIAL = {
   // Subir esto cuando cambie el material: dispara la actualización de lo guardado.
-  version: "2026-09-16d",
+  version: "2026-09-17e",
   anuncios: [
     { tanda:"sep",
       grupo:"Videos",
@@ -822,7 +822,7 @@ var INICIAL = {
       ],
       titulos:[
         { e:0, v:"Cada publicación con un objetivo" },
-        { e:1, v:"Escríbenos y armamos tu estrategia" },
+        { e:1, v:"¿Quieres impulsar tu negocio? ¡Hablemos!" },
         { e:2, v:"Resultados que puedes medir" }
       ],
       descs:[
@@ -845,11 +845,11 @@ var INICIAL = {
       porque:"Los casos con resultados a la vista son lo que más trae: «¿+700k visualizaciones? ¡Sí, es posible!» sumó 74 conversaciones, y el caso Fefa es hoy el único anuncio de redes con volumen.",
       textos:[
         { e:0, v:"Sin pauta, solo contenido orgánico: en las primeras semanas, miles de personas descubrieron Poggi y empezaron a visitarlo." },
-        { e:1, v:"Contenido que se comparte, se comenta y lleva gente al local 💜\n\nAsí trabajamos la marca de Poggi. ¿Hacemos la tuya? 📲" },
+        { e:1, v:"¡Nos convertimos en el equipo integral de tu negocio!" },
         { e:2, v:"Poggi no es un local más de postres. Unimos marca y contenido desde el primer día para que la gente lo sienta cercano." }
       ],
       titulos:[
-        { e:0, v:"De las vistas a las visitas" },
+        { e:0, v:"Desde los views hasta la compra" },
         { e:1, v:"¿Hacemos lo mismo con tu marca?" },
         { e:2, v:"Crea comunidad alrededor de tu marca" }
       ],
@@ -907,11 +907,11 @@ var INICIAL = {
       titulos:[
         { e:0, v:"Primer cliente en dos semanas" },
         { e:1, v:"Resultados así para tu marca" },
-        { e:2, v:"Redes que traen clientes" }
+        { e:2, v:"Estrategias de redes que traen clientes" }
       ],
       descs:[
         { e:0, v:"Testimonio de WBOX" },
-        { e:1, v:"Escríbenos por WhatsApp" },
+        { e:1, v:"¡Escríbenos para conocer tu negocio!" },
         { e:2, v:"Caso WBOX y Didibot" }
       ] },
 
@@ -926,7 +926,7 @@ var INICIAL = {
       porque:"Cada dueño se busca en su rubro: mueblerías, telas, mobiliario corporativo, belleza, restaurantes, alimentos, ropa y autos. No trae versión de reel: en Historias y Reels Meta muestra la cuadrada al centro, con fondo.",
       textos:[
         { e:0, v:"Mueblerías, restaurantes, salones de belleza, arrendadoras de autos: ya manejamos sus redes. Desliza y busca el tuyo." },
-        { e:1, v:"¿Tu negocio está en la lista? 👀\n\nSi no está, igual escríbenos: armamos la estrategia para tu rubro 📲" },
+        { e:1, v:"¿Tu negocio está en la lista? 👀\n\nSi no está, escríbenos: armamos la estrategia para tu industria 📲" },
         { e:2, v:"No se comunica igual una mueblería que un restaurante. Por eso armamos cada estrategia desde cero." }
       ],
       titulos:[
@@ -1281,6 +1281,13 @@ var D = cargar();
 // Textos que se pulieron después de publicados. Se cambian solo si siguen exactamente como
 // salieron: si alguien los editó, lo suyo manda.
 var CAMBIOS_TEXTO = {
+  'Escríbenos y armamos tu estrategia': '¿Quieres impulsar tu negocio? ¡Hablemos!',
+  'Contenido que se comparte, se comenta y lleva gente al local 💜\n\nAsí trabajamos la marca de Poggi. ¿Hacemos la tuya? 📲':
+    '¡Nos convertimos en el equipo integral de tu negocio!',
+  'De las vistas a las visitas': 'Desde los views hasta la compra',
+  'Redes que traen clientes': 'Estrategias de redes que traen clientes',
+  '¿Tu negocio está en la lista? 👀\n\nSi no está, igual escríbenos: armamos la estrategia para tu rubro 📲':
+    '¿Tu negocio está en la lista? 👀\n\nSi no está, escríbenos: armamos la estrategia para tu industria 📲',
   'Cada contenido y cada campaña con un propósito, y un tablero donde ves qué funcionó y qué no.':
     'Cada contenido y cada campaña tienen un propósito, y en un tablero ves qué funcionó y qué no.',
   'Sin pauta, solo contenido orgánico: en pocas semanas, Poggi dejó de ser un local más y la gente empezó a visitarlo.':
